@@ -26,7 +26,7 @@ Setting up the reference app is easy, just follow these steps:
     ```
     $ npm install
     ```
-3. Create a `.env` file:f
+3. Create a `.env` file:
     ```
     $ cp .env.example .env
     ```
