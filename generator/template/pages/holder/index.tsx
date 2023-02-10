@@ -1,17 +1,16 @@
 import { FC } from 'react'
-import { format } from 'date-fns'
 import Image from 'next/image'
 
-import { JSON_SCHEMA_URL } from 'utils'
+import { JSON_SCHEMA_URL } from 'utils/schema'
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'hooks/holder/useCredentials'
 import { useAuthContext } from 'hooks/useAuthContext'
 import NoData from 'public/images/illustration-empty-state.svg'
 import { Container, Header, Spinner, Typography } from 'components'
 
-import { Credential } from './types'
-import PrescriptionCard from './components/PrescriptionCard/PrescriptionCard'
+import CredentialCard from './components/CredentialCard/CredentialCard'
 import * as S from './index.styled'
+import { messages } from '../../utils/messages'
 
 const Home: FC = () => {
   const { authState } = useAuthContext()
@@ -24,7 +23,7 @@ const Home: FC = () => {
   if (isLoading) {
     return (
       <>
-        <Header title="Your medical records" />
+        <Header title={messages.holder.home.title} />
         <Container>
           <Spinner />
         </Container>
@@ -35,7 +34,7 @@ const Home: FC = () => {
   if (error) {
     return (
       <>
-        <Header title="Your medical records" />
+        <Header title={messages.holder.home.title} />
         <Container>
           <div className="grid justify-content-center">
             {error && <Typography variant="e1">{error?.message}</Typography>}
@@ -45,27 +44,27 @@ const Home: FC = () => {
     )
   }
 
-  const prescriptions = data.filter((credentialItem) => {
+  const vcs = data.filter((credentialItem) => {
     const credentialSchema = (credentialItem as StoredW3CCredential).credentialSchema
     return credentialSchema?.id === JSON_SCHEMA_URL
   })
 
-  if (prescriptions.length === 0) {
+  if (vcs.length === 0) {
     return (
       <>
-        <Header title="Your medical records" />
+        <Header title={messages.holder.home.title} />
         <Container>
           <div className="grid justify-content-center">
             <Typography
               align="center"
               variant="p2"
             >
-              You don&apos;t have any medical records yet.
+              {messages.holder.home.noVcs}
             </Typography>
             <S.IconContainer>
               <Image
                 src={NoData}
-                alt="No medical records"
+                alt="No VCs"
               />
             </S.IconContainer>
           </div>
@@ -75,43 +74,33 @@ const Home: FC = () => {
   }
 
   // @ts-ignore
-  const validPrescriptions: StoredW3CCredential[] = prescriptions.filter((credentialItem) => {
+  const validVcs: StoredW3CCredential[] = vcs.filter((credentialItem) => {
     const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
     return Date.parse(credentialSubject?.startDate) >= Date.now()
   })
 
-  const getPrescriptionCards = ({
-    prescriptions,
-    isValid,
+  const getCredentialCards = ({
+    vcs,
   }: {
-    prescriptions: StoredW3CCredential[]
-    isValid: boolean
+    vcs: StoredW3CCredential[]
   }) =>
-    prescriptions.map((credentialItem: StoredW3CCredential) => {
-      const credential: Credential = {
-        title: credentialItem?.credentialSubject?.eventName,
-        date: format(new Date(credentialItem?.credentialSubject?.startDate), 'dd.MM.yyyy'),
-        time: format(new Date(credentialItem?.credentialSubject?.startDate), 'HH:mm'),
-        credentialId: credentialItem?.id,
-      }
-
+    vcs.map((vc: StoredW3CCredential) => {
       return (
-        <PrescriptionCard
-          key={credentialItem.id}
-          credential={credential}
-          isValid={isValid}
+        <CredentialCard
+          key={vc.id}
+          vc={vc}
         />
       )
     })
 
   return (
     <>
-      <Header title="Your medical records" />
+      <Header title={messages.holder.home.title} />
 
-      {validPrescriptions.length > 0 && (
+      {validVcs.length > 0 && (
         <Container>
           <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
-            {getPrescriptionCards({ prescriptions: validPrescriptions, isValid: true })}
+            {getCredentialCards({ vcs: validVcs })}
           </div>
         </Container>
       )}

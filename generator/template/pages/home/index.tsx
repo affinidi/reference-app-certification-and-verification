@@ -9,6 +9,7 @@ import BulkIssuanceIcon from 'public/images/icon-bulk-issuance.svg'
 import { Box, Container, Header, Typography } from 'components'
 
 import * as S from './home.styled'
+import { messages } from '../../utils/messages'
 
 export const Home: FC = () => {
   const router = useRouter()
@@ -27,9 +28,9 @@ export const Home: FC = () => {
             onClick={() => router.push(ROUTES.holder.home)}
           >
             <Box gap={16}>
-              <Typography variant="h6">Collect medical records</Typography>
+              <Typography variant="h6">{messages.home.holder.title}</Typography>
               <Typography variant="p1">
-                Collect your medical records or view them stored in your wallet
+                {messages.home.holder.description}
               </Typography>
             </Box>
             <S.Icon>
@@ -48,9 +49,9 @@ export const Home: FC = () => {
             onClick={() => router.push(ROUTES.verifier.welcome)}
           >
             <Box gap={16}>
-              <Typography variant="h6">Verify medical records</Typography>
+              <Typography variant="h6">{messages.home.verifier.title}</Typography>
               <Typography variant="p1">
-                Verify medical records with a QR code scanner
+                {messages.home.verifier.description}
               </Typography>
             </Box>
             <S.Icon>
@@ -69,9 +70,9 @@ export const Home: FC = () => {
             onClick={() => router.push(ROUTES.issuer.credentialForm)}
           >
             <Box gap={16}>
-              <Typography variant="h6">Issue medical records</Typography>
+              <Typography variant="h6">{messages.home.issuer.title}</Typography>
               <Typography variant="p1">
-                Issue medical records to your patients easily
+                {messages.home.issuer.description}
               </Typography>
             </Box>
             <S.Icon>

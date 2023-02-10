@@ -14,7 +14,7 @@ import * as S from './credentialId.styled'
 const CredentialView: FC = () => {
   const { authState } = useAuthContext()
   const router = useRouter()
-  const { credentialId } = router.query
+  const { credentialId } = router.query as { credentialId: string }
   const { data, isLoading } = useGetCredentialQuery(credentialId || '')
   const { data: shareCredentialData, mutateAsync } = useShareCredentialMutation()
 

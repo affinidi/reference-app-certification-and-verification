@@ -10,7 +10,7 @@ export const Wrapper = styled(Box)`
   margin-bottom: ${pxToRem(24)};
 `
 
-const getTextColor = (props) => {
+const getTextColor = (props: any) => {
   if (props.$hasError) {
     return props.theme.colors.utility.danger['100']
   }

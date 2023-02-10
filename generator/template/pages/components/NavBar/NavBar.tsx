@@ -17,7 +17,7 @@ const NavBar: FC = () => {
       <Container>
         <S.Container justifyContent="space-between" alignItems="center" direction="row">
           <S.Logo>
-            <Image onClick={handleGoHomePage} src={Logo} alt="healthi" aria-label="app-logo" />
+            <Image onClick={handleGoHomePage} src={Logo} alt="logo" aria-label="app-logo" />
           </S.Logo>
 
           {isAuthorized && (

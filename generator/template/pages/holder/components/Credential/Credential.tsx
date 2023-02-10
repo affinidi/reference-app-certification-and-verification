@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 
-import { PrescriptionDetails } from '../PrescriptionDetails/PrescriptionDetails'
+import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
 
 import * as S from './Credential.styled'
 
@@ -31,7 +31,7 @@ const getDetails = ({
   nested = false,
   qrCode,
 }: {
-  detailsObject: unknown
+  detailsObject: any
   nested?: boolean
   qrCode?: string
 }) => {
@@ -48,13 +48,9 @@ const getDetails = ({
   if (typeof detailsObject === 'object' && detailsObject !== null) {
     return (
       qrCode && (
-        <PrescriptionDetails
-          eventName={detailsObject.eventName}
-          startDate={format(new Date(detailsObject.startDate), 'dd.MM.yyy')}
-          endDate={format(new Date(detailsObject.endDate), 'dd.MM.yyy')}
-          startTime={format(new Date(detailsObject.startDate), 'HH.mm')}
-          endTime={format(new Date(detailsObject.endDate), 'HH.mm')}
-          location={detailsObject.place}
+        <CredentialDetails
+          firstName={detailsObject.firstName}
+          lastName={detailsObject.lastName}
           qrCode={qrCode}
         />
       )

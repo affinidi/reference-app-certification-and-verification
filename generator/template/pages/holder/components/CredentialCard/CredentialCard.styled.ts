@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { pxToRem } from 'utils'
 import { Box } from 'components'
 
-export const Prescription = styled(Box)`
+export const Credential = styled(Box)`
   height: ${pxToRem(72)};
   padding: ${pxToRem(12)};
   box-shadow: 0 4px 20px 0 rgba(49, 58, 85, 0.1);

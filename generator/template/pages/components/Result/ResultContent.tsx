@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import IssuedIcon from 'public/images/illustration-doctor.svg'
+import IssuedIcon from 'public/images/illustration-issued.svg'
 import QrScanSuccess from 'public/images/illustration-qr-scan-success.svg'
 import QrScanError from 'public/images/illustration-qr-scan-error.svg'
+import { messages } from 'utils/messages'
 
 import * as S from './Result.styled'
 
@@ -18,15 +19,15 @@ export const ResultContent: FC<ResultContentProps> = ({ isValid, isIssuance }) =
       {isValid ? isIssuance ?
           <Image
             src={IssuedIcon}
-            alt="Prescription successfully issued"
+            alt="Successfully issued"
           /> :
           <Image
             src={QrScanSuccess}
-            alt="Valid prescription"
+            alt="Valid VC"
           /> :
         <Image
           src={QrScanError}
-          alt="Invalid prescription"
+          alt="Invalid VC"
         />
       }
     </S.ImgWrapper>
@@ -36,7 +37,7 @@ export const ResultContent: FC<ResultContentProps> = ({ isValid, isIssuance }) =
       $isVerified={isValid}
       $isIssuance={isIssuance}
     >
-      {isValid ? (isIssuance ? 'Prescription successfully issued' : 'Valid prescription') : 'Invalid prescription'}
+      {isValid ? (isIssuance ? messages.issuer.result.content.issued : messages.verifier.result.content.valid) : messages.verifier.result.content.invalid}
     </S.ResultTitle>
   </>
 )

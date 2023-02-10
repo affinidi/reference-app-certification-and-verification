@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import { ROUTES } from 'utils'
+import { messages } from 'utils/messages'
 import { Box, Button, Container, Header } from 'components'
 import QrScan from 'public/images/illustration-qr-scan-default.svg'
 
@@ -21,7 +22,7 @@ const Verifier: FC = () => {
             <Image src={QrScan} alt="QR Scan" />
 
             <S.WelcomeMessage align="center" variant="p1">
-              Welcome to the healthi scanner. Tap “scan QR code” to start checking medical records.
+              {messages.verifier.welcome}
             </S.WelcomeMessage>
 
             <Button fullWidth onClick={() => router.push(ROUTES.verifier.scan)}>SCAN QR CODE</Button>

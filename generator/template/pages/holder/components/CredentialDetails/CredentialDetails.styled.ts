@@ -84,7 +84,7 @@ export const QrCodeCard = styled(Box)`
   }
 `
 
-export const PrescriptionDetailsCard = styled(Box)`
+export const CredentialDetailsCard = styled(Box)`
   flex-direction: row;
 
   @media (max-width: 1024px) {

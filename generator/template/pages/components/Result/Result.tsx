@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 import { ErrorResponse } from 'hooks/useAuthentication'
 import { Box, Button, Container, Header, Spinner } from 'components'
+import { messages } from 'utils/messages'
 
 import { ResultContent } from './ResultContent'
 import * as S from './Result.styled'
@@ -23,7 +24,7 @@ export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = nu
     return (
       <>
         <Header
-          title={isVerifier ? 'QR code scanned' : 'Prescription Issued'}
+          title={isVerifier ? 'QR code scanned' : messages.issuer.result.title}
           hasBackIcon
         />
         <Container>
@@ -38,7 +39,7 @@ export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = nu
   return (
     <>
       <Header
-        title={isVerifier ? 'QR code scanned' : 'Prescription issued'}
+        title={isVerifier ? 'QR code scanned' : messages.issuer.result.title}
         hasBackIcon
       />
       <Container>
@@ -54,9 +55,9 @@ export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = nu
             <S.ResultPara variant="p1">
               {isVerifier
                 ? isResultValid
-                  ? 'Prescription successfully checked.'
-                  : 'Prescription is invalid'
-                : 'Your prescription has been issued.'}
+                  ? messages.verifier.result.valid
+                  : messages.verifier.result.invalid
+                : messages.issuer.result.issued}
             </S.ResultPara>
 
             <Button
@@ -65,7 +66,7 @@ export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = nu
               variant="outlined"
               onClick={() => router.push(pathTo)}
             >
-              {isVerifier ? 'Scan next qr code' : 'Issue next prescription'}
+              {isVerifier ? 'Scan next QR code' : messages.issuer.result.next}
             </Button>
           </Box>
         </div>

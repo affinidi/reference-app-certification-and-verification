@@ -3,7 +3,8 @@ import { useCallback, useState } from 'react'
 import * as EmailValidator from 'email-validator'
 import { useRouter } from 'next/router'
 
-import { JSON_SCHEMA_URL, ROUTES } from 'utils'
+import { JSON_SCHEMA_URL } from 'utils/schema'
+import { ROUTES } from 'utils'
 import { apiKeyHash, projectDid, projectId } from 'pages/env'
 
 import { parseSchemaURL } from 'services/issuance/parse.schema.url'
@@ -14,68 +15,16 @@ import {
 } from 'services/issuance/issuance.api'
 import { issuanceService } from 'services/issuance'
 
-export type SelectOption = {
-  value: string,
-  label: string
+export type VcData = {
+  firstName: string
+  lastName: string
+  targetEmail: string
 }
 
-export const DosageUnitOptions: SelectOption[] = [
-  {
-    value: 'mg',
-    label: 'mg',
-  },
-  {
-    value: 'g',
-    label: 'g',
-  },
-  {
-    value: 'ml',
-    label: 'ml',
-  },
-  {
-    value: 'piece',
-    label: 'piece',
-  },
-]
-
-export const FrequencyIntervalUnitOptions: SelectOption[] = [
-  {
-    value: 'hour',
-    label: 'per hour',
-  },
-  {
-    value: 'day',
-    label: 'per day',
-  },
-  {
-    value: 'week',
-    label: 'per week',
-  },
-]
-
-
-export type PrescriptionData = {
-  medicationName: string
-  prescribedAt: string
-  practitionerName: string
-  dosageAmount: string
-  dosageUnit: string
-  frequencyTimes: string
-  frequencyIntervalUnit: string
-  patientName: string
-  patientEmail: string
-}
-
-export const initialValues: PrescriptionData = {
-  medicationName: '',
-  prescribedAt: '',
-  practitionerName: '',
-  dosageAmount: "1",
-  dosageUnit: DosageUnitOptions[0].value,
-  frequencyTimes: "1",
-  frequencyIntervalUnit: FrequencyIntervalUnitOptions[0].value,
-  patientName: '',
-  patientEmail: '',
+export const initialValues: VcData = {
+  firstName: '',
+  lastName: '',
+  targetEmail: '',
 }
 
 export const useCredentialForm = () => {
@@ -83,7 +32,7 @@ export const useCredentialForm = () => {
   const [isCreating, setIsCreating] = useState(false)
 
   const handleSubmit = useCallback(
-    async (values: PrescriptionData) => {  
+    async (values: VcData) => {  
       setIsCreating(true)
 
       const walletUrl = `${window.location.origin}/holder/claim`
@@ -108,30 +57,12 @@ export const useCredentialForm = () => {
       const offerInput: CreateIssuanceOfferInput = {
         verification: {
           target: {
-            email: values.patientEmail,
+            email: values.targetEmail,
           },
         },
         credentialSubject: {
-          prescribedAt: format(new Date(values.prescribedAt), "yyyy-MM-dd"),
-          medicationName: values.medicationName,
-          dosage: {
-            amount: Number(values.dosageAmount),
-            unit: values.dosageUnit
-          },
-          practitioner: {
-            name: values.practitionerName,
-          },
-          frequency: {
-            amount: Number(values.frequencyTimes),
-            interval: {
-              amount: 1,
-              unit: values.frequencyIntervalUnit
-            }
-          },
-          patient: {
-            name: values.patientName,
-            email: values.patientEmail,
-          }
+          firstName: values.firstName,
+          lastName: values.lastName,
         },
       }
 
@@ -147,45 +78,21 @@ export const useCredentialForm = () => {
     [router],
   )
 
-  const validate = useCallback((values: PrescriptionData) => {
-    const errors = {} as Partial<PrescriptionData>
+  const validate = useCallback((values: VcData) => {
+    const errors = {} as Partial<VcData>
 
-    if (!values.medicationName) {
-      errors.medicationName = 'Mandatory field'
+    if (!values.firstName) {
+      errors.firstName = 'Mandatory field'
     }
 
-    if (!values.prescribedAt) {
-      errors.prescribedAt = 'Mandatory field'
+    if (!values.lastName) {
+      errors.lastName = 'Mandatory field'
     }
 
-    if (!values.practitionerName) {
-      errors.practitionerName = 'Mandatory field'
-    }
-
-    if (!values.dosageAmount) {
-      errors.dosageAmount = 'Mandatory field'
-    }
-
-    if (!values.dosageUnit) {
-      errors.dosageUnit = 'Mandatory field'
-    }
-
-    if (!values.frequencyIntervalUnit) {
-      errors.frequencyIntervalUnit = 'Mandatory field'
-    }
-
-    if (!values.frequencyTimes) {
-      errors.frequencyTimes = 'Mandatory field'
-    }
-
-    if (!values.patientName) {
-      errors.patientName = 'Mandatory field'
-    }
-
-    if (!values.patientEmail) {
-      errors.patientEmail = 'Mandatory field'
-    } else if (!EmailValidator.validate(values.patientEmail)) {
-      errors.patientEmail = 'Invalid email'
+    if (!values.targetEmail) {
+      errors.targetEmail = 'Mandatory field'
+    } else if (!EmailValidator.validate(values.targetEmail)) {
+      errors.targetEmail = 'Invalid email'
     }
 
     return errors
