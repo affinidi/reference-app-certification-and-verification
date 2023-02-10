@@ -1,6 +1,6 @@
 {
-  "name": "reference-app-<>",
-  "version": "0.1.0",
+  "name": "reference-app-generic",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
