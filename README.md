@@ -245,7 +245,7 @@ Affinidi collects usage data to improve our products and services. For informati
 
 ## Feedback, Support, and Community
 
-[Click here](https://github.com/affinidi/reference-app-health/issues) to create a ticket and we will get on it right away. If you are facing technical or other issues, you can reach out to us on [Discord](https://discord.com/invite/jx2hGBk5xE).
+[Click here](https://github.com/affinidi/reference-app-certification-and-verification/issues) to create a ticket and we will get on it right away. If you are facing technical or other issues, you can reach out to us on [Discord](https://discord.com/invite/jx2hGBk5xE).
 
 ## FAQ
 
