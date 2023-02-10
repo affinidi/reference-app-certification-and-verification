@@ -58,6 +58,9 @@ async function generate() {
       packageLockJson.name = packageName
       packageLockJson.packages[''].name = packageName
     })
+
+    console.log('Replacing variables in README.md file')
+    await replaceVariables(join(flavorPath, 'README.md'), { flavor })
   }
 }
 
@@ -65,6 +68,16 @@ async function transformJson(path, transformFn) {
   const json = JSON.parse(await fs.readFile(path, { encoding: 'utf-8' }))
   transformFn(json)
   await fs.writeFile(path, JSON.stringify(json, null, 2), { encoding: 'utf-8' })
+}
+
+async function replaceVariables(path, variables) {
+  let text = await fs.readFile(path, { encoding: 'utf-8' })
+
+  for (const [key, value] of Object.entries(variables)) {
+    text = text.replaceAll(`{${key}}`, value)
+  }
+
+  await fs.writeFile(path, text, { encoding: 'utf-8' })
 }
 
 async function merge(src, dest) {
