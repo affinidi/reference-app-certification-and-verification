@@ -4,7 +4,7 @@
   "description": "This is a ready-to-use reference app that showcases usage of Affinidi API for issuing, sharing, verifying and storing verifiable credentials in the wallet.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "node generator/generate.mjs"
   },
   "repository": {
     "type": "git",
