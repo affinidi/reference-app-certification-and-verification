@@ -3,23 +3,18 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import { ROUTES } from 'utils'
+import { Credential } from 'pages/holder/types'
 import CredentialIcon from 'public/images/icon-credential.svg'
 import { Box, Typography } from 'components'
 
 import * as S from './CredentialCard.styled'
 
-export type CredentialCardProps = {
-  vc: any
+export type PrescriptionCardProps = {
+  credential: Credential
 }
 
-const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
+const CredentialCard: FC<PrescriptionCardProps> = ({ credential }) => {
   const router = useRouter()
-
-  const credential = {
-    firstName: vc?.credentialSubject?.firstName,
-    lastName: vc?.credentialSubject?.lastName,
-    credentialId: vc?.id,
-  }
 
   const handleClick = () => {
     router.push(`${ROUTES.holder.credential}/${credential.credentialId}`)
@@ -37,7 +32,7 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
       >
         <Image
           src={CredentialIcon}
-          alt="Credential"
+          alt="Prescription"
         />
       </S.ImageWrapper>
 
@@ -46,15 +41,15 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
         gap={4}
       >
         <Box>
-          <Typography variant="c1">First name</Typography>
-          <Typography variant="p4">{credential.firstName}</Typography>
+          <Typography variant="c1">Start Date</Typography>
+          <Typography variant="p4">{credential.date}</Typography>
         </Box>
         <Box>
-          <Typography variant="c1">Last name</Typography>
-          <Typography variant="p4">{credential.lastName}</Typography>
+          <Typography variant="c1">Start Time</Typography>
+          <Typography variant="p4">{credential.time}</Typography>
         </Box>
       </Box>
-    </S.Credential>
+    </S.Prescription>
   )
 }
 
