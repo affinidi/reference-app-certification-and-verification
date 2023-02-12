@@ -3,7 +3,8 @@ import { useCallback, useState } from 'react'
 import * as EmailValidator from 'email-validator'
 import { useRouter } from 'next/router'
 
-import { JSON_SCHEMA_URL, ROUTES } from 'utils'
+import { JSON_SCHEMA_URL } from 'utils/schema'
+import { ROUTES } from 'utils'
 import { apiKeyHash, projectDid, projectId } from 'pages/env'
 
 import { parseSchemaURL } from 'services/issuance/parse.schema.url'

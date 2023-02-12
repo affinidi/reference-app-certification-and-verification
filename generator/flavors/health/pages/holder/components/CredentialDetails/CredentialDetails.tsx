@@ -4,7 +4,7 @@ import { Box, Typography } from 'components'
 
 import * as S from './CredentialDetails.styled'
 
-export type PrescriptionDetailsProps = {
+export type CredentialDetailsProps = {
   eventName: string
   startDate: string
   endDate: string
@@ -14,7 +14,7 @@ export type PrescriptionDetailsProps = {
   location: string
 }
 
-export const CredentialDetails: FC<PrescriptionDetailsProps> = ({
+export const CredentialDetails: FC<CredentialDetailsProps> = ({
   eventName,
   startDate,
   startTime,
@@ -71,7 +71,7 @@ export const CredentialDetails: FC<PrescriptionDetailsProps> = ({
         alt="QR Code"
       />
     </S.QrCodeCard>
-  </S.PrescriptionDetailsCard>
+  </S.CredentialDetailsCard>
 )
 
 export default CredentialDetails

@@ -6,13 +6,12 @@ import rimraf from 'rimraf'
 
 const pathsToMerge = [
   ['public', 'images'],
+  ['utils'],
 ]
 
 const pathsToOverwrite = [
   ['pages', 'holder', 'components'],
   ['pages', 'issuer', 'credential-form'],
-  ['utils', 'theme.ts'],
-  ['utils', 'schema.ts']
 ]
 
 const __dirname = dirname(url.fileURLToPath(import.meta.url))

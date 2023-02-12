@@ -1,16 +1,17 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import { JSON_SCHEMA_URL } from 'utils/schema'
+import { VC_TYPE } from 'utils/schema'
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'hooks/holder/useCredentials'
 import { useAuthContext } from 'hooks/useAuthContext'
 import NoData from 'public/images/illustration-empty-state.svg'
 import { Container, Header, Spinner, Typography } from 'components'
+import { messages } from 'utils/messages'
+import { isCredentialValid } from './components'
 
 import CredentialCard from './components/CredentialCard/CredentialCard'
 import * as S from './index.styled'
-import { messages } from '../../utils/messages'
 
 const Home: FC = () => {
   const { authState } = useAuthContext()
@@ -44,12 +45,10 @@ const Home: FC = () => {
     )
   }
 
-  const vcs = data.filter((credentialItem) => {
-    const credentialSchema = (credentialItem as StoredW3CCredential).credentialSchema
-    return credentialSchema?.id === JSON_SCHEMA_URL
-  })
+  const vcs = (data as StoredW3CCredential[]).filter((vc) => vc.type.includes(VC_TYPE))
+  const validVcs = vcs.filter((vc) => isCredentialValid(vc))
 
-  if (vcs.length === 0) {
+  if (validVcs.length === 0) {
     return (
       <>
         <Header title={messages.holder.home.title} />
@@ -73,26 +72,6 @@ const Home: FC = () => {
     )
   }
 
-  // @ts-ignore
-  const validVcs: StoredW3CCredential[] = vcs.filter((credentialItem) => {
-    const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
-    return Date.parse(credentialSubject?.startDate) >= Date.now()
-  })
-
-  const getCredentialCards = ({
-    vcs,
-  }: {
-    vcs: StoredW3CCredential[]
-  }) =>
-    vcs.map((vc: StoredW3CCredential) => {
-      return (
-        <CredentialCard
-          key={vc.id}
-          vc={vc}
-        />
-      )
-    })
-
   return (
     <>
       <Header title={messages.holder.home.title} />
@@ -100,7 +79,12 @@ const Home: FC = () => {
       {validVcs.length > 0 && (
         <Container>
           <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
-            {getCredentialCards({ vcs: validVcs })}
+            {vcs.map((vc: StoredW3CCredential) => (
+              <CredentialCard
+                key={vc.id}
+                vc={vc}
+              />
+            ))}
           </div>
         </Container>
       )}

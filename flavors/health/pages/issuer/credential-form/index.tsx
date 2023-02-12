@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Field, Formik } from 'formik'
 
-import { JSON_SCHEMA_URL } from 'utils'
+import { JSON_SCHEMA_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
 
@@ -18,7 +18,7 @@ const CredentialForm: FC = () => {
   const { authState } = useAuthContext()
   const { handleSubmit, validate, isCreating } = useCredentialForm()
 
-  const CustomSelectComponent = ({ field, form, ...props }) => {
+  const CustomSelectComponent = ({ field, form, ...props }: any) => {
     const { name } = field
     const handleSelectChange = (value: unknown) => {
       form.setFieldValue(name, (value as SelectOption).value)

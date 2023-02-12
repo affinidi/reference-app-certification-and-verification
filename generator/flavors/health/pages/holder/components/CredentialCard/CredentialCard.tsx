@@ -1,20 +1,27 @@
 import { FC } from 'react'
+import { format } from 'date-fns'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import { ROUTES } from 'utils'
-import { Credential } from 'pages/holder/types'
 import CredentialIcon from 'public/images/icon-credential.svg'
 import { Box, Typography } from 'components'
 
 import * as S from './CredentialCard.styled'
 
 export type PrescriptionCardProps = {
-  credential: Credential
+  vc: any
 }
 
-const CredentialCard: FC<PrescriptionCardProps> = ({ credential }) => {
+const CredentialCard: FC<PrescriptionCardProps> = ({ vc }) => {
   const router = useRouter()
+
+  const credential = {
+    title: vc?.credentialSubject?.eventName,
+    date: format(new Date(vc?.credentialSubject?.startDate), 'dd.MM.yyyy'),
+    time: format(new Date(vc?.credentialSubject?.startDate), 'HH:mm'),
+    credentialId: vc?.id,
+  }
 
   const handleClick = () => {
     router.push(`${ROUTES.holder.credential}/${credential.credentialId}`)
@@ -49,7 +56,7 @@ const CredentialCard: FC<PrescriptionCardProps> = ({ credential }) => {
           <Typography variant="p4">{credential.time}</Typography>
         </Box>
       </Box>
-    </S.Prescription>
+    </S.Credential>
   )
 }
 
