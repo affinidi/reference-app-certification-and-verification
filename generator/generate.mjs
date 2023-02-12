@@ -26,7 +26,7 @@ async function generate() {
   const templatePath = join(generatorPath, 'template')
 
   const flavors = (await fs.readdir(generatorFlavorsPath, { withFileTypes: true }))
-    .filter(i => i.isDirectory).map(i => i.name)
+    .filter(i => i.isDirectory()).map(i => i.name)
   
   console.log(`Detected flavors: ${flavors.join(', ')}`)
 
