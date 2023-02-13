@@ -1,8 +1,10 @@
 import fs from 'fs/promises'
-import { dirname, join } from 'path'
+import { dirname, join, basename } from 'path'
 import url from 'url'
 import mkdirp from 'mkdirp'
 import rimraf from 'rimraf'
+
+const filesToAvoid = ['node_modules', '.next', '.env']
 
 const pathsToMerge = [
   ['public', 'images'],
@@ -36,7 +38,11 @@ async function generate() {
     const flavorPath = join(flavorsPath, flavor)
 
     console.log('Copying the template')
-    await overwrite(templatePath, flavorPath)
+    const pathsToDelete = (await fs.readdir(flavorPath).catch(() => []))
+      .filter(file => !filesToAvoid.includes(file))
+      .map(file => join(flavorPath, file))
+    await deletePath(pathsToDelete)
+    await merge(templatePath, flavorPath, { filter: (path) => !filesToAvoid.includes(basename(path)) })
 
     for (const path of pathsToMerge) {
       console.log(`Merging "${path.join('/')}" path`)
@@ -79,14 +85,11 @@ async function replaceVariables(path, variables) {
   await fs.writeFile(path, text, { encoding: 'utf-8' })
 }
 
-async function merge(src, dest) {
+async function merge(src, dest, options) {
   await mkdirp(join(dest, '..'))
   
   try {
-    await fs.cp(src, dest, {
-      recursive: true,
-      filter: (src) => !src.includes('node_modules/'),
-    })
+    await fs.cp(src, dest, { recursive: true, ...options })
   } catch (error) {
     if (error.code === 'ENOENT') {
       console.warn(`Warning: Source doesn't exist: ${src}`)
