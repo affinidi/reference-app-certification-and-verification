@@ -1,12 +1,7 @@
 import { pxToRem } from 'utils'
 import { theme } from 'utils/theme'
 
-export type ButtonState =
-  | 'default'
-  | 'disabled'
-  | 'hover'
-  | 'active'
-  | 'loading'
+export type ButtonState = 'default' | 'disabled' | 'hover' | 'active' | 'loading'
 
 export type ButtonVariant = 'solid' | 'outlined' | 'ghost'
 
@@ -27,7 +22,7 @@ const primary: ButtonConfig = {
     default: {
       backgroundColor: theme.colors.brand.secondary['100'],
       borderColor: theme.colors.brand.secondary['100'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
     disabled: {
       backgroundColor: theme.colors.neutral.primary['30'],
@@ -37,17 +32,17 @@ const primary: ButtonConfig = {
     hover: {
       backgroundColor: theme.colors.brand.secondary['70'],
       borderColor: theme.colors.brand.secondary['70'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
     active: {
       backgroundColor: theme.colors.brand.secondary['100'],
       borderColor: theme.colors.brand.secondary['100'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
     loading: {
       backgroundColor: theme.colors.brand.secondary['70'],
       borderColor: theme.colors.brand.secondary['70'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
   },
   outlined: {
@@ -80,7 +75,7 @@ const primary: ButtonConfig = {
       color: theme.colors.brand.secondary['100'],
     },
     disabled: {
-      color: theme.colors.neutral.primary['30'],
+      color: theme.colors.neutral.primary['15'],
     },
     hover: {
       backgroundColor: theme.colors.brand.secondary['15'],
@@ -105,7 +100,7 @@ const secondary: ButtonConfig = {
     default: {
       backgroundColor: theme.colors.brand.primary['100'],
       borderColor: theme.colors.brand.primary['100'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
     disabled: {
       backgroundColor: theme.colors.neutral.primary['30'],
@@ -115,17 +110,17 @@ const secondary: ButtonConfig = {
     hover: {
       backgroundColor: theme.colors.brand.primary['70'],
       borderColor: theme.colors.brand.primary['70'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
     active: {
       backgroundColor: theme.colors.brand.primary['100'],
       borderColor: theme.colors.brand.primary['100'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
     loading: {
       backgroundColor: theme.colors.brand.primary['70'],
       borderColor: theme.colors.brand.primary['70'],
-      color: theme.colors.neutral.secondary['100'],
+      color: theme.colors.neutral.primary['100'],
     },
   },
   outlined: {
@@ -134,13 +129,13 @@ const secondary: ButtonConfig = {
       color: theme.colors.brand.primary['100'],
     },
     disabled: {
-      backgroundColor: theme.colors.neutral.primary['15'],
       borderColor: theme.colors.neutral.primary['15'],
+      color: theme.colors.neutral.secondary['100'],
     },
     hover: {
       backgroundColor: theme.colors.brand.primary['15'],
       borderColor: theme.colors.brand.primary['70'],
-      color: theme.colors.brand.primary['100'],
+      color: theme.colors.brand.primary['70'],
     },
     active: {
       backgroundColor: theme.colors.brand.primary['30'],
@@ -150,7 +145,7 @@ const secondary: ButtonConfig = {
     loading: {
       backgroundColor: theme.colors.brand.primary['15'],
       borderColor: theme.colors.brand.primary['70'],
-      color: theme.colors.brand.primary['100'],
+      color: theme.colors.brand.primary['70'],
     },
   },
   ghost: {
@@ -212,8 +207,8 @@ const tertiary: Partial<ButtonConfig> = {
       color: theme.colors.brand.secondary['100'],
     },
     disabled: {
-      backgroundColor: theme.colors.neutral.primary['15'],
       borderColor: theme.colors.neutral.primary['15'],
+      color: theme.colors.neutral.primary['15'],
     },
     hover: {
       backgroundColor: theme.colors.brand.secondary['15'],
@@ -237,16 +232,16 @@ const quaternary: Partial<ButtonConfig> = {
   outlined: {
     default: {
       borderColor: theme.colors.neutral.primary['15'],
-      color: theme.colors.brand.primary['100'],
+      color: theme.colors.brand.secondary['100'],
     },
     disabled: {
-      backgroundColor: theme.colors.neutral.primary['15'],
       borderColor: theme.colors.neutral.primary['15'],
+      color: theme.colors.neutral.secondary['100'],
     },
     hover: {
       backgroundColor: theme.colors.brand.primary['15'],
       borderColor: theme.colors.neutral.primary['30'],
-      color: theme.colors.brand.primary['100'],
+      color: theme.colors.brand.secondary['100'],
     },
     active: {
       backgroundColor: theme.colors.brand.primary['30'],
@@ -256,7 +251,7 @@ const quaternary: Partial<ButtonConfig> = {
     loading: {
       backgroundColor: theme.colors.brand.primary['15'],
       borderColor: theme.colors.neutral.primary['30'],
-      color: theme.colors.brand.primary['100'],
+      color: theme.colors.brand.secondary['100'],
     },
   },
 }
@@ -268,7 +263,7 @@ export const Colors = {
   quaternary,
 }
 
-export type ButtonColor = keyof typeof Colors
+export type ButtonColor = keyof typeof Colors;
 
 export const getBackgroundColor = (
   variant: ButtonVariant,
