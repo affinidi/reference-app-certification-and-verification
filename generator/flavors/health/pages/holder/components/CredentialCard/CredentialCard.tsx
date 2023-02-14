@@ -11,6 +11,7 @@ import * as S from './CredentialCard.styled'
 
 export type PrescriptionCardProps = {
   vc: any
+  expired?: boolean
 }
 
 const CredentialCard: FC<PrescriptionCardProps> = ({ vc }) => {

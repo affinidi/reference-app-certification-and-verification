@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Formik } from 'formik'
 
-import { JSON_SCHEMA_URL } from 'utils'
+import { JSON_SCHEMA_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Spinner } from 'components'
 

@@ -6,7 +6,10 @@
   "scripts": {
     "generate": "node generator/generate.mjs",
     "generate:watch": "nodemon --watch generator --exec 'npm run generate'",
-    "build": "npm run --prefix flavors/health build && npm run --prefix flavors/education build && npm run --prefix flavors/ticketing build"
+    "build:health": "npm run --prefix flavors/health build",
+    "build:education": "npm run --prefix flavors/education build",
+    "build:ticketing": "npm run --prefix flavors/ticketing build",
+    "build": "npm run build:health; npm run build:education; npm run build:ticketing"
   },
   "repository": {
     "type": "git",
