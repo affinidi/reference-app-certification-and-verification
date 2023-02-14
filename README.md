@@ -21,13 +21,7 @@ Setting up the reference app is easy, just follow these steps:
     ```
     $ git clone git@github.com:affinidi/reference-app-certification-and-verification.git
     $ cd reference-app-certification-and-verification
-    ```
-
-    Pick a flavor, for example:
-    ```
-    $ cd flavors/health
-    $ cd flavors/education
-    $ cd flavors/ticketing
+    $ cd flavors/{flavor}
     ```
 2. Install the dependencies:
     ```

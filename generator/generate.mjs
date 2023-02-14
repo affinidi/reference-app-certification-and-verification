@@ -67,7 +67,8 @@ async function generate() {
       packageLockJson.packages[''].name = packageName
     })
 
-    console.log('Replacing variables in README.md file')
+    console.log('Generating the README.md file')
+    await fs.cp(join(rootPath, 'README.md'), join(flavorPath, 'README.md'))
     await replaceVariables(join(flavorPath, 'README.md'), { flavor })
   }
 }
