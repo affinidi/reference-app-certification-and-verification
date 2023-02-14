@@ -9,7 +9,7 @@ This is a ready-to-use reference app that showcases usage of Affinidi API for is
 Certification & Verification app allows you to issue, verify and store VCs in your wallet.  
 You can take a role of an issuer, verifier or holder entity.
 
-With SSI it's possible to create flows without ever storing user's data, while still being able to verify it.  
+With this app it's possible to create flows without ever storing user's data, while still being able to verify it.  
 Users are responsible for their data and can store it in any way they want.
 
 The app has multiple implementations which are designed for industry-specific use cases, making it an end-to-end example of a real app that you can deploy and use right away.
@@ -55,15 +55,15 @@ These are called "flavors" and they're adapted for a specific industry.
 
 > Issue, verify and store tickets for events, such as concerts, conferences, meetups, etc.
 
-As an issuer, you can enter details of the event and generate a ticket for a participant.  
+As an issuer (ticket sales company), you can enter details of the event and generate a ticket for a participant.  
 Participant (holder) can then store that ticket in their wallet and share it as a QR code with the verifier when asked to.  
 When the event starts, someone from the security (verifier) can quickly verify the QR.
 
 ### "Health" flavor
 
-> Issue, verify and store prescriptions for medicaments.
+> Issue, verify and store prescriptions for medications.
 
-As an issuer, you can enter details of the medications (dosage, frequency, etc.) and generate a prescription for a patient.  
+As an issuer (doctor), you can enter details of the medications (dosage, frequency, etc.) and generate a prescription for a patient.  
 Patient (holder) can then store that prescription in their wallet and share it as a QR code with the verifier when asked to.  
 Pharmacist from a drug store can then quickly verify the QR and provide requested medicine.
 
@@ -71,7 +71,7 @@ Pharmacist from a drug store can then quickly verify the QR and provide requeste
 
 > Issue, verify and store course certificates.
 
-As an issuer, you can enter details of the course and generate a certificate for a student.  
+As an issuer (institution), you can enter details of the course and generate a certificate for a student.  
 Student (holder) can then store that certificate in their wallet and share it as a QR code with the verifier when asked to.  
 Job interviewer can then quickly verify the QR and validate your knowledge of the course topic.
 
@@ -151,7 +151,7 @@ sequenceDiagram; autonumber
   participant IW as Issuer's Wallet
   actor Holder
 
-  Issuer->>App: Enters medicament (name, dosage, frequency)<br/>and patient details (name, email)
+  Issuer->>App: Enters medicine (name, dosage, frequency)<br/>and patient details (name, email)
   App->>Issuance: Initiates claim flow with provided details<br/>and patient's email (holder)
   Issuance->>Issuance: Stores the offer with provided details (credential subject)
   Issuance-->>IW: Generates a credential offer request token
