@@ -49,7 +49,6 @@ export const SpinnerWrapper = styled.div`
 export const IconWrapper = styled.div<Pick<StyledButtonProps, '$loading'>>`
   opacity: ${(props) => (props.$loading ? '0' : '1')};
 
-  img,
   svg {
     display: block;
     max-height: ${pxToRem(20)};
