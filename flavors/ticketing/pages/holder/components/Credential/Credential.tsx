@@ -1,7 +1,6 @@
 import { FC } from 'react'
-import { format } from 'date-fns'
-
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
+import { format } from 'date-fns'
 
 import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
 
@@ -49,8 +48,12 @@ const getDetails = ({
     return (
       qrCode && (
         <CredentialDetails
-          firstName={detailsObject.firstName}
-          lastName={detailsObject.lastName}
+          eventName={detailsObject.eventName}
+          startDate={format(new Date(detailsObject.startDate), 'dd.MM.yyy')}
+          endDate={format(new Date(detailsObject.endDate), 'dd.MM.yyy')}
+          startTime={format(new Date(detailsObject.startDate), 'HH.mm')}
+          endTime={format(new Date(detailsObject.endDate), 'HH.mm')}
+          location={detailsObject.place}
           qrCode={qrCode}
         />
       )

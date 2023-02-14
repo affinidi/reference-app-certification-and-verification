@@ -1,43 +1,44 @@
 export const messages = {
   home: {
     holder: {
-      title: 'Collect generic VCs',
-      description: 'Collect your generic VCs or view them stored in your wallet',
+      title: 'Collect tickets',
+      description: 'Collect your tickets or view tickets stored in your wallet',
     },
     verifier: {
-      title: 'Verify generic VCs',
-      description: 'Verify generic VCs with a QR code scanner',
+      title: 'Verify tickets',
+      description: 'Verify tickets with a QR code scanner',
     },
     issuer: {
-      title: 'Issue generic VCs',
-      description: 'Issue generic VCs easily',
+      title: 'Issue tickets',
+      description: 'Issue tickets to your customers easily',
     },
   },
   verifier: {
-    welcome: 'Welcome to the generic scanner. Tap “scan QR code” to start checking generic VCs.',
+    welcome: 'Welcome to the Eventi ticket scanner. Tap “scan QR code” to start checking tickets.',
     result: {
-      valid: 'Generic VC successfully checked.',
-      invalid: 'Generic VC is invalid.',
+      valid: 'Ticket successfully checked.',
+      invalid: 'Ticket is invalid.',
       content: {
-        valid: 'Valid generic VC',
-        invalid: 'Invalid generic VC',
+        valid: 'Valid ticket',
+        invalid: 'Invalid ticket',
       }
     },
   },
   issuer: {
     result: {
-      title: 'Generic VC issued',
-      issued: 'Your generic VC has been issued.',
-      next: 'Issue next generic VC',
+      title: 'Ticket issued',
+      issued: 'Your ticket has been issued.',
+      next: 'Issue next ticket',
       content: {
-        issued: 'Generic VC successfully issued',
+        issued: 'Ticket successfully issued',
       },
     },
   },
   holder: {
     home: {
-      title: 'Your generic VCs',
-      noVcs: 'You don\'t have any generic VCs yet.'
+      title: 'Your tickets',
+      expiredVcs: 'Expired tickets',
+      noVcs: 'You don\'t have any tickets yet.'
     }
   }
 }

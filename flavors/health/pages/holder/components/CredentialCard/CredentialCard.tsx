@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { format } from 'date-fns'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
@@ -8,16 +9,18 @@ import { Box, Typography } from 'components'
 
 import * as S from './CredentialCard.styled'
 
-export type CredentialCardProps = {
+export type PrescriptionCardProps = {
   vc: any
+  expired?: boolean
 }
 
-const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
+const CredentialCard: FC<PrescriptionCardProps> = ({ vc }) => {
   const router = useRouter()
 
   const credential = {
-    firstName: vc?.credentialSubject?.firstName,
-    lastName: vc?.credentialSubject?.lastName,
+    title: vc?.credentialSubject?.eventName,
+    date: format(new Date(vc?.credentialSubject?.startDate), 'dd.MM.yyyy'),
+    time: format(new Date(vc?.credentialSubject?.startDate), 'HH:mm'),
     credentialId: vc?.id,
   }
 
@@ -37,7 +40,7 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
       >
         <Image
           src={CredentialIcon}
-          alt="Credential"
+          alt="Prescription"
         />
       </S.ImageWrapper>
 
@@ -46,12 +49,12 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
         gap={4}
       >
         <Box>
-          <Typography variant="c1">First name</Typography>
-          <Typography variant="p4">{credential.firstName}</Typography>
+          <Typography variant="c1">Start Date</Typography>
+          <Typography variant="p4">{credential.date}</Typography>
         </Box>
         <Box>
-          <Typography variant="c1">Last name</Typography>
-          <Typography variant="p4">{credential.lastName}</Typography>
+          <Typography variant="c1">Start Time</Typography>
+          <Typography variant="p4">{credential.time}</Typography>
         </Box>
       </Box>
     </S.Credential>

@@ -1,52 +1,54 @@
 import { FC } from 'react'
+import Image from 'next/image'
 
-import { Box, Typography } from 'components'
+import { Typography } from 'components'
+import mortarBoard from 'public/images/mortar-board.svg'
 
 import * as S from './CredentialDetails.styled'
 
 export type CredentialDetailsProps = {
-  firstName: string
-  lastName: string
+  courseTitle: string
+  studentName: string
+  institution: string
+  dateOfCompletion: string
   qrCode: string
 }
 
 export const CredentialDetails: FC<CredentialDetailsProps> = ({
-  firstName,
-  lastName,
+  courseTitle,
+  studentName,
+  institution,
+  dateOfCompletion,
   qrCode,
 }) => (
-  <S.CredentialDetailsCard>
+  <S.DetailsCard>
     <S.DataCard>
-      <Box
-        justifyContent="space-between"
-        gap={24}
-      >
-        <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
-          <Box>
-            <Typography variant="c1">First name</Typography>
-            <Typography variant="p4">{firstName} </Typography>
-          </Box>
-          <Box>
-            <Typography variant="c1">Last name</Typography>
-            <Typography variant="p4">{lastName} </Typography>
-          </Box>
+      <Image src={mortarBoard} alt='Mortar Board' aria-label='mortar-board' />
+
+      <S.DataCardInnerContainer justifyContent='space-between'>
+        <div className='grid grid-row-3 sm:grid-row-4'>
+          <S.Data variant='h5'>{courseTitle}</S.Data>
+          <S.Data variant='s1'>{studentName}</S.Data>
         </div>
 
-        <Box>
-          <Typography variant="p1">
-            This is your generic VC. This QR code can only be used one time.
-          </Typography>
-        </Box>
-      </Box>
+        <div className='grid sm:grid-cols-2 gap-y-7'>
+          <div className='grid'>
+            <Typography variant='p3'>Issuing institution</Typography>
+            <S.Data variant='p4'>{institution}</S.Data>
+          </div>
+
+          <div className='grid'>
+            <Typography variant='p3'>Date of completion</Typography>
+            <S.Data variant='p4'>{dateOfCompletion}</S.Data>
+          </div>
+        </div>
+      </S.DataCardInnerContainer>
     </S.DataCard>
 
     <S.QrCodeCard>
-      <img
-        src={qrCode}
-        alt="QR Code"
-      />
+      <img src={qrCode} alt='QR Code' />
     </S.QrCodeCard>
-  </S.CredentialDetailsCard>
+  </S.DetailsCard>
 )
 
 export default CredentialDetails

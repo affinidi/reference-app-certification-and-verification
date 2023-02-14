@@ -37,6 +37,7 @@ export const messages = {
   holder: {
     home: {
       title: 'Your prescriptions',
+      expiredVcs: 'Expired prescriptions',
       noVcs: 'You don\'t have any prescriptions yet.'
     }
   }

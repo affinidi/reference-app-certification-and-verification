@@ -1,40 +1,31 @@
 import styled from 'styled-components'
 
 import { pxToRem } from 'utils'
-import { Box } from 'components'
+import { Box, Typography } from 'components'
 
 export const DataCard = styled.div`
-  background-color: ${(props) => props.theme.colors.brand.secondary['50']};
-  padding: ${pxToRem(40)};
+  background-color: ${(props) => props.theme.colors.neutral.secondary['100']};
+  padding: 0 ${pxToRem(40)} ${pxToRem(40)} ${pxToRem(40)};
+  width: 100%;
 
-  @media (max-width: 1024px) {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: ${pxToRem(24)};
+  img {
+    margin-bottom: ${pxToRem(24)};
   }
+`
 
-  @media (min-width: 1024px) {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+export const DataCardInnerContainer = styled(Box)`
+  gap: ${pxToRem(96)};
+
+  @media (max-width: 576px) {
+    gap: ${pxToRem(40)};
   }
 `
 
 export const QrCodeCard = styled(Box)`
-  background-color: ${(props) => props.theme.colors.brand.secondary['50']};
-  position: relative;
+  background-color: ${(props) => props.theme.colors.brand.primary['100']};
   padding: ${pxToRem(40)};
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    display: block;
-    width: ${pxToRem(16)};
-    height: ${pxToRem(16)};
-    background: ${(props) => props.theme.colors.neutral.secondary['100']};
-    border-radius: 50%;
-    bottom: ${pxToRem(-9)};
-  }
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
 
   img {
     border-radius: 16px;
@@ -45,51 +36,32 @@ export const QrCodeCard = styled(Box)`
     }
   }
 
-  @media (max-width: 1024px) {
-    border-bottom: 3px dashed ${props => props.theme.colors.neutral.secondary['100']};;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-
-    &::before,
-    &::after {
-      bottom: ${pxToRem(-9)};
-    }
-
-    &::before {
-      left: ${pxToRem(-8)};
-    }
-
-    &::after {
-      right: ${pxToRem(-8)};
-    }
-  }
-
-  @media (min-width: 1024px) {
-    border-left: 3px dashed ${props => props.theme.colors.neutral.secondary['100']};;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-
-    &::before,
-    &::after {
-      left: ${pxToRem(-9)};
-    }
-
-    &::before {
-      top: ${pxToRem(-8)};
-    }
-
-    &::after {
-      bottom: ${pxToRem(-8)};
-    }
+  @media (max-width: 576px) {
+    background-color: ${(props) => props.theme.colors.brand.primary['90']};
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 `
 
-export const CredentialDetailsCard = styled(Box)`
+export const Data = styled(Typography)`
+  color: ${(props) => props.theme.colors.neutral.primary['100']};
+`
+
+export const DetailsCard = styled(Box)`
+  margin-top: ${pxToRem(48)};
   flex-direction: row;
+  box-shadow: 0 ${pxToRem(4)} ${pxToRem(20)} 0 rgba(0, 0, 0, 0.1);
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
 
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
     max-width: ${pxToRem(338)};
     margin: 0 auto;
+  }
+
+  @media (max-width: 576px) {
+    max-width: none;
+    margin: 0;
   }
 `

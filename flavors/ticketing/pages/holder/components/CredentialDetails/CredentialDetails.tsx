@@ -1,50 +1,69 @@
-import { FC } from 'react'
-
 import { Box, Typography } from 'components'
+
+import { FC } from 'react'
 
 import * as S from './CredentialDetails.styled'
 
 export type CredentialDetailsProps = {
-  firstName: string
-  lastName: string
+  eventName: string
+  startDate: string
+  endDate: string
+  startTime: string
+  endTime: string
   qrCode: string
+  location: string
 }
 
 export const CredentialDetails: FC<CredentialDetailsProps> = ({
-  firstName,
-  lastName,
+  eventName,
+  startDate,
+  startTime,
+  endDate,
+  endTime,
+  location,
   qrCode,
 }) => (
   <S.CredentialDetailsCard>
     <S.DataCard>
-      <Box
-        justifyContent="space-between"
-        gap={24}
-      >
+      <Box justifyContent="space-between" gap={24}>
         <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
           <Box>
-            <Typography variant="c1">First name</Typography>
-            <Typography variant="p4">{firstName} </Typography>
+            <Typography variant="c1"> Start Date</Typography>
+            <S.Data variant="p4">{startDate}</S.Data>
           </Box>
           <Box>
-            <Typography variant="c1">Last name</Typography>
-            <Typography variant="p4">{lastName} </Typography>
+            <Typography variant="c1"> End Date</Typography>
+            <S.Data variant="p4">{endDate}</S.Data>
           </Box>
         </div>
 
+        <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
+          <Box alignItems="start">
+            <Typography variant="c1"> Start Time</Typography>
+            <S.Data variant="p4">{startTime}</S.Data>
+          </Box>
+          <Box>
+            <Typography variant="c1"> End Time</Typography>
+            <S.Data variant="p4">{endTime}</S.Data>
+          </Box>
+        </div>
+
+        <div className="grid">
+          <Typography variant="c1"> Location</Typography>
+          <S.Data variant="p4">{location}</S.Data>
+        </div>
+
         <Box>
-          <Typography variant="p1">
-            This is your generic VC. This QR code can only be used one time.
-          </Typography>
+          <S.Data variant="p1">
+            This is your event ticket for {eventName}. This ticket will be scanned upon entry. This
+            QR code can only be used one time.
+          </S.Data>
         </Box>
       </Box>
     </S.DataCard>
 
     <S.QrCodeCard>
-      <img
-        src={qrCode}
-        alt="QR Code"
-      />
+      <img src={qrCode} alt="QR Code" />
     </S.QrCodeCard>
   </S.CredentialDetailsCard>
 )

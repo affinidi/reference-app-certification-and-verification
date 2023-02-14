@@ -1,43 +1,44 @@
 export const messages = {
   home: {
     holder: {
-      title: 'Collect medical records',
-      description: 'Collect your medical records or view them stored in your wallet',
+      title: 'Collect certificates',
+      description: 'Collect your certificates or view them stored in your wallet',
     },
     verifier: {
-      title: 'Verify medical records',
-      description: 'Verify medical records with a QR code scanner',
+      title: 'Verify certificates',
+      description: 'Verify certificates with a QR code scanner',
     },
     issuer: {
-      title: 'Issue medical records',
-      description: 'Issue medical records easily',
+      title: 'Issue certificates',
+      description: 'Issue certificates to your students easily',
     },
   },
   verifier: {
-    welcome: 'Welcome to the credential scanner. Tap “scan QR code” to start checking prescriptions.',
+    welcome: 'Welcome to the StudID scanner. Tap “scan QR code” to start checking certificates.',
     result: {
-      valid: 'Prescription successfully checked.',
-      invalid: 'Prescription is invalid.',
+      valid: 'Certificate successfully checked.',
+      invalid: 'Certificate is invalid.',
       content: {
-        valid: 'Valid prescription',
-        invalid: 'Invalid prescription',
+        valid: 'Valid certificate',
+        invalid: 'Invalid certificate',
       }
     },
   },
   issuer: {
     result: {
-      title: 'Prescription issued',
-      issued: 'Your prescription has been issued.',
-      next: 'Issue next prescription',
+      title: 'Certificate issued',
+      issued: 'Your certificate has been issued.',
+      next: 'Issue next certificate',
       content: {
-        issued: 'Prescription successfully issued',
+        issued: 'Certificate successfully issued',
       },
     },
   },
   holder: {
     home: {
-      title: 'Your prescriptions',
-      noVcs: 'You don\'t have any prescriptions yet.'
+      title: 'Your certificates',
+      expiredVcs: 'Expired certificates',
+      noVcs: 'You don\'t have any certificates yet.'
     }
   }
 }

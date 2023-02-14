@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 import { pxToRem } from 'utils'
-import { Box } from 'components'
+import { Box, Typography } from 'components'
 
 export const DataCard = styled.div`
-  background-color: ${(props) => props.theme.colors.brand.secondary['50']};
+  background-color: ${(props) => props.theme.colors.brand.secondary['100']};
   padding: ${pxToRem(40)};
 
   @media (max-width: 1024px) {
@@ -20,7 +20,7 @@ export const DataCard = styled.div`
 `
 
 export const QrCodeCard = styled(Box)`
-  background-color: ${(props) => props.theme.colors.brand.secondary['50']};
+  background-color: ${(props) => props.theme.colors.brand.secondary['100']};
   position: relative;
   padding: ${pxToRem(40)};
 
@@ -41,12 +41,16 @@ export const QrCodeCard = styled(Box)`
 
     @media (min-width: 1024px) {
       max-width: none;
-      height: ${pxToRem(292)};
+
+      img {
+        height: ${pxToRem(292)};
+        width: ${pxToRem(292)};
+      }
     }
   }
 
   @media (max-width: 1024px) {
-    border-bottom: 3px dashed ${props => props.theme.colors.neutral.secondary['100']};;
+    border-bottom: 3px dashed #fff;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 
@@ -65,7 +69,7 @@ export const QrCodeCard = styled(Box)`
   }
 
   @media (min-width: 1024px) {
-    border-left: 3px dashed ${props => props.theme.colors.neutral.secondary['100']};;
+    border-left: 3px dashed #fff;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 
@@ -82,6 +86,10 @@ export const QrCodeCard = styled(Box)`
       bottom: ${pxToRem(-8)};
     }
   }
+`
+
+export const Data = styled(Typography)`
+  color: ${(props) => props.theme.colors.neutral.secondary['100']};
 `
 
 export const CredentialDetailsCard = styled(Box)`

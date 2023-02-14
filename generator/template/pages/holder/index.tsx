@@ -1,16 +1,17 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import { JSON_SCHEMA_URL } from 'utils/schema'
+import { VC_TYPE } from 'utils/schema'
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'hooks/holder/useCredentials'
 import { useAuthContext } from 'hooks/useAuthContext'
 import NoData from 'public/images/illustration-empty-state.svg'
 import { Container, Header, Spinner, Typography } from 'components'
+import { messages } from 'utils/messages'
+import { isCredentialExpired } from './components'
 
 import CredentialCard from './components/CredentialCard/CredentialCard'
 import * as S from './index.styled'
-import { messages } from '../../utils/messages'
 
 const Home: FC = () => {
   const { authState } = useAuthContext()
@@ -44,15 +45,15 @@ const Home: FC = () => {
     )
   }
 
-  const vcs = data.filter((credentialItem) => {
-    const credentialSchema = (credentialItem as StoredW3CCredential).credentialSchema
-    return credentialSchema?.id === JSON_SCHEMA_URL
-  })
+  const matchingVcs = (data as StoredW3CCredential[]).filter((vc) => vc.type.includes(VC_TYPE))
+  const validMatchingVcs = matchingVcs.filter((vc) => !isCredentialExpired(vc))
+  const expiredMatchingVcs = matchingVcs.filter((vc) => isCredentialExpired(vc))
 
-  if (vcs.length === 0) {
-    return (
-      <>
-        <Header title={messages.holder.home.title} />
+  return (
+    <>
+      <Header title={messages.holder.home.title} />
+
+      {validMatchingVcs.length === 0 && expiredMatchingVcs.length === 0 && (
         <Container>
           <div className="grid justify-content-center">
             <Typography
@@ -69,38 +70,33 @@ const Home: FC = () => {
             </S.IconContainer>
           </div>
         </Container>
-      </>
-    )
-  }
+      )}
 
-  // @ts-ignore
-  const validVcs: StoredW3CCredential[] = vcs.filter((credentialItem) => {
-    const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
-    return Date.parse(credentialSubject?.startDate) >= Date.now()
-  })
-
-  const getCredentialCards = ({
-    vcs,
-  }: {
-    vcs: StoredW3CCredential[]
-  }) =>
-    vcs.map((vc: StoredW3CCredential) => {
-      return (
-        <CredentialCard
-          key={vc.id}
-          vc={vc}
-        />
-      )
-    })
-
-  return (
-    <>
-      <Header title={messages.holder.home.title} />
-
-      {validVcs.length > 0 && (
+      {validMatchingVcs.length > 0 && (
         <Container>
           <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
-            {getCredentialCards({ vcs: validVcs })}
+            {matchingVcs.map((vc: StoredW3CCredential) => (
+              <CredentialCard
+                key={vc.id}
+                vc={vc}
+              />
+            ))}
+          </div>
+        </Container>
+      )}
+
+      {expiredMatchingVcs.length > 0 && (
+        <Container>
+          <S.SubTitle variant="h6">{messages.holder.home.expiredVcs}</S.SubTitle>
+
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
+            {matchingVcs.map((vc: StoredW3CCredential) => (
+              <CredentialCard
+                key={vc.id}
+                vc={vc}
+                expired
+              />
+            ))}
           </div>
         </Container>
       )}

@@ -1,43 +1,44 @@
 export const messages = {
   home: {
     holder: {
-      title: 'Collect generic VCs',
-      description: 'Collect your generic VCs or view them stored in your wallet',
+      title: 'Collect certificates',
+      description: 'Collect your certificates or view them stored in your wallet',
     },
     verifier: {
-      title: 'Verify generic VCs',
-      description: 'Verify generic VCs with a QR code scanner',
+      title: 'Verify certificates',
+      description: 'Verify certificates with a QR code scanner',
     },
     issuer: {
-      title: 'Issue generic VCs',
-      description: 'Issue generic VCs easily',
+      title: 'Issue certificates',
+      description: 'Issue certificates to your students easily',
     },
   },
   verifier: {
-    welcome: 'Welcome to the generic scanner. Tap “scan QR code” to start checking generic VCs.',
+    welcome: 'Welcome to the StudID scanner. Tap “scan QR code” to start checking certificates.',
     result: {
-      valid: 'Generic VC successfully checked.',
-      invalid: 'Generic VC is invalid.',
+      valid: 'Certificate successfully checked.',
+      invalid: 'Certificate is invalid.',
       content: {
-        valid: 'Valid generic VC',
-        invalid: 'Invalid generic VC',
+        valid: 'Valid certificate',
+        invalid: 'Invalid certificate',
       }
     },
   },
   issuer: {
     result: {
-      title: 'Generic VC issued',
-      issued: 'Your generic VC has been issued.',
-      next: 'Issue next generic VC',
+      title: 'Certificate issued',
+      issued: 'Your certificate has been issued.',
+      next: 'Issue next certificate',
       content: {
-        issued: 'Generic VC successfully issued',
+        issued: 'Certificate successfully issued',
       },
     },
   },
   holder: {
     home: {
-      title: 'Your generic VCs',
-      noVcs: 'You don\'t have any generic VCs yet.'
+      title: 'Your certificates',
+      expiredVcs: 'Expired certificates',
+      noVcs: 'You don\'t have any certificates yet.'
     }
   }
 }
