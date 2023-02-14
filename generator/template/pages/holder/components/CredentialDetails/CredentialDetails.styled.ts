@@ -36,7 +36,7 @@ export const QrCodeCard = styled(Box)`
     bottom: ${pxToRem(-9)};
   }
 
-  svg {
+  img {
     border-radius: 16px;
 
     @media (min-width: 1024px) {

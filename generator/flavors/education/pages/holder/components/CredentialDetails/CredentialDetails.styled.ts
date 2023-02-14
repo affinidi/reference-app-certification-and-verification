@@ -27,7 +27,7 @@ export const QrCodeCard = styled(Box)`
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
 
-  svg {
+  img {
     border-radius: 16px;
 
     @media (min-width: 1024px) {
