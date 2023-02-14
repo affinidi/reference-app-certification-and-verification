@@ -14,7 +14,7 @@ export const messages = {
     },
   },
   verifier: {
-    welcome: 'Welcome to the credential scanner. Tap “scan QR code” to start checking prescriptions.',
+    welcome: 'Welcome to the Healthi scanner. Tap “scan QR code” to start checking prescriptions.',
     result: {
       valid: 'Prescription successfully checked.',
       invalid: 'Prescription is invalid.',
