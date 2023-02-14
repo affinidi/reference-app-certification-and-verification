@@ -4,7 +4,11 @@
   "description": "This is a ready-to-use reference app that showcases usage of Affinidi API for issuing, sharing, verifying and storing verifiable credentials in the wallet.",
   "main": "index.js",
   "scripts": {
-    "generate": "node generator/generate.mjs"
+    "generate": "node generator/generate.mjs",
+    "build:health": "cd flavors/health && npm run build",
+    "build:education": "cd flavors/education && npm run build",
+    "build:ticketing": "cd flavors/ticketing && npm run build",
+    "build": "npm run build:health && npm run build:education && npm run build:ticketing"
   },
   "repository": {
     "type": "git",

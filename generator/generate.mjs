@@ -7,6 +7,7 @@ import rimraf from 'rimraf'
 const filesToAvoid = ['node_modules', '.next', '.env']
 
 const pathsToMerge = [
+  ['assets'],
   ['public', 'images'],
   ['utils'],
 ]
