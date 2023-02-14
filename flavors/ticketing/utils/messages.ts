@@ -1,43 +1,44 @@
 export const messages = {
   home: {
     holder: {
-      title: 'Collect medical records',
-      description: 'Collect your medical records or view them stored in your wallet',
+      title: 'Collect tickets',
+      description: 'Collect your tickets or view tickets stored in your wallet',
     },
     verifier: {
-      title: 'Verify medical records',
-      description: 'Verify medical records with a QR code scanner',
+      title: 'Verify tickets',
+      description: 'Verify tickets with a QR code scanner',
     },
     issuer: {
-      title: 'Issue medical records',
-      description: 'Issue medical records easily',
+      title: 'Issue tickets',
+      description: 'Issue tickets to your customers easily',
     },
   },
   verifier: {
-    welcome: 'Welcome to the credential scanner. Tap “scan QR code” to start checking prescriptions.',
+    welcome: 'Welcome to the Eventi ticket scanner. Tap “scan QR code” to start checking tickets.',
     result: {
-      valid: 'Prescription successfully checked.',
-      invalid: 'Prescription is invalid.',
+      valid: 'Ticket successfully checked.',
+      invalid: 'Ticket is invalid.',
       content: {
-        valid: 'Valid prescription',
-        invalid: 'Invalid prescription',
+        valid: 'Valid ticket',
+        invalid: 'Invalid ticket',
       }
     },
   },
   issuer: {
     result: {
-      title: 'Prescription issued',
-      issued: 'Your prescription has been issued.',
-      next: 'Issue next prescription',
+      title: 'Ticket issued',
+      issued: 'Your ticket has been issued.',
+      next: 'Issue next ticket',
       content: {
-        issued: 'Prescription successfully issued',
+        issued: 'Ticket successfully issued',
       },
     },
   },
   holder: {
     home: {
-      title: 'Your prescriptions',
-      noVcs: 'You don\'t have any prescriptions yet.'
+      title: 'Your tickets',
+      expiredVcs: 'Expired tickets',
+      noVcs: 'You don\'t have any tickets yet.'
     }
   }
 }

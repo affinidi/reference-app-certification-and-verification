@@ -8,7 +8,7 @@ import { useAuthContext } from 'hooks/useAuthContext'
 import NoData from 'public/images/illustration-empty-state.svg'
 import { Container, Header, Spinner, Typography } from 'components'
 import { messages } from 'utils/messages'
-import { isCredentialValid } from './components'
+import { isCredentialExpired } from './components'
 
 import CredentialCard from './components/CredentialCard/CredentialCard'
 import * as S from './index.styled'
@@ -45,13 +45,15 @@ const Home: FC = () => {
     )
   }
 
-  const vcs = (data as StoredW3CCredential[]).filter((vc) => vc.type.includes(VC_TYPE))
-  const validVcs = vcs.filter((vc) => isCredentialValid(vc))
+  const matchingVcs = (data as StoredW3CCredential[]).filter((vc) => vc.type.includes(VC_TYPE))
+  const validMatchingVcs = matchingVcs.filter((vc) => !isCredentialExpired(vc))
+  const expiredMatchingVcs = matchingVcs.filter((vc) => isCredentialExpired(vc))
 
-  if (validVcs.length === 0) {
-    return (
-      <>
-        <Header title={messages.holder.home.title} />
+  return (
+    <>
+      <Header title={messages.holder.home.title} />
+
+      {validMatchingVcs.length === 0 && expiredMatchingVcs.length === 0 && (
         <Container>
           <div className="grid justify-content-center">
             <Typography
@@ -68,21 +70,31 @@ const Home: FC = () => {
             </S.IconContainer>
           </div>
         </Container>
-      </>
-    )
-  }
+      )}
 
-  return (
-    <>
-      <Header title={messages.holder.home.title} />
-
-      {validVcs.length > 0 && (
+      {validMatchingVcs.length > 0 && (
         <Container>
           <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
-            {vcs.map((vc: StoredW3CCredential) => (
+            {matchingVcs.map((vc: StoredW3CCredential) => (
               <CredentialCard
                 key={vc.id}
                 vc={vc}
+              />
+            ))}
+          </div>
+        </Container>
+      )}
+
+      {expiredMatchingVcs.length > 0 && (
+        <Container>
+          <S.SubTitle variant="h6">{messages.holder.home.expiredVcs}</S.SubTitle>
+
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
+            {matchingVcs.map((vc: StoredW3CCredential) => (
+              <CredentialCard
+                key={vc.id}
+                vc={vc}
+                expired
               />
             ))}
           </div>

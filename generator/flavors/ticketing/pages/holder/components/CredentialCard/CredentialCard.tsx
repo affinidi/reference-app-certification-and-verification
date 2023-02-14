@@ -1,60 +1,49 @@
 import { FC } from 'react'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
-
+import { format } from 'date-fns'
 import { ROUTES } from 'utils'
-import CredentialIcon from 'public/images/icon-credential.svg'
-import { Box, Typography } from 'components'
 
-import * as S from './CredentialCard.styled'
+import { Box, Typography } from 'components'
+import { Ticket } from '../Ticket/Ticket'
+import { useRouter } from 'next/router'
 
 export type CredentialCardProps = {
   vc: any
+  expired?: boolean
 }
 
-const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
+const CredentialCard: FC<CredentialCardProps> = ({ vc, expired }) => {
   const router = useRouter()
 
   const credential = {
-    firstName: vc?.credentialSubject?.firstName,
-    lastName: vc?.credentialSubject?.lastName,
+    title: vc?.credentialSubject?.eventName,
+    date: format(new Date(vc?.credentialSubject?.startDate), 'dd.MM.yyyy'),
+    time: format(new Date(vc?.credentialSubject?.startDate), 'HH:mm'),
     credentialId: vc?.id,
   }
 
-  const handleClick = () => {
-    router.push(`${ROUTES.holder.credential}/${credential.credentialId}`)
-  }
-
   return (
-    <S.Credential
-      direction="row"
-      gap={12}
-      onClick={handleClick}
+    <Ticket
+      expired={expired}
+      onClick={() => router.push(`${ROUTES.holder.credential}/${credential.credentialId}`)}
     >
-      <S.ImageWrapper
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Image
-          src={CredentialIcon}
-          alt="Credential"
-        />
-      </S.ImageWrapper>
-
-      <Box
-        direction="row"
-        gap={4}
-      >
+      <Box gap={32}>
         <Box>
-          <Typography variant="c1">First name</Typography>
-          <Typography variant="p4">{credential.firstName}</Typography>
+          <Typography variant="h6">{credential.title}</Typography>
+          <Typography variant="s2">Entry Ticket</Typography>
         </Box>
-        <Box>
-          <Typography variant="c1">Last name</Typography>
-          <Typography variant="p4">{credential.lastName}</Typography>
+
+        <Box direction="row" gap={32}>
+          <Box>
+            <Typography variant="c1">Start Date</Typography>
+            <Typography variant="p4">{credential.date}</Typography>
+          </Box>
+          <Box>
+            <Typography variant="c1">Start Time</Typography>
+            <Typography variant="p4">{credential.time}</Typography>
+          </Box>
         </Box>
       </Box>
-    </S.Credential>
+    </Ticket>
   )
 }
 

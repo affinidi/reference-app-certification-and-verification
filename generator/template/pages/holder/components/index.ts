@@ -1,3 +1,3 @@
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 
-export const isCredentialValid = (vc: StoredW3CCredential) => true
+export const isCredentialExpired = (vc: StoredW3CCredential) => true
