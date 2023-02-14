@@ -4,7 +4,7 @@ This is a ready-to-use reference app that showcases usage of Affinidi API for is
 
 ## Introduction
 
-![Home page](docs/home_page.png)
+![Home page](./docs/home_page.png)
 
 Certification & Verification app allows you to issue, verify and store VCs in your wallet.  
 You can take a role of an issuer, verifier or holder entity.
