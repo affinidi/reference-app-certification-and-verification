@@ -7,11 +7,14 @@ import rimraf from 'rimraf'
 const filesToAvoid = ['node_modules', '.next', '.env']
 
 const pathsToMerge = [
-  ['assets'],
   ['public', 'images'],
+  ['assets'],
   ['utils'],
   ['components'],
-  ['styles']
+  ['styles'],
+  ['verifier'],
+  ['pages', 'components'],
+  ['pages', 'home'],
 ]
 
 const pathsToOverwrite = [
@@ -67,7 +70,8 @@ async function generate() {
       packageLockJson.packages[''].name = packageName
     })
 
-    console.log('Replacing variables in README.md file')
+    console.log('Generating the README.md file')
+    await fs.cp(join(rootPath, 'README.md'), join(flavorPath, 'README.md'))
     await replaceVariables(join(flavorPath, 'README.md'), { flavor })
   }
 }

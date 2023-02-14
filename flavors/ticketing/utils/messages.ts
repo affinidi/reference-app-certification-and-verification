@@ -37,7 +37,6 @@ export const messages = {
   holder: {
     home: {
       title: 'Your tickets',
-      expiredVcs: 'Expired tickets',
       noVcs: 'You don\'t have any tickets yet.'
     }
   }

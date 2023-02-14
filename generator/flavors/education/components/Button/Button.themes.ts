@@ -1,12 +1,7 @@
 import { pxToRem } from 'utils'
 import { theme } from 'utils/theme'
 
-export type ButtonState =
-  | 'default'
-  | 'disabled'
-  | 'hover'
-  | 'active'
-  | 'loading'
+export type ButtonState = 'default' | 'disabled' | 'hover' | 'active' | 'loading'
 
 export type ButtonVariant = 'solid' | 'outlined' | 'ghost'
 
@@ -268,7 +263,7 @@ export const Colors = {
   quaternary,
 }
 
-export type ButtonColor = keyof typeof Colors
+export type ButtonColor = keyof typeof Colors;
 
 export const getBackgroundColor = (
   variant: ButtonVariant,

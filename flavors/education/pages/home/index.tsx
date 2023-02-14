@@ -1,11 +1,10 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 import { ROUTES } from 'utils'
-import WalletIcon from 'public/images/icon-wallet.svg'
-import DigitalCheckIcon from 'public/images/icon-digital-check.svg'
-import BulkIssuanceIcon from 'public/images/icon-bulk-issuance.svg'
+import { WalletIcon } from 'assets/wallet-icon'
+import { DigitalCheckIcon } from 'assets/digital-check-icon'
+import { BulkIssuanceIcon } from 'assets/bulk-issuance-icon'
 import { Box, Container, Header, Typography } from 'components'
 
 import * as S from './home.styled'
@@ -34,10 +33,7 @@ export const Home: FC = () => {
               </Typography>
             </Box>
             <S.Icon>
-              <Image
-                src={WalletIcon}
-                alt="Wallet"
-              />
+              <WalletIcon />
             </S.Icon>
           </S.Card>
 
@@ -55,10 +51,7 @@ export const Home: FC = () => {
               </Typography>
             </Box>
             <S.Icon>
-              <Image
-                src={DigitalCheckIcon}
-                alt="Check"
-              />
+              <DigitalCheckIcon />
             </S.Icon>
           </S.Card>
 
@@ -76,10 +69,7 @@ export const Home: FC = () => {
               </Typography>
             </Box>
             <S.Icon>
-              <Image
-                src={BulkIssuanceIcon}
-                alt="Bulk Issuance"
-              />
+              <BulkIssuanceIcon />
             </S.Icon>
           </S.Card>
         </S.Wrapper>

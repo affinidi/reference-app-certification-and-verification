@@ -37,7 +37,6 @@ export const messages = {
   holder: {
     home: {
       title: 'Your certificates',
-      expiredVcs: 'Expired certificates',
       noVcs: 'You don\'t have any certificates yet.'
     }
   }

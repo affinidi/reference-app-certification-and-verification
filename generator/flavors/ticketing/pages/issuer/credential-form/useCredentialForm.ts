@@ -4,7 +4,7 @@ import * as EmailValidator from 'email-validator'
 import { useRouter } from 'next/router'
 
 import { ROUTES } from 'utils'
-import { JSON_SCHEMA_URL } from 'utils/schema'
+import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { apiKeyHash, projectDid, projectId } from 'pages/env'
 
 import { parseSchemaURL } from 'services/issuance/parse.schema.url'
@@ -55,7 +55,7 @@ export const useCredentialForm = () => {
       setIsCreating(true)
 
       const walletUrl = `${window.location.origin}/holder/claim`
-      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSON_SCHEMA_URL)
+      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSONLD_CONTEXT_URL)
 
       const issuanceJson: CreateIssuanceInput = {
         template: {

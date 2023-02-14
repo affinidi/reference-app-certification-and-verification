@@ -1,4 +1,4 @@
-import { Typography } from 'components'
+import { Box, Typography } from 'components'
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
@@ -19,5 +19,13 @@ export const QrCodeContainer = styled.div`
   margin: 0 auto;
   @media (min-width: 1024px) {
     margin: 0 8%;
+  }
+`
+
+export const Container = styled(Box)`
+  padding: 0 ${pxToRem(100)};
+
+  @media (max-width: 576px) {
+    padding: 0;
   }
 `

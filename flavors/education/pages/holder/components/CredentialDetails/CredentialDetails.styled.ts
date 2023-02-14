@@ -8,7 +8,7 @@ export const DataCard = styled.div`
   padding: 0 ${pxToRem(40)} ${pxToRem(40)} ${pxToRem(40)};
   width: 100%;
 
-  img {
+  svg {
     margin-bottom: ${pxToRem(24)};
   }
 `

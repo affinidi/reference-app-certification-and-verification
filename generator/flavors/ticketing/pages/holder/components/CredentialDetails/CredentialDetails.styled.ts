@@ -42,7 +42,7 @@ export const QrCodeCard = styled(Box)`
     @media (min-width: 1024px) {
       max-width: none;
 
-      img {
+      svg {
         height: ${pxToRem(292)};
         width: ${pxToRem(292)};
       }

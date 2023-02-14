@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import { pxToRem } from 'utils'
 import { Typography } from 'components'
 
+export const Wrapper = styled.div`
+  margin-top: ${pxToRem(48)};
+`
+
 export const IconContainer = styled.div`
   margin: ${pxToRem(44)} auto ${pxToRem(48)};
 

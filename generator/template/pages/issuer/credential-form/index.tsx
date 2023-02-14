@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Formik } from 'formik'
 
-import { JSON_SCHEMA_URL } from 'utils/schema'
+import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
 
@@ -37,7 +37,7 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a generic VC.
                   </S.Title>
 
-                  <Input label='Schema URL' value={JSON_SCHEMA_URL} disabled />
+                  <Input label='JSON-LD Context URL' value={JSONLD_CONTEXT_URL} disabled />
 
                   <S.Heading variant='h6'>Generic VC details</S.Heading>
 

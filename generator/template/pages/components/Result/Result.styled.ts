@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { pxToRem } from 'utils'
 import { Typography } from 'components'
 
+export const Wrapper = styled.div`
+  margin-top: ${pxToRem(48)};
+`
+
 export const ResultTitle = styled(Typography)<{ $isVerified?: boolean; $isIssuance?: boolean }>`
   color: ${(props) =>
     props.$isIssuance || props.$isVerified

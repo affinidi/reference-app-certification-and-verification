@@ -8,10 +8,9 @@ import { useRouter } from 'next/router'
 
 export type CredentialCardProps = {
   vc: any
-  expired?: boolean
 }
 
-const CredentialCard: FC<CredentialCardProps> = ({ vc, expired }) => {
+const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
   const router = useRouter()
 
   const credential = {
@@ -22,10 +21,7 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc, expired }) => {
   }
 
   return (
-    <Ticket
-      expired={expired}
-      onClick={() => router.push(`${ROUTES.holder.credential}/${credential.credentialId}`)}
-    >
+    <Ticket onClick={() => router.push(`${ROUTES.holder.credential}/${credential.credentialId}`)}>
       <Box gap={32}>
         <Box>
           <Typography variant="h6">{credential.title}</Typography>

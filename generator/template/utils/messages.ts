@@ -37,7 +37,6 @@ export const messages = {
   holder: {
     home: {
       title: 'Your generic VCs',
-      expiredVcs: 'Expired generic VCs',
       noVcs: 'You don\'t have any generic VCs yet.'
     }
   }

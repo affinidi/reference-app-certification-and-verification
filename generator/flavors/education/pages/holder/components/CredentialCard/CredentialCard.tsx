@@ -1,19 +1,17 @@
 import { FC } from 'react'
 import { format } from 'date-fns'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 import { Box, Typography } from 'components'
 import { ROUTES } from 'utils'
 
-import CertDateIcon from 'public/images/cert-icon.svg'
-import MortarBoard from 'public/images/mortar-board.svg'
+import { CertificateDateIcon } from 'assets/certificate-date-icon'
+import { MortarBoardIcon } from 'assets/mortar-board-icon'
 
 import * as S from './CredentialCard.styled'
 
 export type CredentialCardProps = {
   vc: any
-  expired?: boolean
 }
 
 const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
@@ -38,11 +36,7 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
       <Box gap={32}>
         <Box>
           <S.MortarBoardHatIconContainer>
-            <Image
-              src={MortarBoard}
-              alt='Mortar Board Hat Icon that shows on top of ticket'
-              aria-label='mortar-board'
-            />
+            <MortarBoardIcon />
           </S.MortarBoardHatIconContainer>
 
           <Typography variant='h6'>{credential.title}</Typography>
@@ -50,11 +44,7 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
         </Box>
 
         <Box direction='row' gap={8}>
-          <Image
-            src={CertDateIcon}
-            alt='Icon that shows the certificate date'
-            aria-label='cert-icon'
-          />
+          <CertificateDateIcon />
           <Typography variant='s2'>{credential.date}</Typography>
         </Box>
       </Box>

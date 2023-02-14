@@ -1,9 +1,8 @@
 import React from 'react'
 import { Props, components } from 'react-select'
-import Image from 'next/image'
 
 import { Typography } from 'components'
-import ChevronDownIcon from 'public/images/icon-chevron-down.svg'
+import { ChevronDownIcon } from 'assets/chevron-down-icon'
 
 import * as S from './Select.styled'
 
@@ -50,7 +49,7 @@ export const Select = ({
       isSearchable={isSearchable}
       menuPortalTarget={menuPortalTarget}
       components={{
-        DropdownIndicator: () => <Image src={ChevronDownIcon} alt='Loading' />,
+        DropdownIndicator: () => <ChevronDownIcon />,
         Menu: (menuProps) => (
           <S.Menu>
             <components.Menu {...menuProps} />

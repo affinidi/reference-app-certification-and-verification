@@ -1,5 +1,5 @@
-import { Typography } from 'components'
 import styled from 'styled-components'
+import { Box, Typography } from 'components'
 import { pxToRem } from 'utils'
 
 export const Div = styled.div<{ nested?: boolean }>`
@@ -21,5 +21,13 @@ export const QrCodeContainer = styled.div`
 
   @media (min-width: 1024px) {
     margin: 0 8%;
+  }
+`
+
+export const Container = styled(Box)`
+  padding: 0 ${pxToRem(100)};
+
+  @media (max-width: 576px) {
+    padding: 0;
   }
 `
