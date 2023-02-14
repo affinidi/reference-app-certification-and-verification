@@ -1,19 +1,21 @@
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 
 import { Logo } from 'assets/logo'
 import { CloseIcon } from 'assets/close-icon'
 import { MenuIcon } from 'assets/menu-icon'
 import { Container, Modal, Typography } from 'components'
+import { useNavBar } from 'hooks/useNavBar'
+import { wrapInContainer } from './NavBar.theme'
 
-import { useNavBar } from './useNavBar'
 import * as S from './NavBar.styled'
 
 const NavBar: FC = () => {
   const { isMenuOpen, setIsMenuOpen, handleLogOut, handleGoHomePage, isAuthorized } = useNavBar()
+  const Wrapper = wrapInContainer ? Container : Fragment
 
   return (
     <>
-      <Container>
+      <Wrapper>
         <S.Container justifyContent="space-between" alignItems="center" direction="row">
           <S.LogoWrapper onClick={handleGoHomePage}>
             <Logo />
@@ -33,7 +35,7 @@ const NavBar: FC = () => {
             </>
           )}
         </S.Container>
-      </Container>
+      </Wrapper>
 
       {isAuthorized && (
         <Modal open={isMenuOpen} onClose={() => setIsMenuOpen(false)} position="rightSide">
