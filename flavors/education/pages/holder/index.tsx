@@ -1,11 +1,10 @@
 import { FC } from 'react'
-import Image from 'next/image'
 
 import { VC_TYPE } from 'utils/schema'
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'hooks/holder/useCredentials'
 import { useAuthContext } from 'hooks/useAuthContext'
-import NoData from 'public/images/illustration-empty-state.svg'
+import { EmptyStateIllustration } from 'assets/empty-state-illustration'
 import { Container, Header, Spinner, Typography } from 'components'
 import { messages } from 'utils/messages'
 import { isCredentialExpired } from './components'
@@ -63,10 +62,7 @@ const Home: FC = () => {
               {messages.holder.home.noVcs}
             </Typography>
             <S.IconContainer>
-              <Image
-                src={NoData}
-                alt="No VCs"
-              />
+              <EmptyStateIllustration />
             </S.IconContainer>
           </div>
         </Container>

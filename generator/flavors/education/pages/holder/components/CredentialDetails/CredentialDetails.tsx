@@ -1,8 +1,7 @@
 import { FC } from 'react'
-import Image from 'next/image'
 
 import { Typography } from 'components'
-import mortarBoard from 'public/images/mortar-board.svg'
+import { MortarBoardIcon } from 'assets/mortar-board-icon'
 
 import * as S from './CredentialDetails.styled'
 
@@ -23,7 +22,7 @@ export const CredentialDetails: FC<CredentialDetailsProps> = ({
 }) => (
   <S.DetailsCard>
     <S.DataCard>
-      <Image src={mortarBoard} alt='Mortar Board' aria-label='mortar-board' />
+      <MortarBoardIcon />
 
       <S.DataCardInnerContainer justifyContent='space-between'>
         <div className='grid grid-row-3 sm:grid-row-4'>

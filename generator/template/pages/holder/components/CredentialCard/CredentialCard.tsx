@@ -1,9 +1,8 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 import { ROUTES } from 'utils'
-import CredentialIcon from 'public/images/icon-credential.svg'
+import { CredentialIcon } from 'assets/credential-icon'
 import { Box, Typography } from 'components'
 
 import * as S from './CredentialCard.styled'
@@ -36,10 +35,7 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }: CredentialCardProps) =>
         justifyContent="center"
         alignItems="center"
       >
-        <Image
-          src={CredentialIcon}
-          alt="Credential"
-        />
+        <CredentialIcon />
       </S.ImageWrapper>
 
       <Box

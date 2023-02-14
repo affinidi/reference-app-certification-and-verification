@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { LoadingIcon } from 'assets'
+import { LoadingIcon } from 'assets/loading'
 
 import { ButtonColor, ButtonSize, ButtonVariant } from './Button.themes'
 import * as S from './Button.styled'

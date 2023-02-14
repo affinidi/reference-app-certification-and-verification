@@ -1,13 +1,12 @@
 import { FC } from 'react'
 
-import Logo from 'public/images/logo.svg'
-import CloseIcon from 'public/images/icon-close.svg'
-import MenuIcon from 'public/images/icon-menu.svg'
+import { Logo } from 'assets/logo'
+import { CloseIcon } from 'assets/close-icon'
+import { MenuIcon } from 'assets/menu-icon'
 import { Container, Modal, Typography } from 'components'
 
 import { useNavBar } from './useNavBar'
 import * as S from './NavBar.styled'
-import Image from 'next/image'
 
 const NavBar: FC = () => {
   const { isMenuOpen, setIsMenuOpen, handleLogOut, handleGoHomePage, isAuthorized } = useNavBar()
@@ -17,18 +16,18 @@ const NavBar: FC = () => {
       <Container>
         <S.Container justifyContent="space-between" alignItems="center" direction="row">
           <S.Logo>
-            <Image onClick={handleGoHomePage} src={Logo} alt="logo" aria-label="app-logo" />
+            <Logo onClick={handleGoHomePage} />
           </S.Logo>
 
           {isAuthorized && (
             <>
               {isMenuOpen ? (
                 <S.IconWrapper>
-                  <Image src={CloseIcon} alt="Close menu" onClick={() => setIsMenuOpen(false)} aria-label="menu-close-icon" />
+                  <CloseIcon onClick={() => setIsMenuOpen(false)} />
                 </S.IconWrapper>
               ) : (
                 <S.IconWrapper>
-                  <Image src={MenuIcon} alt="Open menu" onClick={() => setIsMenuOpen(true)} aria-label="menu-open-icon" />
+                  <MenuIcon onClick={() => setIsMenuOpen(true)} />
                 </S.IconWrapper>
               )}
             </>
