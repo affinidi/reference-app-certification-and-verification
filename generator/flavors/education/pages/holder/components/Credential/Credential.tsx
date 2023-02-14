@@ -1,9 +1,8 @@
 import { FC } from 'react'
+import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { format } from 'date-fns'
 
-import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
-
-import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
+import VcDetails from '../VcDetails/VcDetails'
 
 import * as S from './Credential.styled'
 
@@ -31,7 +30,7 @@ const getDetails = ({
   nested = false,
   qrCode,
 }: {
-  detailsObject: any
+  detailsObject: unknown
   nested?: boolean
   qrCode?: string
 }) => {
@@ -39,7 +38,9 @@ const getDetails = ({
     return (
       <S.Div nested={nested}>
         {detailsObject.map((value, index) => (
-          <S.Div key={index}>{getDetails({ detailsObject: value, nested: true })}</S.Div>
+          <S.Div key={index}>
+            {getDetails({ detailsObject: value, nested: true })}
+          </S.Div>
         ))}
       </S.Div>
     )
@@ -48,9 +49,14 @@ const getDetails = ({
   if (typeof detailsObject === 'object' && detailsObject !== null) {
     return (
       qrCode && (
-        <CredentialDetails
-          firstName={detailsObject.firstName}
-          lastName={detailsObject.lastName}
+        <VcDetails
+          courseTitle={detailsObject.courseTitle}
+          studentName={detailsObject.student.name}
+          dateOfCompletion={format(
+            new Date(detailsObject.dateOfCompletion),
+            'dd.MM.yyyy'
+          )}
+          institution={detailsObject.institution}
           qrCode={qrCode}
         />
       )
@@ -60,6 +66,9 @@ const getDetails = ({
   return <S.Div>{renderLiteral(detailsObject)}</S.Div>
 }
 
-export const Credential: FC<CredentialProps> = ({ credentialSubject, qrCode }) => {
+export const Credential: FC<CredentialProps> = ({
+  credentialSubject,
+  qrCode,
+}) => {
   return <>{getDetails({ detailsObject: credentialSubject, qrCode })}</>
 }

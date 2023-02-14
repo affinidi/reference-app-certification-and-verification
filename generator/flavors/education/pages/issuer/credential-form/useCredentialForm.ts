@@ -15,16 +15,24 @@ import {
 } from 'services/issuance/issuance.api'
 import { issuanceService } from 'services/issuance'
 
-export type VcData = {
-  firstName: string
-  lastName: string
-  targetEmail: string
+export const adjustForUTCOffset = (date: Date) => {
+  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
 }
 
-export const initialValues: VcData = {
-  firstName: '',
-  lastName: '',
-  targetEmail: '',
+export type CredentialSubjectData = {
+  courseTitle: string
+  institution: string
+  dateOfCompletion: string
+  name: string
+  email: string
+}
+
+export const initialValues: CredentialSubjectData = {
+  courseTitle: '',
+  institution: '',
+  dateOfCompletion: '',
+  name: '',
+  email: '',
 }
 
 export const useCredentialForm = () => {
@@ -32,11 +40,12 @@ export const useCredentialForm = () => {
   const [isCreating, setIsCreating] = useState(false)
 
   const handleSubmit = useCallback(
-    async (values: VcData) => {  
+    async (values: CredentialSubjectData) => {
       setIsCreating(true)
 
       const walletUrl = `${window.location.origin}/holder/claim`
-      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSON_SCHEMA_URL)
+      const { schemaType, jsonSchema, jsonLdContext } =
+        parseSchemaURL(JSON_SCHEMA_URL)
 
       const issuanceJson: CreateIssuanceInput = {
         template: {
@@ -57,17 +66,28 @@ export const useCredentialForm = () => {
       const offerInput: CreateIssuanceOfferInput = {
         verification: {
           target: {
-            email: values.targetEmail,
+            email: values.email,
           },
         },
         credentialSubject: {
-          firstName: values.firstName,
-          lastName: values.lastName,
+          dateOfCompletion: format(
+            adjustForUTCOffset(new Date(values.dateOfCompletion)),
+            'yyyy-MM-dd'
+          ),
+          courseTitle: values.courseTitle,
+          institution: values.institution,
+          student: {
+            name: values.name,
+            email: values.email,
+          },
         },
       }
 
       try {
-        const issuanceId = await issuanceService.createIssuance(apiKeyHash, issuanceJson)
+        const issuanceId = await issuanceService.createIssuance(
+          apiKeyHash,
+          issuanceJson
+        )
         await issuanceService.createOffer(apiKeyHash, issuanceId.id, offerInput)
 
         router.push(ROUTES.issuer.result)
@@ -75,24 +95,32 @@ export const useCredentialForm = () => {
         setIsCreating(false)
       }
     },
-    [router],
+    [router]
   )
 
-  const validate = useCallback((values: VcData) => {
-    const errors = {} as Partial<VcData>
+  const validate = useCallback((values: CredentialSubjectData) => {
+    const errors = {} as Partial<CredentialSubjectData>
 
-    if (!values.firstName) {
-      errors.firstName = 'Mandatory field'
+    if (!values.courseTitle) {
+      errors.courseTitle = 'Mandatory field'
     }
 
-    if (!values.lastName) {
-      errors.lastName = 'Mandatory field'
+    if (!values.institution) {
+      errors.institution = 'Mandatory field'
     }
 
-    if (!values.targetEmail) {
-      errors.targetEmail = 'Mandatory field'
-    } else if (!EmailValidator.validate(values.targetEmail)) {
-      errors.targetEmail = 'Invalid email'
+    if (!values.dateOfCompletion) {
+      errors.dateOfCompletion = 'Mandatory field'
+    }
+
+    if (!values.name) {
+      errors.name = 'Mandatory field'
+    }
+
+    if (!values.email) {
+      errors.email = 'Mandatory field'
+    } else if (!EmailValidator.validate(values.email)) {
+      errors.email = 'Invalid email'
     }
 
     return errors

@@ -1,23 +1,31 @@
 import { FC } from 'react'
+import { format } from 'date-fns'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
-import { ROUTES } from 'utils'
-import CredentialIcon from 'public/images/icon-credential.svg'
 import { Box, Typography } from 'components'
+import { ROUTES } from 'utils'
+
+import CertDateIcon from 'public/images/cert-icon.svg'
+import MortarBoard from 'public/images/mortar-board.svg'
 
 import * as S from './CredentialCard.styled'
 
 export type CredentialCardProps = {
   vc: any
+  expired?: boolean
 }
 
 const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
   const router = useRouter()
 
   const credential = {
-    firstName: vc?.credentialSubject?.firstName,
-    lastName: vc?.credentialSubject?.lastName,
+    title: vc?.credentialSubject?.courseTitle,
+    date: format(
+      new Date(vc?.credentialSubject?.dateOfCompletion),
+      'dd.MM.yyyy'
+    ),
+    institution: vc?.credentialSubject?.institution,
     credentialId: vc?.id,
   }
 
@@ -26,35 +34,31 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
   }
 
   return (
-    <S.Credential
-      direction="row"
-      gap={12}
-      onClick={handleClick}
-    >
-      <S.ImageWrapper
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Image
-          src={CredentialIcon}
-          alt="Credential"
-        />
-      </S.ImageWrapper>
+    <S.CredentialCard onClick={handleClick}>
+      <Box gap={32}>
+        <Box>
+          <S.MortarBoardHatIconContainer>
+            <Image
+              src={MortarBoard}
+              alt='Mortar Board Hat Icon that shows on top of ticket'
+              aria-label='mortar-board'
+            />
+          </S.MortarBoardHatIconContainer>
 
-      <Box
-        direction="row"
-        gap={4}
-      >
-        <Box>
-          <Typography variant="c1">First name</Typography>
-          <Typography variant="p4">{credential.firstName}</Typography>
+          <Typography variant='h6'>{credential.title}</Typography>
+          <Typography variant='s2'>{credential.institution}</Typography>
         </Box>
-        <Box>
-          <Typography variant="c1">Last name</Typography>
-          <Typography variant="p4">{credential.lastName}</Typography>
+
+        <Box direction='row' gap={8}>
+          <Image
+            src={CertDateIcon}
+            alt='Icon that shows the certificate date'
+            aria-label='cert-icon'
+          />
+          <Typography variant='s2'>{credential.date}</Typography>
         </Box>
       </Box>
-    </S.Credential>
+    </S.CredentialCard>
   )
 }
 

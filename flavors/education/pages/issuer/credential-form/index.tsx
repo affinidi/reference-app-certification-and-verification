@@ -1,14 +1,11 @@
 import { FC } from 'react'
 import { Formik } from 'formik'
 
-import { JSON_SCHEMA_URL } from 'utils/schema'
+import { JSON_SCHEMA_URL } from 'utils'
 import { useAuthContext } from 'hooks/useAuthContext'
-import { Container, Header, Input, Select, Spinner } from 'components'
+import { Container, Header, Input, Spinner } from 'components'
 
-import {
-  initialValues,
-  useCredentialForm,
-} from './useCredentialForm'
+import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
 
 const CredentialForm: FC = () => {
@@ -34,90 +31,122 @@ const CredentialForm: FC = () => {
               {(formikProps) => (
                 <form id='form' onSubmit={formikProps.handleSubmit}>
                   <S.Title variant='p1'>
-                    Please fill in the form below to issue a generic VC.
+                    Please fill in the form below to issue a certificate.
                   </S.Title>
 
                   <Input label='Schema URL' value={JSON_SCHEMA_URL} disabled />
 
-                  <S.Heading variant='h6'>Generic VC details</S.Heading>
+                  <S.Heading variant='h6'>Certificate details</S.Heading>
 
                   <div className='grid lg:grid-cols-2 lg:gap-x-8'>
                     <S.InputWrapper
-                      label='First name'
-                      name='firstName'
-                      placeholder='Enter first name'
+                      label='Course title'
+                      placeholder='Enter course title'
+                      name='courseTitle'
                       maxLength={100}
-                      value={formikProps.values.firstName}
+                      value={formikProps.values.courseTitle}
                       onChange={(_, event) => formikProps.handleChange(event)}
                       hasError={
-                        formikProps.touched.firstName
-                          ? Boolean(formikProps.errors.firstName)
+                        formikProps.touched.courseTitle
+                          ? Boolean(formikProps.errors.courseTitle)
                           : false
                       }
                       helpText={
-                        formikProps.touched.firstName
-                          ? formikProps.errors.firstName
+                        formikProps.touched.courseTitle
+                          ? formikProps.errors.courseTitle
                           : ''
                       }
                       onBlur={formikProps.handleBlur}
                     />
-
                     <S.InputWrapper
-                      label='Last name'
-                      name='lastName'
-                      placeholder="Enter last name"
-                      maxLength={100}
-                      value={formikProps.values.lastName}
+                      label='Issuing institution'
+                      placeholder='Issuing institution'
+                      name='institution'
+                      maxLength={500}
+                      value={formikProps.values.institution}
                       onChange={(_, event) => formikProps.handleChange(event)}
                       hasError={
-                        formikProps.touched.lastName
-                          ? Boolean(formikProps.errors.lastName)
+                        formikProps.touched.institution
+                          ? Boolean(formikProps.errors.institution)
                           : false
                       }
                       helpText={
-                        formikProps.touched.lastName
-                          ? formikProps.errors.lastName
+                        formikProps.touched.institution
+                          ? formikProps.errors.institution
+                          : ''
+                      }
+                      onBlur={formikProps.handleBlur}
+                    />
+                    <S.InputWrapper
+                      label='Date of completion'
+                      name='dateOfCompletion'
+                      type='date'
+                      value={formikProps.values.dateOfCompletion}
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={
+                        formikProps.touched.dateOfCompletion
+                          ? Boolean(formikProps.errors.dateOfCompletion)
+                          : false
+                      }
+                      helpText={
+                        formikProps.touched.dateOfCompletion
+                          ? formikProps.errors.dateOfCompletion
                           : ''
                       }
                       onBlur={formikProps.handleBlur}
                     />
                   </div>
 
-                  <S.Heading variant='h6'>Holder information</S.Heading>
+                  <S.Heading variant='h6'>Student information</S.Heading>
 
                   <div className='grid lg:grid-cols-2 lg:gap-x-8'>
                     <S.InputWrapper
-                      label='Holder email'
-                      name='targetEmail'
+                      label='Student name'
+                      name='name'
+                      maxLength={100}
+                      placeholder='Enter Student name'
+                      value={formikProps.values.name}
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={
+                        formikProps.touched.name
+                          ? Boolean(formikProps.errors.name)
+                          : false
+                      }
+                      helpText={
+                        formikProps.touched.name ? formikProps.errors.name : ''
+                      }
+                      onBlur={formikProps.handleBlur}
+                    />
+                    <S.InputWrapper
+                      label='Student email'
+                      name='email'
                       type='email'
-                      placeholder='Enter holder email'
+                      placeholder='Enter student email'
                       maxLength={100}
-                      value={formikProps.values.targetEmail}
+                      value={formikProps.values.email}
                       onChange={(_, event) => formikProps.handleChange(event)}
                       hasError={
-                        formikProps.touched.targetEmail
-                          ? Boolean(formikProps.errors.targetEmail)
+                        formikProps.touched.email
+                          ? Boolean(formikProps.errors.email)
                           : false
                       }
                       helpText={
-                        formikProps.touched.targetEmail
-                          ? formikProps.errors.targetEmail
+                        formikProps.touched.email
+                          ? formikProps.errors.email
                           : ''
                       }
                       onBlur={formikProps.handleBlur}
                     />
                   </div>
 
-                  <div className='grid lg:grid-cols-3'>
-                    <S.ButtonWrapper
-                      type='submit'
-                      form='form'
-                      disabled={!(formikProps.isValid && formikProps.dirty)}
-                      loading={isCreating}
-                    >
-                      Issue generic VC
-                    </S.ButtonWrapper>
-                  </div>
+                  <S.ButtonWrapper
+                    type='submit'
+                    form='form'
+                    disabled={!(formikProps.isValid && formikProps.dirty)}
+                    loading={isCreating}
+                  >
+                    Issue certificate
+                  </S.ButtonWrapper>
                 </form>
               )}
             </Formik>

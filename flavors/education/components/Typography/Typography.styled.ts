@@ -98,7 +98,7 @@ export const Typography = styled.p<{
       case 'h6':
       case 'h7':
       case 'h8':
-        return "'PT Serif', sans-serif"
+        return "'Poppins', sans-serif"
 
       default:
         return "'Nunito Sans', sans-serif"
