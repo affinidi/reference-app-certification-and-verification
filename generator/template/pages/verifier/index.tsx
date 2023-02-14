@@ -15,19 +15,21 @@ const Verifier: FC = () => {
     <>
       <Header title="Welcome" hasBackIcon />
 
-      <Container>
-        <div className="grid lg:grid-cols-3 lg:gap-16">
-          <Box alignItems="center" className="lg:col-start-2">
-            <QrScanDefaultIllustration />
+      <S.Wrapper>
+        <Container>
+          <div className="grid lg:grid-cols-3 lg:gap-16">
+            <Box alignItems="center" className="lg:col-start-2">
+              <QrScanDefaultIllustration />
 
-            <S.WelcomeMessage align="center" variant="p1">
-              {messages.verifier.welcome}
-            </S.WelcomeMessage>
+              <S.WelcomeMessage align="center" variant="p1">
+                {messages.verifier.welcome}
+              </S.WelcomeMessage>
 
-            <Button fullWidth onClick={() => router.push(ROUTES.verifier.scan)}>SCAN QR CODE</Button>
-          </Box>
-        </div>
-      </Container>
+              <Button fullWidth onClick={() => router.push(ROUTES.verifier.scan)}>SCAN QR CODE</Button>
+            </Box>
+          </div>
+        </Container>
+      </S.Wrapper>
     </>
   )
 }

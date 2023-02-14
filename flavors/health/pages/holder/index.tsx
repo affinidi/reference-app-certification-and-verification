@@ -49,34 +49,36 @@ const Home: FC = () => {
     <>
       <Header title={messages.holder.home.title} />
 
-      {matchingVcs.length === 0 && (
-        <Container>
-          <div className="grid justify-content-center">
-            <Typography
-              align="center"
-              variant="p2"
-            >
-              {messages.holder.home.noVcs}
-            </Typography>
-            <S.IconContainer>
-              <EmptyStateIllustration />
-            </S.IconContainer>
-          </div>
-        </Container>
-      )}
+      <S.Wrapper>
+        {matchingVcs.length === 0 && (
+          <Container>
+            <div className="grid justify-content-center">
+              <Typography
+                align="center"
+                variant="p2"
+              >
+                {messages.holder.home.noVcs}
+              </Typography>
+              <S.IconContainer>
+                <EmptyStateIllustration />
+              </S.IconContainer>
+            </div>
+          </Container>
+        )}
 
-      {matchingVcs.length > 0 && (
-        <Container>
-          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
-            {matchingVcs.map((vc: StoredW3CCredential) => (
-              <CredentialCard
-                key={vc.id}
-                vc={vc}
-              />
-            ))}
-          </div>
-        </Container>
-      )}
+        {matchingVcs.length > 0 && (
+          <Container>
+            <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
+              {matchingVcs.map((vc: StoredW3CCredential) => (
+                <CredentialCard
+                  key={vc.id}
+                  vc={vc}
+                />
+              ))}
+            </div>
+          </Container>
+        )}
+      </S.Wrapper>
     </>
   )
 }

@@ -42,35 +42,38 @@ export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = nu
         title={isVerifier ? 'QR code scanned' : messages.issuer.result.title}
         hasBackIcon
       />
-      <Container>
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
-          <Box
-            className="lg:col-start-2"
-            alignItems="center"
-          >
-            <ResultContent
-              isValid={isResultValid}
-              isIssuance={!isVerifier}
-            />
-            <S.ResultPara variant="p1">
-              {isVerifier
-                ? isResultValid
-                  ? messages.verifier.result.valid
-                  : messages.verifier.result.invalid
-                : messages.issuer.result.issued}
-            </S.ResultPara>
 
-            <Button
-              fullWidth
-              color="quaternary"
-              variant="outlined"
-              onClick={() => router.push(pathTo)}
+      <S.Wrapper>
+        <Container>
+          <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+            <Box
+              className="lg:col-start-2"
+              alignItems="center"
             >
-              {isVerifier ? 'Scan next QR code' : messages.issuer.result.next}
-            </Button>
-          </Box>
-        </div>
-      </Container>
+              <ResultContent
+                isValid={isResultValid}
+                isIssuance={!isVerifier}
+              />
+              <S.ResultPara variant="p1">
+                {isVerifier
+                  ? isResultValid
+                    ? messages.verifier.result.valid
+                    : messages.verifier.result.invalid
+                  : messages.issuer.result.issued}
+              </S.ResultPara>
+
+              <Button
+                fullWidth
+                color="quaternary"
+                variant="outlined"
+                onClick={() => router.push(pathTo)}
+              >
+                {isVerifier ? 'Scan next QR code' : messages.issuer.result.next}
+              </Button>
+            </Box>
+          </div>
+        </Container>
+      </S.Wrapper>
     </>
   )
 }

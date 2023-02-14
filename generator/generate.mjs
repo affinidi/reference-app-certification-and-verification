@@ -11,7 +11,10 @@ const pathsToMerge = [
   ['assets'],
   ['utils'],
   ['components'],
-  ['styles']
+  ['styles'],
+  ['verifier'],
+  ['pages', 'components'],
+  ['pages', 'home'],
 ]
 
 const pathsToOverwrite = [
