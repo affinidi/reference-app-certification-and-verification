@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { format } from 'date-fns'
-
+import { ROUTES } from 'utils'
+import { Header } from 'components'
 import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
 
 import * as S from './Credential.styled'
@@ -63,6 +64,19 @@ const getDetails = ({
   return <S.Div>{renderLiteral(detailsObject)}</S.Div>
 }
 
-export const Credential: FC<CredentialProps> = ({ credentialSubject, qrCode }) => {
-  return <>{getDetails({ detailsObject: credentialSubject, qrCode })}</>
+export const Credential: FC<CredentialProps> = ({
+  credentialSubject,
+  qrCode,
+}) => {
+  return <>
+    <Header
+      title={credentialSubject.eventName || ''}
+      path={ROUTES.holder.home}
+      hasBackIcon
+    />
+
+    <S.Container>
+      {getDetails({ detailsObject: credentialSubject, qrCode })}
+    </S.Container>
+  </>
 }
