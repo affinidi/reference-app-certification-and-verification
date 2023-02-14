@@ -8,7 +8,7 @@ export const DataCard = styled.div`
   padding: 0 ${pxToRem(40)} ${pxToRem(40)} ${pxToRem(40)};
   width: 100%;
 
-  img {
+  svg {
     margin-bottom: ${pxToRem(24)};
   }
 `
@@ -27,7 +27,7 @@ export const QrCodeCard = styled(Box)`
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
 
-  img {
+  svg {
     border-radius: 16px;
 
     @media (min-width: 1024px) {

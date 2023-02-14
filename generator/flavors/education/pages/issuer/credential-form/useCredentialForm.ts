@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react'
 import * as EmailValidator from 'email-validator'
 import { useRouter } from 'next/router'
 
-import { JSON_SCHEMA_URL } from 'utils/schema'
+import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { ROUTES } from 'utils'
 import { apiKeyHash, projectDid, projectId } from 'pages/env'
 
@@ -45,7 +45,7 @@ export const useCredentialForm = () => {
 
       const walletUrl = `${window.location.origin}/holder/claim`
       const { schemaType, jsonSchema, jsonLdContext } =
-        parseSchemaURL(JSON_SCHEMA_URL)
+        parseSchemaURL(JSONLD_CONTEXT_URL)
 
       const issuanceJson: CreateIssuanceInput = {
         template: {

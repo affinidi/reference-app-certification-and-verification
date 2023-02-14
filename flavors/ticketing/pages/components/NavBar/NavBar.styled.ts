@@ -23,18 +23,8 @@ export const ButtonContainer = styled.div`
   }
 `
 
-export const Logo = styled.div`
-  svg {
-    width: ${pxToRem(100)};
-    height: ${pxToRem(24)};
-  }
-
-  @media (max-width: 1024px) {
-    svg {
-      width: ${pxToRem(139)};
-      height: ${pxToRem(32)};
-    }
-  }
+export const LogoWrapper = styled.div`
+  cursor: pointer;
 `
 
 export const IconWrapper = styled.div`

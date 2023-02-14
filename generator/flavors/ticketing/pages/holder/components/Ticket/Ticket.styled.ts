@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
-export const Ticket = styled.div<{ expired?: boolean }>`
+export const Ticket = styled.div`
   position: relative;
   height: ${pxToRem(176)};
   padding: ${pxToRem(24)} ${pxToRem(40)};
@@ -34,10 +34,7 @@ export const Ticket = styled.div<{ expired?: boolean }>`
     height: 100%;
     position: absolute;
     left: 0;
-    background-image: ${(props) =>
-      props.expired
-        ? `url(./images/ticket-preview-highlight-gray.svg)`
-        : `url(./images/ticket-preview-highlight-blue.svg)`};
+    background-image: url(./images/ticket-preview-highlight-blue.svg);
     border-radius: 15px 0 0 15px;
   }
 
@@ -46,10 +43,7 @@ export const Ticket = styled.div<{ expired?: boolean }>`
     height: 100%;
     position: absolute;
     right: 0;
-    background-image: ${(props) =>
-      props.expired
-        ? `url(./images/watermark-gray.svg)`
-        : `url(./images/watermark-blue.svg)`};
+    background-image: url(./images/watermark-blue.svg);
     border-radius: 0 15px 15px 0;
   }
 `

@@ -12,7 +12,6 @@ import * as S from './CredentialCard.styled'
 
 export type CredentialCardProps = {
   vc: any
-  expired?: boolean
 }
 
 const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {

@@ -15,19 +15,19 @@ const NavBar: FC = () => {
     <>
       <Container>
         <S.Container justifyContent="space-between" alignItems="center" direction="row">
-          <S.Logo>
-            <Logo onClick={handleGoHomePage} />
-          </S.Logo>
+          <S.LogoWrapper onClick={handleGoHomePage}>
+            <Logo />
+          </S.LogoWrapper>
 
           {isAuthorized && (
             <>
               {isMenuOpen ? (
-                <S.IconWrapper>
-                  <CloseIcon onClick={() => setIsMenuOpen(false)} />
+                <S.IconWrapper onClick={() => setIsMenuOpen(false)}>
+                  <CloseIcon />
                 </S.IconWrapper>
               ) : (
-                <S.IconWrapper>
-                  <MenuIcon onClick={() => setIsMenuOpen(true)} />
+                <S.IconWrapper onClick={() => setIsMenuOpen(true)}>
+                  <MenuIcon />
                 </S.IconWrapper>
               )}
             </>

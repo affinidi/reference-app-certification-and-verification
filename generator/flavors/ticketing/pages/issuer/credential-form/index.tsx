@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Formik } from 'formik'
 
 import { Container, Header, Input, Textarea } from 'components'
-import { JSON_SCHEMA_URL } from 'utils/schema'
+import { JSONLD_CONTEXT_URL } from 'utils/schema'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
@@ -25,7 +25,7 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a credential.
                   </S.Title>
 
-                  <Input label="Schema URL" value={JSON_SCHEMA_URL} disabled />
+                  <Input label="JSON-LD Context URL" value={JSONLD_CONTEXT_URL} disabled />
 
                   <S.Heading variant="h6">Event details</S.Heading>
 

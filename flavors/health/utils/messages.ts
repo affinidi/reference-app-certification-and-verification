@@ -1,20 +1,20 @@
 export const messages = {
   home: {
     holder: {
-      title: 'Collect medical records',
-      description: 'Collect your medical records or view them stored in your wallet',
+      title: 'Collect prescriptions',
+      description: 'Collect your prescriptions or view them stored in your wallet',
     },
     verifier: {
-      title: 'Verify medical records',
-      description: 'Verify medical records with a QR code scanner',
+      title: 'Verify prescriptions',
+      description: 'Verify prescriptions with a QR code scanner',
     },
     issuer: {
-      title: 'Issue medical records',
-      description: 'Issue medical records easily',
+      title: 'Issue prescriptions',
+      description: 'Issue prescriptions to your patients easily',
     },
   },
   verifier: {
-    welcome: 'Welcome to the Healthi scanner. Tap “scan QR code” to start checking prescriptions.',
+    welcome: 'Welcome to the healthi scanner. Tap “scan QR code” to start checking prescriptions.',
     result: {
       valid: 'Prescription successfully checked.',
       invalid: 'Prescription is invalid.',
@@ -37,7 +37,6 @@ export const messages = {
   holder: {
     home: {
       title: 'Your prescriptions',
-      expiredVcs: 'Expired prescriptions',
       noVcs: 'You don\'t have any prescriptions yet.'
     }
   }

@@ -5,73 +5,65 @@ import { Box, Typography } from 'components'
 import * as S from './CredentialDetails.styled'
 
 export type CredentialDetailsProps = {
-  eventName: string
-  startDate: string
-  endDate: string
-  startTime: string
-  endTime: string
+  patientName: string
+  medicationName: string
+  date: string
+  dosage: string
+  frequency: string
+  practitionerName: string
   qrCode: string
-  location: string
 }
 
 export const CredentialDetails: FC<CredentialDetailsProps> = ({
-  eventName,
-  startDate,
-  startTime,
-  endDate,
-  endTime,
-  location,
+  patientName,
+  medicationName,
+  date,
+  dosage,
+  frequency,
+  practitionerName,
   qrCode,
 }) => (
-  <S.CredentialDetailsCard>
-    <S.DataCard>
-      <Box
-        justifyContent="space-between"
-        gap={24}
-      >
-        <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
-          <Box>
-            <Typography variant="c1">Start Date</Typography>
-            <Typography variant="p4">{startDate} </Typography>
-          </Box>
-          <Box>
-            <Typography variant="c1">End Date</Typography>
-            <Typography variant="p4">{endDate} </Typography>
-          </Box>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
-          <Box alignItems="start">
-            <Typography variant="c1">Start Time</Typography>
-            <Typography variant="p4">{startTime} </Typography>
-          </Box>
-          <Box>
-            <Typography variant="c1">End Time</Typography>
-            <Typography variant="p4">{endTime} </Typography>
-          </Box>
-        </div>
-
-        <div className="grid">
-          <Typography variant="c1">Location</Typography>
-          <Typography variant="p4">{location} </Typography>
-        </div>
-
-        <Box>
-          <Typography variant="p1">
-            This is your event prescription for {eventName}. This prescription will be scanned upon entry. This
-            QR code can only be used one time.
-          </Typography>
-        </Box>
+  <S.CredentialDetailsContainer justifyContent='space-between' direction="row">
+    <S.CredentialDetailsCard justifyContent='space-between' gap={48}>
+      <Box gap={8}>
+        <Typography variant='h4'>{patientName}</Typography>
       </Box>
-    </S.DataCard>
+
+      <S.MedicationDetailsContainer gap={42}>
+        <Box gap={2}>
+          <Typography variant='p3'>Medication</Typography>
+          <Typography variant='p4'>{medicationName}</Typography>
+        </Box>
+
+        <div className='grid gap-8 lg:grid-cols-4'>
+          <div className='grid lg:col-span-2 grid-cols-2 gap-8'>
+            <Box gap={2}>
+              <Typography variant='p3'>Dosage</Typography>
+              <Typography variant='p4'>{dosage} </Typography>
+            </Box>
+            <Box gap={2}>
+              <Typography variant='p3'>Frequency</Typography>
+              <Typography variant='p4'>{frequency}</Typography>
+            </Box>
+          </div>
+
+          <Box gap={2}>
+            <Typography variant='p3'>Date</Typography>
+            <Typography variant='p4'>{date}</Typography>
+          </Box>
+
+          <Box gap={2}>
+            <Typography variant='p3'>Practitioner</Typography>
+            <Typography variant='p4'>{practitionerName}</Typography>
+          </Box>
+        </div>
+      </S.MedicationDetailsContainer>
+    </S.CredentialDetailsCard>
 
     <S.QrCodeCard>
-      <img
-        src={qrCode}
-        alt="QR Code"
-      />
+      <img src={qrCode} alt='QR Code' />
     </S.QrCodeCard>
-  </S.CredentialDetailsCard>
+  </S.CredentialDetailsContainer>
 )
 
 export default CredentialDetails
