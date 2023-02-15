@@ -73,7 +73,7 @@ async function generate() {
 
     console.log('Generating the README.md file')
     await fs.cp(join(rootPath, 'README.md'), join(useCasePath, 'README.md'))
-    await replaceVariables(join(useCasePath, 'README.md'), { useCase })
+    await replaceVariables(join(useCasePath, 'README.md'), { "use-case": useCase })
   }
 }
 
