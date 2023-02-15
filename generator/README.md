@@ -23,17 +23,17 @@ $ npm run dev
 
 ```
 /docs
-/use-cases       – fully functional use case-specific apps 
+/use-cases      – fully functional use case-specific apps 
   /use-case-1
   /use-case-2
   ...
 /generator
-  /template    – fully functional generic app that's used as a base for all use cases
+  /template     – fully functional generic app that's used as a base for all use cases
   /use-cases
-    /use-case-1  – use case-specific customizations (themes, components, assets, etc.)
+    /use-case-1 – use case-specific customizations (themes, components, assets, etc.)
     /use-case-2
     ...
-  generate.mjs – script that's responsible for generating use case-specific apps
+  generate.mjs  – script that's responsible for generating use case-specific apps
 ```
 
 How it works:
