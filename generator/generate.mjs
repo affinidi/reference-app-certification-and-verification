@@ -27,53 +27,53 @@ const __dirname = dirname(url.fileURLToPath(import.meta.url))
 
 async function generate() {
   const rootPath = join(__dirname, '..')
-  const flavorsPath = join(rootPath, 'flavors')
+  const useCasesPath = join(rootPath, 'use-cases')
   const generatorPath = join(rootPath, 'generator')
-  const generatorFlavorsPath = join(generatorPath, 'flavors')
+  const generatorUseCasesPath = join(generatorPath, 'use-cases')
 
   const templatePath = join(generatorPath, 'template')
 
-  const flavors = (await fs.readdir(generatorFlavorsPath, { withFileTypes: true }))
+  const useCases = (await fs.readdir(generatorUseCasesPath, { withFileTypes: true }))
     .filter(i => i.isDirectory()).map(i => i.name)
   
-  console.log(`Detected flavors: ${flavors.join(', ')}`)
+  console.log(`Detected use cases: ${useCases.join(', ')}`)
 
-  for (const flavor of flavors) {
-    console.log(`Generating "${flavor}" flavor`)
+  for (const useCase of useCases) {
+    console.log(`\nGenerating "${useCase}" use case`)
 
-    const generatorFlavorPath = join(generatorFlavorsPath, flavor)
-    const flavorPath = join(flavorsPath, flavor)
+    const generatorUseCasePath = join(generatorUseCasesPath, useCase)
+    const useCasePath = join(useCasesPath, useCase)
 
     console.log('Copying the template')
-    const pathsToDelete = (await fs.readdir(flavorPath).catch(() => []))
+    const pathsToDelete = (await fs.readdir(useCasePath).catch(() => []))
       .filter(file => !filesToAvoid.includes(file))
-      .map(file => join(flavorPath, file))
+      .map(file => join(useCasePath, file))
     await deletePath(pathsToDelete)
-    await merge(templatePath, flavorPath, { filter: (path) => !filesToAvoid.includes(basename(path)) })
+    await merge(templatePath, useCasePath, { filter: (path) => !filesToAvoid.includes(basename(path)) })
 
     for (const path of pathsToMerge) {
       console.log(`Merging "${path.join('/')}" path`)
-      await merge(join(generatorFlavorPath, ...path), join(flavorPath, ...path))
+      await merge(join(generatorUseCasePath, ...path), join(useCasePath, ...path))
     }
 
     for (const path of pathsToOverwrite) {
       console.log(`Overwriting "${path.join('/')}" path`)
-      await overwrite(join(generatorFlavorPath, ...path), join(flavorPath, ...path))
+      await overwrite(join(generatorUseCasePath, ...path), join(useCasePath, ...path))
     }
     
     console.log('Transforming package.json and package-lock.json files')
-    const packageName = `reference-app-${flavor}`
-    await transformJson(join(flavorPath, 'package.json'), (packageJson) => {
+    const packageName = `reference-app-${useCase}`
+    await transformJson(join(useCasePath, 'package.json'), (packageJson) => {
       packageJson.name = packageName
     })
-    await transformJson(join(flavorPath, 'package-lock.json'), (packageLockJson) => {
+    await transformJson(join(useCasePath, 'package-lock.json'), (packageLockJson) => {
       packageLockJson.name = packageName
       packageLockJson.packages[''].name = packageName
     })
 
     console.log('Generating the README.md file')
-    await fs.cp(join(rootPath, 'README.md'), join(flavorPath, 'README.md'))
-    await replaceVariables(join(flavorPath, 'README.md'), { flavor })
+    await fs.cp(join(rootPath, 'README.md'), join(useCasePath, 'README.md'))
+    await replaceVariables(join(useCasePath, 'README.md'), { useCase })
   }
 }
 
@@ -122,6 +122,6 @@ generate()
     process.exit(1)
   })
   .then(() => {
-    console.log('Done!')
+    console.log('\nDone!')
     process.exit(0)
   })

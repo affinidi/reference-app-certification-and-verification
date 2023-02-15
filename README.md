@@ -21,7 +21,7 @@ Setting up the reference app is easy, just follow these steps:
     ```
     $ git clone git@github.com:affinidi/reference-app-certification-and-verification.git
     $ cd reference-app-certification-and-verification
-    $ cd flavors/{flavor}
+    $ cd use-cases/{use-case}
     ```
 2. Install the dependencies:
     ```
@@ -40,12 +40,12 @@ Setting up the reference app is easy, just follow these steps:
     
     App will be available locally on http://localhost:3000.
 
-## App flavors
+## App use cases
 
 We have created multiple implementations of the same app for you to use.  
-These are called "flavors" and they're adapted for a specific industry.
+These are called "use cases" and they're adapted for a specific industry.
 
-### "Ticketing" flavor
+### "Ticketing" use case
 
 > Issue, verify and store tickets for events, such as concerts, conferences, meetups, etc.
 
@@ -53,7 +53,7 @@ As an issuer (ticket sales company), you can enter details of the event and gene
 Participant (holder) can then store that ticket in their wallet and share it as a QR code with the verifier when asked to.  
 When the event starts, someone from the security (verifier) can quickly verify the QR.
 
-### "Health" flavor
+### "Health" use case
 
 > Issue, verify and store prescriptions for medications.
 
@@ -61,7 +61,7 @@ As an issuer (doctor), you can enter details of the medications (dosage, frequen
 Patient (holder) can then store that prescription in their wallet and share it as a QR code with the verifier when asked to.  
 Pharmacist from a drug store can then quickly verify the QR and provide requested medicine.
 
-### "Education" flavor
+### "Education" use case
 
 > Issue, verify and store course certificates.
 
@@ -131,7 +131,7 @@ Learn more about [VCs](https://academy.affinidi.com/what-are-verifiable-credenti
 
 ## Overview diagrams
 
-> We'll use "Health" flavor as an example.
+> We'll use "Health" use case as an example.
 
 ### Issuer flow
 
