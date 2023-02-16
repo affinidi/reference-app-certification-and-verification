@@ -16,6 +16,6 @@
     "incremental": true,
     "baseUrl": "."
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../use-cases/education/pages/components/SignInForm/SigninForm.styled.ts"],
   "exclude": ["node_modules"]
 }

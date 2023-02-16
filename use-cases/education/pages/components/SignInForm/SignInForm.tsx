@@ -41,15 +41,6 @@ export const SignInForm: FC<SignInFormProps> = ({
     role = 'Admin login'
   }
 
-  // switch (role) {
-  //   case role === 'holder':
-  //     role === 'Log in'
-  //     return role
-  //   case role === 'issuer':
-  //     role === 'Admin login'
-  //     return role
-  // }
-
   return (
     <>
       <Header title={role} />
