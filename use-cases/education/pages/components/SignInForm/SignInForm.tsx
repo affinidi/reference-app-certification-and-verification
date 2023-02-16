@@ -33,9 +33,26 @@ export const SignInForm: FC<SignInFormProps> = ({
     setUsername(value)
   }
 
+  console.log('role0', role)
+
+  if (role === 'holder') {
+    role = 'Log in'
+  } else if (role === 'issuer') {
+    role = 'Admin login'
+  }
+
+  // switch (role) {
+  //   case role === 'holder':
+  //     role === 'Log in'
+  //     return role
+  //   case role === 'issuer':
+  //     role === 'Admin login'
+  //     return role
+  // }
+
   return (
     <>
-      <Header title='Admin login' />
+      <Header title={role} />
 
       <Container>
         <div className='grid lg:grid-cols-3 lg:gap-16'>
