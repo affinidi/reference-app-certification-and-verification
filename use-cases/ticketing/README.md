@@ -21,7 +21,7 @@ Setting up the reference app is easy, just follow these steps:
     ```
     $ git clone git@github.com:affinidi/reference-app-certification-and-verification.git
     $ cd reference-app-certification-and-verification
-    $ cd use-cases/{use-case}
+    $ cd use-cases/ticketing
     ```
 2. Install the dependencies:
     ```
