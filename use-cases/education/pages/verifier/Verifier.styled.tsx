@@ -11,6 +11,6 @@ export const WelcomeMessage = styled(Typography)`
   margin-top: ${pxToRem(40)};
 
   @media (min-width: 1024px) {
-    margin: ${pxToRem(48)} 0 ${pxToRem(8)};
+    margin: ${pxToRem(48)} 0 ${pxToRem(48)};
   }
 `
