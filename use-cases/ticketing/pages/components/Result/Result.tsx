@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useRouter } from 'next/router'
 
 import { ErrorResponse } from 'hooks/useAuthentication'
-import { Box, Button, Container, Header, Spinner } from 'components'
+import { Box, Container, Header, Spinner } from 'components'
 import { messages } from 'utils/messages'
 
 import { ResultContent } from './ResultContent'
@@ -15,7 +15,12 @@ export type ResultProps = {
   pathTo: string
 }
 
-export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = null, pathTo }) => {
+export const Result: FC<ResultProps> = ({
+  isLoading = false,
+  isValid,
+  error = null,
+  pathTo,
+}) => {
   const router = useRouter()
 
   const isVerifier = router.route.includes('/verifier')
@@ -43,18 +48,11 @@ export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = nu
         hasBackIcon
       />
 
-      <S.Wrapper>
         <Container>
-          <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
-            <Box
-              className="lg:col-start-2"
-              alignItems="center"
-            >
-              <ResultContent
-                isValid={isResultValid}
-                isIssuance={!isVerifier}
-              />
-              <S.ResultPara variant="p1">
+          <div className='grid lg:grid-cols-3 gap-12 lg:gap-16'>
+            <Box className='lg:col-start-2' alignItems='center'>
+              <ResultContent isValid={isResultValid} isIssuance={!isVerifier} />
+              <S.ResultPara variant='p1'>
                 {isVerifier
                   ? isResultValid
                     ? messages.verifier.result.valid
@@ -62,18 +60,17 @@ export const Result: FC<ResultProps> = ({ isLoading = false, isValid, error = nu
                   : messages.issuer.result.issued}
               </S.ResultPara>
 
-              <Button
+              <S.IssueButton
                 fullWidth
-                color="quaternary"
-                variant="outlined"
+                color='quaternary'
+                variant='outlined'
                 onClick={() => router.push(pathTo)}
               >
                 {isVerifier ? 'Scan next QR code' : messages.issuer.result.next}
-              </Button>
+              </S.IssueButton>
             </Box>
           </div>
         </Container>
-      </S.Wrapper>
     </>
   )
 }

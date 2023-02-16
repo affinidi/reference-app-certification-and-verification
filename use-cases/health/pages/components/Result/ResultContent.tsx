@@ -12,22 +12,34 @@ export type ResultContentProps = {
   isIssuance?: boolean
 }
 
-export const ResultContent: FC<ResultContentProps> = ({ isValid, isIssuance }) => (
+export const ResultContent: FC<ResultContentProps> = ({
+  isValid,
+  isIssuance,
+}) => (
   <>
     <S.ImgWrapper>
-      {isValid ? isIssuance ?
-          <IssuedIllustration /> :
-          <QrScanSuccessIllustration /> :
+      {isValid ? (
+        isIssuance ? (
+          <IssuedIllustration />
+        ) : (
+          <QrScanSuccessIllustration />
+        )
+      ) : (
         <QrScanErrorIllustration />
-      }
+      )}
     </S.ImgWrapper>
 
     <S.ResultTitle
-      variant="h5"
+      align='center'
+      variant='h5'
       $isVerified={isValid}
       $isIssuance={isIssuance}
     >
-      {isValid ? (isIssuance ? messages.issuer.result.content.issued : messages.verifier.result.content.valid) : messages.verifier.result.content.invalid}
+      {isValid
+        ? isIssuance
+          ? messages.issuer.result.content.issued
+          : messages.verifier.result.content.valid
+        : messages.verifier.result.content.invalid}
     </S.ResultTitle>
   </>
 )
