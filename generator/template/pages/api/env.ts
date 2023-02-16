@@ -17,7 +17,7 @@ function require<T>(value: T | undefined): T {
   if (!value) {
     throw new Error('Environment value is missing')
   }
-
+ 
   return value
 }
 

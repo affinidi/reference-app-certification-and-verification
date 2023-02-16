@@ -3,7 +3,7 @@
 import axios from 'axios'
 import { issuerApiKeyHash, issuanceApiUrl } from '../env'
 
-type CreateIssuanceInput = {
+export type CreateIssuanceInput = {
   template: {
     walletUrl?: string
     verification: {
@@ -19,13 +19,17 @@ type CreateIssuanceInput = {
   projectId: string
 }
 
-type CreateIssuanceOfferInput = {
+export type CreateIssuanceOfferInput = {
   verification: {
     target: {
       email: string
     }
   }
   credentialSubject: any
+}
+
+export enum VerificationMethod {
+  Email = 'email',
 }
 
 export const issuanceClient = {
