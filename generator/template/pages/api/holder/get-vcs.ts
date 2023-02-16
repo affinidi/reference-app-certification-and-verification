@@ -5,12 +5,11 @@ import { allowedHttpMethods } from '../middlewares/allowed-http-methods'
 import { errorHandler } from '../middlewares/error-handler'
 import { authenticateCloudWallet } from '../helpers/authenticate-cloud-wallet'
 import { cloudWalletClient } from '../clients/cloud-wallet-client'
+import { VC_TYPE } from 'utils/schema'
 
 type HandlerResponse = {
   vcs: VerifiableCredential[]
 };
-
-const VC_TYPE = 'EventEligibility'
 
 export async function handler(
   req: NextApiRequest,

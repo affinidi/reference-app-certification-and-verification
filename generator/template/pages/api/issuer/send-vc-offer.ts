@@ -7,6 +7,8 @@ import { authenticateIssuer } from '../helpers/authenticate-issuer'
 import { issuanceClient } from '../clients/issuance-client'
 import { issuerProjectDid, issuerProjectId } from '../env'
 import { hostUrl } from '../../env'
+import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { parseSchemaURL } from '../helpers/parse.schema.url'
 
 const requestSchema = z
   .object({
@@ -23,6 +25,8 @@ async function handler(
 
   const { credentialSubject, targetEmail } = requestSchema.parse(req.body)
 
+  const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSONLD_CONTEXT_URL)
+
   const { id: issuanceId } = await issuanceClient.createIssuance({
     projectId: issuerProjectId,
     template: {
@@ -32,9 +36,9 @@ async function handler(
       },
       walletUrl: `${hostUrl}/holder/claim`,
       schema: {
-        type: 'EventEligibility',
-        jsonSchemaUrl: 'https://schema.affinidi.com/EventEligibilityV1-0.json',
-        jsonLdContextUrl: 'https://schema.affinidi.com/EventEligibilityV1-0.jsonld',
+        type: schemaType,
+        jsonSchemaUrl: jsonSchema.toString(),
+        jsonLdContextUrl: jsonLdContext.toString(),
       },
     },
   })
