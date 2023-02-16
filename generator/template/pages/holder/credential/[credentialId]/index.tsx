@@ -1,38 +1,45 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
-import { useGetCredentialQuery, useShareCredentialMutation } from 'hooks/holder/useCredentials'
-import { useAuthContext } from 'hooks/useAuthContext'
-import { Spinner } from 'components'
+
+import { ROUTES } from 'utils'
+import { Container, Header, Spinner } from 'components'
+
 import { Credential } from '../../components/Credential/Credential'
+import { useShareVcQuery } from 'hooks/holder/api'
 
 const CredentialView: FC = () => {
-  const { authState } = useAuthContext()
   const router = useRouter()
-  const { credentialId } = router.query as { credentialId: string }
-  const { data, isLoading } = useGetCredentialQuery(credentialId || '')
-  const { data: shareCredentialData, mutateAsync } = useShareCredentialMutation()
+  const credentialId = router.query.credentialId as string
+
+  const { data, error } = useShareVcQuery({ credentialId })
 
   useEffect(() => {
-    if (credentialId) {
-      mutateAsync(credentialId)
+    if (error) {
+      // TODO: show error
+      router.push(ROUTES.holder.home)
     }
-  }, [mutateAsync, credentialId])
+  }, [router, error])
 
-  if (isLoading || !authState.authorizedAsHolder) {
+  if (!data) {
     return <Spinner />
   }
 
-  if (!(data as StoredW3CCredential).type) {
-    return null
-  }
+  return (
+    <>
+      <Header
+        title={data.vc.credentialSubject.eventName || ''}
+        path={ROUTES.holder.home}
+        hasBackIcon
+      />
 
-  const credential = data as StoredW3CCredential
-
-  return <Credential
-    credentialSubject={credential.credentialSubject}
-    qrCode={shareCredentialData?.qrCode}
-  />
+      <Container>
+        <Credential
+          credentialSubject={data.vc.credentialSubject}
+          qrCode={data.qrCode}
+        />
+      </Container>
+    </>
+  )
 }
 
 export default CredentialView

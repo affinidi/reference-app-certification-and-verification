@@ -1,28 +1,28 @@
 import { FC } from 'react'
+import { format } from 'date-fns'
 
-import { JSONLD_CONTEXT_URL } from 'utils/schema'
-import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
-import { useCredentialsQuery } from 'hooks/holder/useCredentials'
 import { useAuthContext } from 'hooks/useAuthContext'
-import { EmptyStateIllustration } from 'assets/empty-state-illustration'
+import NoData from 'public/images/illustration-empty-state.svg'
 import { Container, Header, Spinner, Typography } from 'components'
-import { messages } from 'utils/messages'
 
-import CredentialCard from './components/CredentialCard/CredentialCard'
+import { Credential } from './types'
+import PrescriptionCard from './components/PrescriptionCard/PrescriptionCard'
 import * as S from './index.styled'
+import { VerifiableCredential } from 'types/vc'
+import { useGetVcsQuery } from 'hooks/holder/api'
 
 const Home: FC = () => {
   const { authState } = useAuthContext()
-  const { data, error, isLoading } = useCredentialsQuery()
+  const { data, error } = useGetVcsQuery() 
 
   if (!authState.authorizedAsHolder) {
     return <Spinner />
   }
 
-  if (isLoading) {
+  if (!data) {
     return (
       <>
-        <Header title={messages.holder.home.title} />
+        <Header title="Your medical records" />
         <Container>
           <Spinner />
         </Container>
@@ -33,7 +33,7 @@ const Home: FC = () => {
   if (error) {
     return (
       <>
-        <Header title={messages.holder.home.title} />
+        <Header title="Your medical records" />
         <Container>
           <div className="grid justify-content-center">
             {error && <Typography variant="e1">{error?.message}</Typography>}
@@ -43,42 +43,58 @@ const Home: FC = () => {
     )
   }
 
-  const matchingVcs = (data as StoredW3CCredential[]).filter((vc) => vc['@context'].includes(JSONLD_CONTEXT_URL))
+  if (data?.vcs.length === 0) {
+    return (
+      <>
+        <Header title="Your medical records" />
+        <Container>
+          <div className="grid justify-content-center">
+            <Typography align="center" variant="p2">
+              You don&apos;t have any medical records yet.
+            </Typography>
+            <S.IconContainer>
+              <NoData />
+            </S.IconContainer>
+          </div>
+        </Container>
+      </>
+    )
+  }
+
+  const validPrescriptions: VerifiableCredential[] = data.vcs.filter((credentialItem) => {
+    const credentialSubject = (credentialItem as VerifiableCredential)?.credentialSubject
+    return Date.parse(credentialSubject?.startDate) >= Date.now()
+  })
+
+  const getPrescriptionCards = ({
+    prescriptions,
+    isValid,
+  }: {
+    prescriptions: VerifiableCredential[]
+    isValid: boolean
+  }) =>
+    prescriptions.map((credentialItem: VerifiableCredential) => {
+      const credential: Credential = {
+        title: credentialItem?.credentialSubject?.eventName,
+        date: format(new Date(credentialItem?.credentialSubject?.startDate), 'dd.MM.yyyy'),
+        time: format(new Date(credentialItem?.credentialSubject?.startDate), 'HH:mm'),
+        credentialId: credentialItem?.id,
+      }
+
+      return <PrescriptionCard key={credentialItem.id} credential={credential} isValid={isValid} />
+    })
 
   return (
     <>
-      <Header title={messages.holder.home.title} />
+      <Header title="Your medical records" />
 
-      <S.Wrapper>
-        {matchingVcs.length === 0 && (
-          <Container>
-            <div className="grid justify-content-center">
-              <Typography
-                align="center"
-                variant="p2"
-              >
-                {messages.holder.home.noVcs}
-              </Typography>
-              <S.IconContainer>
-                <EmptyStateIllustration />
-              </S.IconContainer>
-            </div>
-          </Container>
-        )}
-
-        {matchingVcs.length > 0 && (
-          <Container>
-            <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
-              {matchingVcs.map((vc: StoredW3CCredential) => (
-                <CredentialCard
-                  key={vc.id}
-                  vc={vc}
-                />
-              ))}
-            </div>
-          </Container>
-        )}
-      </S.Wrapper>
+      {validPrescriptions.length > 0 && (
+        <Container>
+          <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
+            {getPrescriptionCards({ prescriptions: validPrescriptions, isValid: true })}
+          </div>
+        </Container>
+      )}
     </>
   )
 }

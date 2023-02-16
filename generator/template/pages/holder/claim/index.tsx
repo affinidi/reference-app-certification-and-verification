@@ -3,34 +3,32 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import { ROUTES } from 'utils'
-import { useAuthContext } from 'hooks/useAuthContext'
-import { useClaimCredentialQuery } from 'hooks/holder/useCredentials'
 import { Container, Header, Spinner } from 'components'
+import { useClaimVcQuery } from 'hooks/holder/api'
+import { useAuthContext } from 'hooks/useAuthContext'
 
 const ClaimVc: FC = () => {
-  const { authState, updateAuthState } = useAuthContext()
   const { push } = useRouter()
+  const { authState, updateAuthState } = useAuthContext()
   const searchParams = useSearchParams()
-  const credentialOfferRequestToken = searchParams.get('credentialOfferRequestToken')
-  const { data, refetch } = useClaimCredentialQuery(authState.authorizedAsHolder ? authState.vcOfferToken : '')
+  const credentialOfferRequestToken = searchParams.get('credentialOfferRequestToken') || authState.vcOfferToken
+  const { data, error } = useClaimVcQuery({ credentialOfferRequestToken })
 
   useEffect(() => {
-    if (credentialOfferRequestToken !== null) {
+    if (credentialOfferRequestToken) {
       updateAuthState({ vcOfferToken: credentialOfferRequestToken })
     }
-  }, [refetch, credentialOfferRequestToken])
 
-  useEffect(() => {
-    if (data) {
-      updateAuthState({ vcOfferToken: '' })
-
-      push(`${ROUTES.holder.credential}/${data.credentialIds[0]}`)
+    if (data?.credentialId) {
+      updateAuthState({ vcOfferToken: undefined })
+      push(`${ROUTES.holder.credential}/${data.credentialId}`)
     }
-  }, [data, push])
 
-  if (!authState.authorizedAsHolder) {
-    return <Spinner />
-  }
+    if (error) {
+      // TODO: show error
+      push(ROUTES.holder.home)
+    }
+  }, [credentialOfferRequestToken,, data, error])
 
   return (
     <>

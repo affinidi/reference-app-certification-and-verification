@@ -1,10 +1,10 @@
 import { SyntheticEvent, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { useSessionStorage } from 'hooks/holder/useSessionStorage'
+import { useSessionStorage } from 'hooks/useSessionStorage'
 import { useConfirmSignIn } from 'pages/components/ConfirmSignInForm/useConfirmSignIn'
-import { useConfirmSignInMutation, useHolderSignInMutation } from 'hooks/useAuthentication'
 import { useAuthContext } from 'hooks/useAuthContext'
+import { useSignInMutation, useConfirmSignInMutation } from 'hooks/holder/api'
 
 import { ROUTES } from 'utils'
 
@@ -13,7 +13,7 @@ export const useHolderConfirmSignIn = () => {
   const router = useRouter()
   const { authState, updateAuthState } = useAuthContext()
   const { data, error, mutateAsync, isLoading } = useConfirmSignInMutation()
-  const { data: signInData, mutateAsync: signInMutateAsync } = useHolderSignInMutation()
+  const { data: signInData, mutateAsync: signInMutateAsync } = useSignInMutation()
   const { computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
 
   const handleResendCode = async () => {
@@ -53,7 +53,7 @@ export const useHolderConfirmSignIn = () => {
 
   useEffect(() => {
     if (signInData) {
-      storage.setItem('signUpToken', signInData)
+      storage.setItem('signUpToken', signInData.token)
     }
   }, [signInData, storage])
 
