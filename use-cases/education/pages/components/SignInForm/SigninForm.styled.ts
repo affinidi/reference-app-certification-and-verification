@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import { pxToRem } from 'utils'
-import { Button, Typography } from 'components'
+import { pxToRem } from "utils"
+import { Button, Typography } from "components"
 
 export const Title = styled(Typography)`
-  margin: ${pxToRem(40)} 0;
+  margin: ${pxToRem(48)} 0 ${pxToRem(40)} 0;
 
   @media (max-width: 1024px) {
     margin: ${pxToRem(40)} 0 ${pxToRem(24)};

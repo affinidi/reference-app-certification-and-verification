@@ -1,14 +1,14 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components"
 
-import { pxToRem } from 'utils'
-import { Box, Button, Input, Typography } from 'components'
+import { pxToRem } from "utils"
+import { Box, Button, Input, Typography } from "components"
 
 export const Wrapper = styled.div`
   padding-bottom: ${pxToRem(40)};
 `
 
 export const Title = styled(Typography)`
-  margin: ${pxToRem(40)} 0;
+  margin: ${pxToRem(48)} 0 ${pxToRem(40)} 0;
 `
 
 export const VerificationFieldContainer = styled(Box)`
@@ -21,7 +21,7 @@ export const Label = styled(Typography)<{ hasError: boolean }>`
   ${(props) =>
     props.hasError &&
     css`
-      color: ${props.theme.colors.utility.danger['100']};
+      color: ${props.theme.colors.utility.danger["100"]};
     `}
 `
 
@@ -32,7 +32,7 @@ export const VerificationField = styled(Input)`
     border-radius: ${pxToRem(8)};
     font-size: ${pxToRem(28)};
     font-weight: bold;
-    background: ${(props) => props.theme.colors.brand.primary['3']};
+    background: ${(props) => props.theme.colors.brand.primary["3"]};
 
     &:focus {
       padding: ${pxToRem(4)} ${pxToRem(8)} !important;

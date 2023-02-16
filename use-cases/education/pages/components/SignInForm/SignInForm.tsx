@@ -1,8 +1,8 @@
-import { Dispatch, FC, FormEvent, SetStateAction } from 'react'
+import { Dispatch, FC, FormEvent, SetStateAction } from "react"
 
-import { Container, ContainerForm, Header, Input } from 'components'
+import { Container, ContainerForm, Header, Input } from "components"
 
-import * as S from './SigninForm.styled'
+import * as S from "./SigninForm.styled"
 
 type SignInFormProps = {
   handleSignIn(e: FormEvent): void
@@ -12,7 +12,7 @@ type SignInFormProps = {
   error: Error | null
   inputError: string | null
   setInputError: Dispatch<SetStateAction<string | null>>
-  role: 'holder' | 'issuer'
+  role: "holder" | "issuer"
 }
 
 export const SignInForm: FC<SignInFormProps> = ({
@@ -40,7 +40,9 @@ export const SignInForm: FC<SignInFormProps> = ({
       <Container>
         <div className="grid lg:grid-cols-3 lg:gap-16">
           <ContainerForm className="lg:col-start-2" onSubmit={handleSignIn}>
-            <S.Title variant="p1">Please enter your email address to sign in.</S.Title>
+            <S.Title variant="p1">
+              Please enter your email address to sign in.
+            </S.Title>
 
             <Input
               id="email"
@@ -52,7 +54,12 @@ export const SignInForm: FC<SignInFormProps> = ({
               helpText={inputError || error?.message}
             />
 
-            <S.ButtonWrapper fullWidth disabled={disabled} loading={isLoading} type="submit">
+            <S.ButtonWrapper
+              fullWidth
+              disabled={disabled}
+              loading={isLoading}
+              type="submit"
+            >
               send verification code
             </S.ButtonWrapper>
           </ContainerForm>
