@@ -5,7 +5,7 @@ import { Box, Typography } from 'components'
 
 export const DataCard = styled.div`
   background-color: ${(props) => props.theme.colors.neutral.secondary['100']};
-  padding: 0 ${pxToRem(40)} ${pxToRem(40)} ${pxToRem(40)};
+  padding: 0 ${pxToRem(40)} 0 ${pxToRem(40)};
   width: 100%;
 
   svg {
@@ -32,7 +32,7 @@ export const QrCodeCard = styled(Box)`
 
     @media (min-width: 1024px) {
       max-width: none;
-      height: ${pxToRem(292)};
+      height: ${pxToRem(248)};
     }
   }
 
