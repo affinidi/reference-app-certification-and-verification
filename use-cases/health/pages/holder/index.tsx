@@ -45,7 +45,6 @@ const Home: FC = () => {
   }
 
   const matchingVcs = (data as StoredW3CCredential[]).filter((vc) => vc['@context'].includes(JSONLD_CONTEXT_URL))
-console.log("columns", COLUMNS);
 
   return (
     <>
