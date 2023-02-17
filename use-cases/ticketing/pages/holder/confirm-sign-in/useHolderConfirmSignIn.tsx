@@ -12,11 +12,19 @@ export const useHolderConfirmSignIn = () => {
   const storage = useSessionStorage()
   const router = useRouter()
   const { authState, updateAuthState } = useAuthContext()
-  const { data, error, mutateAsync, isLoading } = useConfirmSignInMutation()
+  const { data, error, mutateAsync, isLoading, reset } = useConfirmSignInMutation()
   const { data: signInData, mutateAsync: signInMutateAsync } = useHolderSignInMutation()
-  const { computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
+  const { computedCode, inputs, isButtonDisabled, resetInputs } = useConfirmSignIn(error)
+
+  useEffect(() => {
+    if (error && computedCode.length < 6) {
+      reset()
+    }
+  }, [computedCode, error, reset])
 
   const handleResendCode = async () => {
+    reset()
+    resetInputs()
     if (!authState.username) {
       router.push(ROUTES.holder.signIn)
       return
