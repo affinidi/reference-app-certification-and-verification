@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Container, Header, Typography } from 'components'
 import QrScanner from './components/QrScanner'
 
-import * as S from "../../../components/Container/Container.styled"
+import * as S from "components/Container/Container.styled"
 
 const VerifierScan: FC = () => (
   <>
