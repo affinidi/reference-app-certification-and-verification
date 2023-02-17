@@ -5,7 +5,8 @@ import { allowedHttpMethods } from '../middlewares/allowed-http-methods'
 import { errorHandler } from '../middlewares/error-handler'
 import { authenticateCloudWallet } from '../helpers/authenticate-cloud-wallet'
 import { cloudWalletClient } from '../clients/cloud-wallet-client'
-import { VC_TYPE } from 'utils/schema'
+import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { parseSchemaURL } from '../helpers/parse.schema.url'
 
 type HandlerResponse = {
   vcs: VerifiableCredential[]
@@ -19,7 +20,9 @@ export async function handler(
 
   const { vcs } = await cloudWalletClient.getCredentials({}, { accessToken })
 
-  res.status(200).json({ vcs: vcs.filter(vc => vc.type.includes(VC_TYPE)) })
+  const { schemaType } = parseSchemaURL(JSONLD_CONTEXT_URL)
+
+  res.status(200).json({ vcs: vcs.filter(vc => vc.type.includes(schemaType)) })
 }
 
 export default use(allowedHttpMethods('GET'), errorHandler)(handler)
