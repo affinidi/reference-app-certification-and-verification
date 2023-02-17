@@ -9,6 +9,7 @@ import { Container, Header, Spinner, Typography } from 'components'
 import { messages } from 'utils/messages'
 
 import CredentialCard from './components/CredentialCard/CredentialCard'
+import { COLUMNS } from './home.theme'
 import * as S from './index.styled'
 
 const Home: FC = () => {
@@ -70,7 +71,7 @@ const Home: FC = () => {
 
         {matchingVcs.length > 0 && (
           <Container>
-            <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16">
+            <div className={`grid lg:grid-cols-2 xl:grid-cols-${COLUMNS} gap-12 lg:gap-16`}>
               {matchingVcs.map((vc: VerifiableCredential) => (
                 <CredentialCard
                   key={vc.id}
