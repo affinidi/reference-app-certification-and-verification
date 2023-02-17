@@ -14,6 +14,7 @@ export const Container = styled(Box)`
 
 export const ButtonContainer = styled.div`
   margin-bottom: ${pxToRem(24)};
+
   * {
     cursor: pointer;
     text-decoration: none;
@@ -27,6 +28,7 @@ export const LogoWrapper = styled.div`
 
 export const IconWrapper = styled.div`
   cursor: pointer;
+
   path {
     fill: ${(props) => props.theme.colors.brand.primary['100']};
   }
@@ -34,6 +36,7 @@ export const IconWrapper = styled.div`
 
 export const Content = styled(Box)`
   padding: ${pxToRem(100)};
+  
   @media (max-width: 1024px) {
     padding: ${pxToRem(76)} ${pxToRem(24)} ${pxToRem(24)};
   }
