@@ -4,7 +4,7 @@
   "description": "This is a ready-to-use reference app that showcases usage of Affinidi API for issuing, sharing, verifying and storing verifiable credentials in the wallet.",
   "main": "index.js",
   "scripts": {
-    "dev": "node generator/confirm.mjs && nodemon --watch ./generator/** --exec 'node generator/generate.mjs && npm run start'",
+    "dev": "node generator/confirm.mjs && nodemon --exec 'node generator/generate.mjs && npm run start'",
     "generate": "node generator/confirm.mjs && node generator/generate.mjs",
 
     "install": "concurrently -n w: npm:install:*",
@@ -44,6 +44,9 @@
     "rimraf": "^4.1.2"
   },
   "nodemonConfig": {
+    "watch": [
+      "generator"
+    ],
     "ignore": [
       ".git",
       "node_modules",
