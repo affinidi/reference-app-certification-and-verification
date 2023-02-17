@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { format } from 'date-fns'
-import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
 import { ROUTES } from 'utils'
 import { Header } from 'components'
@@ -8,7 +7,7 @@ import { Header } from 'components'
 import * as S from './Credential.styled'
 
 export type CredentialProps = {
-  credentialSubject: AnyData
+  credentialSubject: any
   qrCode?: string
 }
 
@@ -51,12 +50,8 @@ const getDetails = ({
     return (
       qrCode && (
         <CredentialDetails
-          medicationName={detailsObject.medicationName}
-          patientName={detailsObject.patient.name}
-          date={format(new Date(detailsObject.prescribedAt), 'dd/MM/yyyy')}
-          dosage={`${detailsObject.dosage.amount} ${detailsObject.dosage.unit}`}
-          frequency={`${detailsObject.frequency.amount} per ${detailsObject.frequency.interval.unit}`}
-          practitionerName={detailsObject.practitioner.name}
+          firstName={detailsObject?.firstName}
+          lastName={detailsObject?.lastName}
           qrCode={qrCode}
         />
       )
