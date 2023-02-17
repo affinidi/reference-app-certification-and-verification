@@ -4,21 +4,7 @@ import url from 'url'
 import mkdirp from 'mkdirp'
 import rimraf from 'rimraf'
 
-const filesToAvoid = ['node_modules', '.next', '.env']
-
-const pathsToMerge = [
-  ['public', 'images'],
-  ['assets'],
-  ['utils'],
-  ['components'],
-  ['styles'],
-  ['verifier'],
-  ['pages', 'components'],
-  ['pages', 'home'],
-  ['docs'],
-  ['pages', 'holder'],
-]
-
+const filesToIgnore = ['node_modules', '.next', '.env']
 const pathsToOverwrite = [
   ['pages', 'holder', 'components'],
   ['pages', 'issuer', 'credential-form'],
@@ -31,39 +17,38 @@ async function generate() {
   const useCasesPath = join(rootPath, 'use-cases')
   const generatorPath = join(rootPath, 'generator')
   const generatorUseCasesPath = join(generatorPath, 'use-cases')
-
   const templatePath = join(generatorPath, 'template')
 
   const useCases = (await fs.readdir(generatorUseCasesPath, { withFileTypes: true }))
     .filter(i => i.isDirectory()).map(i => i.name)
+    .sort()
   
   console.log(`Detected use cases: ${useCases.join(', ')}`)
 
-  for (const useCase of useCases) {
+  for (const [i, useCase] of useCases.entries()) {
     console.log(`\nGenerating "${useCase}" use case`)
+    const port = 3000 + i + 1
 
     const generatorUseCasePath = join(generatorUseCasesPath, useCase)
     const useCasePath = join(useCasesPath, useCase)
 
     console.log('Copying the template')
     const pathsToDelete = (await fs.readdir(useCasePath).catch(() => []))
-      .filter(file => !filesToAvoid.includes(file))
+      .filter(file => !filesToIgnore.includes(file))
       .map(file => join(useCasePath, file))
     await deletePath(pathsToDelete)
-    await merge(templatePath, useCasePath, { filter: (path) => !filesToAvoid.includes(basename(path)) })
-
-    for (const path of pathsToMerge) {
-      console.log(`Merging "${path.join('/')}" path`)
-      await merge(join(generatorUseCasePath, ...path), join(useCasePath, ...path))
-    }
+    await merge(templatePath, useCasePath, { filter: (path) => !filesToIgnore.includes(basename(path)) })
 
     for (const path of pathsToOverwrite) {
-      console.log(`Overwriting "${path.join('/')}" path`)
       if (await exists(join(generatorUseCasePath, ...path))) {
-        await overwrite(join(generatorUseCasePath, ...path), join(useCasePath, ...path))
+        console.log(`Deleting "${path.join('/')}" path from the template`)
+        await deletePath(join(useCasePath, ...path))
       }
     }
-    
+
+    console.log(`Applying overrides`)
+    await merge(generatorUseCasePath, useCasePath, { filter: (path) => !filesToIgnore.includes(basename(path)) })
+
     console.log('Transforming package.json and package-lock.json files')
     const packageName = `reference-app-${useCase}`
     await transformJson(join(useCasePath, 'package.json'), (packageJson) => {
@@ -75,8 +60,15 @@ async function generate() {
     })
 
     console.log('Generating the README.md file')
-    await fs.cp(join(rootPath, 'README.md'), join(useCasePath, 'README.md'))
-    await replaceVariables(join(useCasePath, 'README.md'), { "use-case": useCase })
+    const readmePath = join(useCasePath, 'README.md')
+    await fs.cp(join(rootPath, 'README.md'), readmePath)
+    await replace(readmePath, { '{use-case}': useCase })
+
+    const envPath = join(useCasePath, '.env')
+    if (!(await exists(envPath))) {
+      await fs.cp(join(useCasePath, '.env.example'), envPath)
+      await replace(envPath, { 'localhost:3000': `localhost:${port}` })
+    }
   }
 }
 
@@ -86,11 +78,11 @@ async function transformJson(path, transformFn) {
   await fs.writeFile(path, JSON.stringify(json, null, 2), { encoding: 'utf-8' })
 }
 
-async function replaceVariables(path, variables) {
+async function replace(path, variables) {
   let text = await fs.readFile(path, { encoding: 'utf-8' })
 
   for (const [key, value] of Object.entries(variables)) {
-    text = text.replaceAll(`{${key}}`, value)
+    text = text.replaceAll(key, value)
   }
 
   await fs.writeFile(path, text, { encoding: 'utf-8' })

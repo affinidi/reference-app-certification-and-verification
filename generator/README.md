@@ -1,23 +1,19 @@
 # Reference app generator
 
-## Commands 
+## Getting started 
 
-Generate all use cases:
-```
-$ npm run generate
-$ npm run generate:watch
-```
-> Warning: This overwrites yours local changes to the `use-cases/` directory.
+1. Clone this monorepo
+2. Run `npm install` in the root directory
+3. Run `npm run install` to install dependencies in the template and each use case
+4. Run `npm run generate:watch` to automatically re-generate use cases and run them
 
-Build all use cases:
-```
-$ npm run build
-```
+Now make some changes to `generator/template` or `generator/use-cases/{use-case}` and apps will be re-generated & restarted automatically.
 
-Run all use cases simultaneously:
-```
-$ npm run dev
-```
+## Additional commands
+
+- To just generate the use cases, use `npm run generate`
+- To just run use cases without re-generating them, use `npm run dev` or `npm run dev:health`
+- To build use cases, use `npm run build` or `npm run build:health`
 
 ## Structure
 
