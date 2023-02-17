@@ -9,6 +9,8 @@
 
 Now make some changes to `generator/template` or `generator/use-cases/{use-case}` and apps will be re-generated & restarted automatically.
 
+> Unfortunately, `npm run dev` does not reload the page automatically when source code changes.
+
 ## Additional commands
 
 - To just generate the use cases, use `npm run generate`

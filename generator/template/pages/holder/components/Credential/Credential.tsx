@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { format } from 'date-fns'
-import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
 import { ROUTES } from 'utils'
 import { Header } from 'components'
+import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
 
 import * as S from './Credential.styled'
 
@@ -50,8 +50,12 @@ const getDetails = ({
     return (
       qrCode && (
         <CredentialDetails
-          firstName={detailsObject?.firstName}
-          lastName={detailsObject?.lastName}
+          medicationName={detailsObject.medicationName}
+          patientName={detailsObject.patient.name}
+          date={format(new Date(detailsObject.prescribedAt), 'dd/MM/yyyy')}
+          dosage={`${detailsObject.dosage.amount} ${detailsObject.dosage.unit}`}
+          frequency={`${detailsObject.frequency.amount} per ${detailsObject.frequency.interval.unit}`}
+          practitionerName={detailsObject.practitioner.name}
           qrCode={qrCode}
         />
       )
@@ -67,7 +71,7 @@ export const Credential: FC<CredentialProps> = ({
 }) => {
   return <>
     <Header
-      title={credentialSubject.eventName || ''}
+      title={`${credentialSubject.patient.name} ${credentialSubject.prescribedAt}`}
       path={ROUTES.holder.home}
       hasBackIcon
     />
