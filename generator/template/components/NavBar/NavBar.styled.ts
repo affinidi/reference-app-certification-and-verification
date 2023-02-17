@@ -6,6 +6,7 @@ import { Box } from 'components'
 export const Container = styled(Box)`
   padding: ${pxToRem(20)} 0;
   height: ${pxToRem(64)};
+  
   @media (min-width: 1024px) {
     padding: ${pxToRem(22)} 0;
     height: ${pxToRem(72)};
@@ -36,7 +37,7 @@ export const IconWrapper = styled.div`
 
 export const Content = styled(Box)`
   padding: ${pxToRem(100)};
-  
+
   @media (max-width: 1024px) {
     padding: ${pxToRem(76)} ${pxToRem(24)} ${pxToRem(24)};
   }
