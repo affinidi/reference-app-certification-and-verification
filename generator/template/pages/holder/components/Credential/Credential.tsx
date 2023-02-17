@@ -50,12 +50,8 @@ const getDetails = ({
     return (
       qrCode && (
         <CredentialDetails
-          medicationName={detailsObject.medicationName}
-          patientName={detailsObject.patient.name}
-          date={format(new Date(detailsObject.prescribedAt), 'dd/MM/yyyy')}
-          dosage={`${detailsObject.dosage.amount} ${detailsObject.dosage.unit}`}
-          frequency={`${detailsObject.frequency.amount} per ${detailsObject.frequency.interval.unit}`}
-          practitionerName={detailsObject.practitioner.name}
+          firstName={detailsObject?.firstName}
+          lastName={detailsObject?.lastName}
           qrCode={qrCode}
         />
       )

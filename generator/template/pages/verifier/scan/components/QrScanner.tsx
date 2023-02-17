@@ -22,7 +22,7 @@ const QrScanner: FC<QrScannerProps> = () => {
       }
       try {
         const hashAndKey = extractHashAndKeyFromVSShareUrl(text);
-        if (!hashAndKey || (!hashAndKey.key || !hashAndKey.hash)) {
+        if (!hashAndKey?.key || !hashAndKey?.hash) {
           setScanError("The QR code was not recognized");
           return;
         }

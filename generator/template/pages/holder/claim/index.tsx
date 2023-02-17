@@ -28,7 +28,7 @@ const ClaimVc: FC = () => {
       // TODO: show error
       push(ROUTES.holder.home)
     }
-  }, [credentialOfferRequestToken,, data, error])
+  }, [credentialOfferRequestToken, data, error])
 
   return (
     <>

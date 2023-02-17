@@ -28,9 +28,9 @@ async function handler(
   const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSONLD_CONTEXT_URL)
 
   const { id: issuanceId } = await issuanceClient.createIssuance({
-    projectId: issuerProjectId,
+    projectId: issuerProjectId as string,
     template: {
-      issuerDid: issuerProjectDid,
+      issuerDid: issuerProjectDid as string,
       verification: {
         method: 'email',
       },

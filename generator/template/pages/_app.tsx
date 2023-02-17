@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 
 import { theme } from "utils/theme";
 import { AuthProvider } from "contexts/AuthContext";
-import NavBar from "pages/components/NavBar/NavBar";
+import NavBar from "components/NavBar/NavBar";
 import { AuthRedirect } from "pages/components/Authorisation/AuthRedirect";
 
 import "../styles/fonts.css";

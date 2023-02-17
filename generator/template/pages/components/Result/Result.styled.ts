@@ -27,7 +27,7 @@ export const ResultPara = styled(Typography)`
 `
 
 export const ImgWrapper = styled.div`
-  img {
+  svg {
     max-width: 100%;
     height: auto;
   }
