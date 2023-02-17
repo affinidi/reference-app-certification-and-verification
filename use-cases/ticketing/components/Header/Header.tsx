@@ -2,7 +2,7 @@ import { FC, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import { Container } from 'components'
 import { BackIcon } from 'assets/back-icon'
-import { wrapInContainer } from './Header.theme'
+import { PROJECT, wrapInContainer } from './Header.theme'
 
 import * as S from './Header.styled'
 
@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({ title, hasBackIcon, path }) => {
 
   return (
     <Wrapper>
-      <S.Container justifyContent='flex-end' $isProject="ticketing">
+      <S.Container justifyContent='flex-end' $isProject={PROJECT}>
         {hasBackIcon && (
           <S.IconWrapper
             onClick={() =>
