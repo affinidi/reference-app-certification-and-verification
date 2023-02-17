@@ -4,7 +4,7 @@
   "description": "This is a ready-to-use reference app that showcases usage of Affinidi API for issuing, sharing, verifying and storing verifiable credentials in the wallet.",
   "main": "index.js",
   "scripts": {
-    "generate:watch": "node generator/confirm.mjs && nodemon --watch ./generator/** --exec 'node generator/generate.mjs && npm run dev'",
+    "dev": "node generator/confirm.mjs && nodemon --watch ./generator/** --exec 'node generator/generate.mjs && npm run dev-only'",
     "generate": "node generator/confirm.mjs && node generator/generate.mjs",
 
     "install": "concurrently -n w: npm:install:*",
@@ -13,17 +13,17 @@
     "install:health": "npm i --prefix use-cases/health",
     "install:ticketing": "npm i --prefix use-cases/ticketing",
 
-    "dev": "concurrently -n w: npm:dev:*",
-    "dev:template": "npm run --prefix generator/template dev -- -p 3000",
-    "dev:education": "npm run --prefix use-cases/education dev -- -p 3001",
-    "dev:health": "npm run --prefix use-cases/health dev -- -p 3002",
-    "dev:ticketing": "npm run --prefix use-cases/ticketing dev -- -p 3003",
+    "start": "concurrently -n w: npm:start:*",
+    "start:template": "npm run --prefix generator/template dev -- -p 3000",
+    "start:education": "npm run --prefix use-cases/education dev -- -p 3001",
+    "start:health": "npm run --prefix use-cases/health dev -- -p 3002",
+    "start:ticketing": "npm run --prefix use-cases/ticketing dev -- -p 3003",
 
     "build": "concurrently -n w: npm:build:*",
+    "build:template": "npm run --prefix generator/template build",
     "build:education": "npm run --prefix use-cases/education build",
     "build:health": "npm run --prefix use-cases/health build",
-    "build:ticketing": "npm run --prefix use-cases/ticketing build",
-    "build:template": "npm run --prefix generator/template build"
+    "build:ticketing": "npm run --prefix use-cases/ticketing build"
   },
   "repository": {
     "type": "git",
