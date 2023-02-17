@@ -17,6 +17,7 @@ const pathsToMerge = [
   ['pages', 'home'],
   ['docs'],
   ['pages', 'holder'],
+  ['pages', 'issuer'],
 ]
 
 const pathsToOverwrite = [

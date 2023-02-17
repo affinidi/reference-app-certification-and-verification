@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import { pxToRem } from 'utils'
 import { Button, Typography } from 'components'
 
-export const Title = styled(Typography)`
-  margin: ${pxToRem(40)} 0;
+export const Title = styled(Typography)<{
+  $isProject?: "education" | "health" | "ticketing"
+}>`
+margin-bottom: ${(props) => props.$isProject === "education" ? pxToRem(18) : pxToRem(40)};}
 
   @media (max-width: 1024px) {
-    margin: ${pxToRem(40)} 0 ${pxToRem(24)};
+    margin-bottom: ${pxToRem(24)};
   }
 `
 
