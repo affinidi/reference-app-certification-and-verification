@@ -15,12 +15,12 @@ class IssuanceService {
       baseApiParams: {
         credentials: 'include',
       },
-    }),
+    })
   ) {}
 
   public createIssuance = async (
     apiKey: string,
-    issuanceInput: CreateIssuanceInput,
+    issuanceInput: CreateIssuanceInput
   ): Promise<CreateIssuanceOutput> => {
     try {
       const resp = await this.client.issuances.createIssuance(issuanceInput, {
@@ -28,7 +28,11 @@ class IssuanceService {
       })
       return resp.data
     } catch (error: any) {
-      if(error.status === 404){
+      if (
+        error.status === 404 ||
+        error.status === 500 ||
+        error.error?.code === 'COM-0'
+      ) {
         throw new Error(messages.issuer.error.apiError)
       }
       throw new Error(error?.error?.message)
@@ -38,14 +42,25 @@ class IssuanceService {
   public createOffer = async (
     apiKey: string,
     issuanceId: string,
-    offerInput: CreateIssuanceOfferInput,
+    offerInput: CreateIssuanceOfferInput
   ): Promise<OfferDto> => {
     try {
-      const resp = await this.client.issuances.createOffer(issuanceId, offerInput, {
-        headers: { 'Api-Key': apiKey },
-      })
+      const resp = await this.client.issuances.createOffer(
+        issuanceId,
+        offerInput,
+        {
+          headers: { 'Api-Key': apiKey },
+        }
+      )
       return resp.data
     } catch (error: any) {
+      if (
+        error.status === 404 ||
+        error.status === 500 ||
+        error.error?.code === 'COM-0'
+      ) {
+        throw new Error(messages.issuer.error.apiError)
+      }
       throw new Error(error?.error?.message)
     }
   }
