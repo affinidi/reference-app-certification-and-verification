@@ -1,35 +1,20 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useRouter } from 'next/router'
-
 import { ROUTES } from 'utils'
-import { W3CCredential } from 'services/verifier/verifier.api'
-import { useVerifyCredentialsMutation } from 'hooks/verifier/useVerification'
-import { useRetrieveSharedCredentialQuery } from 'hooks/holder/useCredentials'
-
+import { useVerifyVcQuery } from 'hooks/verifier/api'
 import { Result } from '../../components/Result/Result'
 
 const VerifierResult: FC = () => {
-  const { query: { key, hash } } = useRouter()
-  const { data, isLoading, error } = useRetrieveSharedCredentialQuery(hash as string, key as string);
+  const router = useRouter()
+  const { key, hash } = router.query as { key: string; hash: string }
 
-  const {
-    data: verifyCredentialData,
-    mutateAsync,
-    isLoading: verifyCredentialIsLoading,
-    error: verifyCredentialError,
-  } = useVerifyCredentialsMutation();
-
-  useEffect(() => {
-    if (data) {
-      mutateAsync(data as W3CCredential);
-    }
-  }, [data, mutateAsync]);
+  const { data, isLoading, error } = useVerifyVcQuery({ key, hash })
 
   return (
     <Result
-      isLoading={isLoading || verifyCredentialIsLoading}
-      error={error || verifyCredentialError}
-      isValid={!!verifyCredentialData?.isValid}
+      isLoading={isLoading}
+      error={error}
+      isValid={Boolean(data?.isValid)}
       pathTo={ROUTES.verifier.scan}
     />
   );
