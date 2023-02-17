@@ -45,7 +45,8 @@
   },
   "nodemonConfig": {
     "watch": [
-      "generator"
+      "generator",
+      "README.md"
     ],
     "ignore": [
       ".git",
@@ -54,6 +55,6 @@
       ".next"
     ],
     "delay": 500,
-    "ext": "js,mjs,ts,tsx,json"
+    "ext": "js,mjs,ts,tsx,json,md"
   }
 }
