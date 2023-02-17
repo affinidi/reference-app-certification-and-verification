@@ -3,7 +3,10 @@
 const requiredEnvs = [
   'ISSUER_PROJECT_ID',
   'ISSUER_PROJECT_DID',
-  'ISSUER_API_KEY_HASH'
+  'ISSUER_API_KEY_HASH',
+  'CLOUD_WALLET_API_URL',
+  'VERIFIER_API_URL',
+  'ISSUANCE_API_URL'
 ]
 const missingEnvs = requiredEnvs.filter((name) => !process.env[name])
 if (missingEnvs.length !== 0) {
