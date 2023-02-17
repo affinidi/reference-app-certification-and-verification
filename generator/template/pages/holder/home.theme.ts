@@ -1,1 +1,1 @@
-export const COLUMNS = 3
+export const useFourColumns = false
