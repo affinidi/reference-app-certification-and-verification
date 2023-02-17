@@ -6,7 +6,7 @@ import { Box } from 'components'
 export const Container = styled(Box)`
   padding: ${pxToRem(20)} 0;
   height: ${pxToRem(64)};
-  
+
   @media (min-width: 1024px) {
     padding: ${pxToRem(22)} 0;
     height: ${pxToRem(72)};
