@@ -11,14 +11,18 @@ export interface AuthConfirmationInput extends AuthConfirmationInputBase {
 }
 
 export const isHttpError = (
-  error: unknown,
+  error: unknown
 ): error is {
   status: number
   error: {
     message: string
   }
 } => {
-  return Object.prototype.hasOwnProperty.call(error, 'error')
+  return (
+    Object.prototype.hasOwnProperty.call(error, 'error') &&
+    error.error instanceof Object &&
+    Object.prototype.hasOwnProperty.call(error.error, 'message')
+  )
 }
 
 class UserManagementService {
@@ -28,7 +32,7 @@ class UserManagementService {
       baseApiParams: {
         credentials: 'include',
       },
-    }).auth,
+    }).auth
   ) {}
 
   async signupUser(params: AuthSignupInput) {

@@ -1,4 +1,10 @@
-import { ClipboardEventHandler, KeyboardEvent, useMemo, useRef, useState } from 'react'
+import {
+  ClipboardEventHandler,
+  KeyboardEvent,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 import { Keys } from 'enums/keys'
 
@@ -16,21 +22,26 @@ const FROM_ZERO_TO_NINE = Array(10)
   .fill(undefined)
   .map((_, idx) => idx.toString())
 
-export const useConfirmSignIn = (message?: string) => {
-  const [verifyCode, setVerifyCode] = useState<OTPCode>({
-    0: null,
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-  })
+const EMPTY_CODE = {
+  0: null,
+  1: null,
+  2: null,
+  3: null,
+  4: null,
+  5: null,
+}
 
-  const computedCode = useMemo(() => CodeObjectToString(verifyCode), [verifyCode])
+export const useConfirmSignIn = (error?: unknown) => {
+  const [verifyCode, setVerifyCode] = useState<OTPCode>(EMPTY_CODE)
+
+  const computedCode = useMemo(
+    () => CodeObjectToString(verifyCode),
+    [verifyCode]
+  )
 
   const refInputs = Array.from({ length: INPUT_ELEMENTS_AMOUNT }, () =>
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null)
   )
 
   const partialUpdate = (newState: OTPCode) =>
@@ -74,14 +85,18 @@ export const useConfirmSignIn = (message?: string) => {
         ...acc,
         [idx]: curr,
       }),
-      {},
+      {}
     )
 
     partialUpdate(verifyCodePasted)
     refInputs[firstSix.length - 1].current?.focus()
   }
 
-  const isButtonDisabled = computedCode.length < CODE_LENGTH
+  const isButtonDisabled = computedCode.length < CODE_LENGTH || Boolean(error)
+
+  const resetInputs = () => {
+    setVerifyCode(EMPTY_CODE)
+  }
 
   const inputs = Array.from({ length: INPUT_ELEMENTS_AMOUNT }, (_, index) => (
     <S.VerificationField
@@ -91,9 +106,9 @@ export const useConfirmSignIn = (message?: string) => {
       key={index}
       className={index.toString()}
       autoFocus={index === 0}
-      type="text"
+      type='text'
       ref={refInputs[index]}
-      hasError={Boolean(message)}
+      hasError={Boolean(error)}
       maxLength={1}
       onKeyDown={onKeyDown(index)}
     />
@@ -102,6 +117,7 @@ export const useConfirmSignIn = (message?: string) => {
   return {
     computedCode,
     inputs,
+    resetInputs,
     isButtonDisabled,
   }
 }

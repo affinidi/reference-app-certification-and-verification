@@ -33,6 +33,7 @@ export const VerificationField = styled(Input)`
     font-size: ${pxToRem(28)};
     font-weight: bold;
     background: ${(props) => props.theme.colors.brand.primary['3']};
+    border-color: ${(props) => props.hasError && props.theme.colors.utility.danger['100']};
 
     &:focus {
       padding: ${pxToRem(4)} ${pxToRem(8)} !important;

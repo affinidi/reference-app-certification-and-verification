@@ -4,7 +4,10 @@ import { useRouter } from 'next/router'
 
 import { useSessionStorage } from 'hooks/holder/useSessionStorage'
 import { useConfirmSignIn } from 'pages/components/ConfirmSignInForm/useConfirmSignIn'
-import { useIssuerConfirmSignInMutation, useIssuerSignInMutation } from 'hooks/useAuthentication'
+import {
+  useIssuerConfirmSignInMutation,
+  useIssuerSignInMutation,
+} from 'hooks/useAuthentication'
 import { useAuthContext } from 'hooks/useAuthContext'
 
 import { ROUTES } from 'utils'
@@ -13,9 +16,20 @@ export const useIssuerConfirmSignIn = () => {
   const storage = useSessionStorage()
   const router = useRouter()
   const { authState, updateAuthState } = useAuthContext()
-  const { data, error, mutateAsync, isLoading } = useIssuerConfirmSignInMutation()
-  const { data: signInData, mutateAsync: signInMutateAsync } = useIssuerSignInMutation()
-  const { computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
+  const { data, error, mutateAsync, isLoading, reset } =
+    useIssuerConfirmSignInMutation()
+  const {
+    data: signInData,
+    mutateAsync: signInMutateAsync,
+  } = useIssuerSignInMutation()
+  const { computedCode, inputs, isButtonDisabled, resetInputs } =
+    useConfirmSignIn(error)
+
+  useEffect(() => {
+    if (error && computedCode.length < 6) {
+      reset()
+    }
+  }, [computedCode, error, reset])
 
   const onSubmit = async (e?: SyntheticEvent) => {
     e?.preventDefault()
@@ -30,6 +44,8 @@ export const useIssuerConfirmSignIn = () => {
   }
 
   const handleResendCode = async () => {
+    reset()
+    resetInputs()
     if (!authState.username) {
       router.push(ROUTES.issuer.signIn)
       return
@@ -56,5 +72,12 @@ export const useIssuerConfirmSignIn = () => {
     }
   }, [signInData, storage])
 
-  return { error, onSubmit, inputs, isButtonDisabled, isLoading, handleResendCode }
+  return {
+    error,
+    onSubmit,
+    inputs,
+    isButtonDisabled,
+    isLoading,
+    handleResendCode,
+  }
 }
