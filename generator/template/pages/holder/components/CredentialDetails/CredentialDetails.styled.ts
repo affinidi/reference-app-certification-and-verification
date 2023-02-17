@@ -41,7 +41,7 @@ export const QrCodeCard = styled(Box)`
 
     @media (min-width: 1024px) {
       max-width: none;
-      height: ${pxToRem(292)};
+      height: ${pxToRem(248)};
     }
   }
 
