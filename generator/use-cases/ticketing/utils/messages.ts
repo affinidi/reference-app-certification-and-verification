@@ -33,6 +33,9 @@ export const messages = {
         issued: 'Ticket successfully issued',
       },
     },
+    error: {
+      apiError: 'Due to server error the ticket could not be issued.'
+    }
   },
   holder: {
     home: {

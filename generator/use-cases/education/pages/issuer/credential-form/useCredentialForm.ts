@@ -38,6 +38,7 @@ export const initialValues: CredentialSubjectData = {
 export const useCredentialForm = () => {
   const router = useRouter()
   const [isCreating, setIsCreating] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleSubmit = useCallback(
     async (values: CredentialSubjectData) => {
@@ -91,8 +92,9 @@ export const useCredentialForm = () => {
         await issuanceService.createOffer(apiKeyHash, issuanceId.id, offerInput)
 
         router.push(ROUTES.issuer.result)
-      } catch {
+      } catch(err: unknown) {
         setIsCreating(false)
+        setError(err)
       }
     },
     [router]
@@ -129,6 +131,7 @@ export const useCredentialForm = () => {
   return {
     handleSubmit,
     validate,
+    error,
     isCreating,
   }
 }

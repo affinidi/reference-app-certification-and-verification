@@ -33,6 +33,9 @@ export const messages = {
         issued: 'Generic VC successfully issued',
       },
     },
+    error: {
+      apiError: 'Generic VC could not be issued.'
+    }
   },
   holder: {
     home: {

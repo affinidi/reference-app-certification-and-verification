@@ -33,6 +33,9 @@ export const messages = {
         issued: 'Certificate successfully issued',
       },
     },
+    error: {
+      apiError: 'Due to server error the certificate could not be issued.'
+    }
   },
   holder: {
     home: {

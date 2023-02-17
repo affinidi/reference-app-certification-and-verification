@@ -1,16 +1,32 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Formik } from 'formik'
 
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Spinner } from 'components'
+import { toast } from 'components/Toast/Toast'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
 
 const CredentialForm: FC = () => {
   const { authState } = useAuthContext()
-  const { handleSubmit, validate, isCreating } = useCredentialForm()
+  const { handleSubmit, validate, isCreating, error } = useCredentialForm()
+
+  useEffect(() => {
+    if(error){
+      toast(error.message, {
+        theme: 'dark',
+        type: 'error',
+        hideProgressBar: true,
+        position: 'top-right',
+        style: {
+          top: '60px',
+        },
+      })
+    }
+  }, [error])
+
 
   if (!authState.authorizedAsIssuer) {
     return <Spinner />

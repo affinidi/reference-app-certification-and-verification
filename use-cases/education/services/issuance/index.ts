@@ -1,4 +1,5 @@
 import { issuanceApiUrl } from 'pages/env'
+import { messages } from 'utils/messages'
 import {
   Api as IssuanceAPI,
   CreateIssuanceInput,
@@ -27,6 +28,9 @@ class IssuanceService {
       })
       return resp.data
     } catch (error: any) {
+      if(error.status === 404){
+        throw new Error(messages.issuer.error.apiError)
+      }
       throw new Error(error?.error?.message)
     }
   }
