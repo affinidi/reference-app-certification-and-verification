@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 
 import { theme } from "utils/theme";
 import { AuthProvider } from "contexts/AuthContext";
-import { NavBar } from "components";
+import { NavBar, ToastsContainer } from "components";
 import { AuthRedirect } from "pages/components/Authorisation/AuthRedirect";
 
 import "../styles/fonts.css";
@@ -31,6 +31,7 @@ export default function App({
             <Component {...pageProps} />
           </AuthRedirect>
         </AuthProvider>
+        <ToastsContainer />
       </QueryClientProvider>
     </ThemeProvider>
   );
