@@ -4,10 +4,10 @@ import { pxToRem } from 'utils'
 import { Button, Typography } from 'components'
 
 export const Title = styled(Typography)`
-  margin: ${pxToRem(40)} 0;
+  margin-bottom: ${pxToRem(40)};
 
   @media (max-width: 1024px) {
-    margin: ${pxToRem(40)} 0 ${pxToRem(24)};
+    margin-bottom: ${pxToRem(24)};
   }
 `
 
