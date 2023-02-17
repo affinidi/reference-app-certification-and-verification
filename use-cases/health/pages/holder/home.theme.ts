@@ -1,1 +1,1 @@
-export const COLUMNS = 4
+export const COLUMNS = 3
