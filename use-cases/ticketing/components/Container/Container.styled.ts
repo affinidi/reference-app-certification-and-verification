@@ -12,9 +12,9 @@ export const Container = styled.div`
 `
 
 export const Title = styled(Typography)`
-  padding: ${pxToRem(24)} 0 ${pxToRem(40)};
+  padding-bottom: ${pxToRem(40)};
 
   @media (max-width: 1024px) {
-    padding: ${pxToRem(40)} 0 ${pxToRem(24)};
+    padding-bottom: ${pxToRem(24)};
   }
 `
