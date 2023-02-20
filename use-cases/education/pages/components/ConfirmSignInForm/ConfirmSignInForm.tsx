@@ -27,7 +27,7 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
       <Container>
         <div className="grid lg:grid-cols-3 lg:gap-16">
           <S.Wrapper className="lg:col-start-2">
-            <Title variant="p1">
+            <Title>
               Please enter the verification code you received in your email.
             </Title>
 
