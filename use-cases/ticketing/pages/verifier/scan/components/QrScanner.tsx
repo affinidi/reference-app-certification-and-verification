@@ -5,6 +5,7 @@ import { useScanner } from "hooks/verifier/useScanner";
 import { Typography } from "../../../../components";
 import * as S from "./QrScanner.styled";
 import { useRouter } from "next/router";
+import { notifyError } from "utils/notification";
 
 type QrScannerProps = {};
 
@@ -23,7 +24,8 @@ const QrScanner: FC<QrScannerProps> = () => {
       try {
         const hashAndKey = extractHashAndKeyFromVSShareUrl(text);
         if (!hashAndKey) {
-          setScanError("The QR code was not recognized");
+          // setScanError("The QR code was not recognized");
+          notifyError(new Error('The QR code was not recognized'))
           return;
         }
         const { hash, key } = hashAndKey;
@@ -36,7 +38,8 @@ const QrScanner: FC<QrScannerProps> = () => {
         );
       } catch (error) {
         console.error(error);
-        setScanError("The QR-Code has not been recognized.");
+        notifyError(new Error('The QR-Code has not been recognized.'))
+        // setScanError("The QR-Code has not been recognized.");
       }
     },
     [router]

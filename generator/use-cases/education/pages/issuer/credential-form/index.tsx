@@ -4,7 +4,8 @@ import { Formik } from 'formik'
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Spinner } from 'components'
-import { toast } from 'components/Toast/Toast'
+
+import { notifyError } from '../../../utils/notification'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
@@ -14,19 +15,10 @@ const CredentialForm: FC = () => {
   const { handleSubmit, validate, isCreating, error } = useCredentialForm()
 
   useEffect(() => {
-    if(error){
-      toast(error.message, {
-        theme: 'dark',
-        type: 'error',
-        hideProgressBar: true,
-        position: 'top-right',
-        style: {
-          top: '60px',
-        },
-      })
+    if (error) {
+      notifyError(error)
     }
   }, [error])
-
 
   if (!authState.authorizedAsIssuer) {
     return <Spinner />
@@ -50,7 +42,11 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a certificate.
                   </S.Title>
 
-                  <Input label='JSON-LD Context URL' value={JSONLD_CONTEXT_URL} disabled />
+                  <Input
+                    label='JSON-LD Context URL'
+                    value={JSONLD_CONTEXT_URL}
+                    disabled
+                  />
 
                   <S.Heading variant='h6'>Certificate details</S.Heading>
 

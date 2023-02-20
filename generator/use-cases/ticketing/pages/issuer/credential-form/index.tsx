@@ -3,26 +3,18 @@ import { Formik } from 'formik'
 
 import { Container, Header, Input, Textarea } from 'components'
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
-import { toast } from 'components/Toast/Toast'
+
+import { notifyError } from '../../../utils/notification'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
-
 
 const CredentialForm: FC = () => {
   const { handleSubmit, validate, isCreating, error } = useCredentialForm()
 
   useEffect(() => {
     if(error){
-      toast(error.message, {
-        theme: 'dark',
-        type: 'error',
-        hideProgressBar: true,
-        position: 'top-right',
-        style: {
-          top: '60px',
-        },
-      })
+      notifyError(error)
     }
   }, [error])
 

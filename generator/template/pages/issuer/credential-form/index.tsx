@@ -6,11 +6,9 @@ import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
 import { toast } from 'components/Toast/Toast'
 
-import {
-  initialValues,
-  useCredentialForm,
-} from './useCredentialForm'
+import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
+import { notifyError } from 'utils/notification'
 
 const CredentialForm: FC = () => {
   const { authState } = useAuthContext()
@@ -21,16 +19,8 @@ const CredentialForm: FC = () => {
   }
 
   useEffect(() => {
-    if(error){
-      toast(error.message, {
-        theme: 'dark',
-        type: 'error',
-        hideProgressBar: true,
-        position: 'top-right',
-        style: {
-          top: '60px',
-        },
-      })
+    if (error) {
+      notifyError(error)
     }
   }, [error])
 
@@ -52,7 +42,11 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a generic VC.
                   </S.Title>
 
-                  <Input label='JSON-LD Context URL' value={JSONLD_CONTEXT_URL} disabled />
+                  <Input
+                    label='JSON-LD Context URL'
+                    value={JSONLD_CONTEXT_URL}
+                    disabled
+                  />
 
                   <S.Heading variant='h6'>Generic VC details</S.Heading>
 
@@ -80,7 +74,7 @@ const CredentialForm: FC = () => {
                     <S.InputWrapper
                       label='Last name'
                       name='lastName'
-                      placeholder="Enter last name"
+                      placeholder='Enter last name'
                       maxLength={100}
                       value={formikProps.values.lastName}
                       onChange={(_, event) => formikProps.handleChange(event)}
