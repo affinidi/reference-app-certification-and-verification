@@ -13,7 +13,7 @@
     "install:health": "npm i --prefix use-cases/health",
     "install:ticketing": "npm i --prefix use-cases/ticketing",
 
-    "start": "concurrently -n w: npm:start:*",
+    "start": "concurrently -n w: \"npm:start:*(!template)\"",
     "start:template": "npm run --prefix generator/template dev -- -p 3000",
     "start:education": "npm run --prefix use-cases/education dev -- -p 3001",
     "start:health": "npm run --prefix use-cases/health dev -- -p 3002",
