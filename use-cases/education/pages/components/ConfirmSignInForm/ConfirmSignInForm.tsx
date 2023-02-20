@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-import { Box, Container, Header, Typography } from 'components'
+import { Box, Container, Header, Typography, Title } from 'components'
 
 import * as S from './ConfirmSignInForm.styled'
 
@@ -27,9 +27,9 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
       <Container>
         <div className="grid lg:grid-cols-3 lg:gap-16">
           <S.Wrapper className="lg:col-start-2">
-            <S.Title variant="p1">
+            <Title variant="p1">
               Please enter the verification code you received in your email.
-            </S.Title>
+            </Title>
 
             <form id="confirmation" onSubmit={onSubmit}>
               <Box gap={4}>
@@ -55,10 +55,10 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
               Log in
             </S.SignInButton>
 
-            <Typography variant="p1">
+            <Typography variant="s2">
               Didn’t receive a code? Click{' '}
               <Typography
-                variant="l1"
+                variant="l3"
                 onClick={handleResendCode}
                 role="button"
                 tabIndex={0}
