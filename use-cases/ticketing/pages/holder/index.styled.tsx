@@ -3,7 +3,7 @@ import { pxToRem } from 'utils'
 import { Typography } from 'components'
 
 export const Wrapper = styled.div`
-  margin-top: ${pxToRem(48)};
+  margin-top: ${pxToRem(24)};
 `
 
 export const IconContainer = styled.div`

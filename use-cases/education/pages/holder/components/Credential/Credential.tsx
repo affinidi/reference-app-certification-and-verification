@@ -72,11 +72,13 @@ export const Credential: FC<CredentialProps> = ({
   qrCode,
 }) => {
   return <>
-    <Header
-      title='Certificate details'
-      path={ROUTES.holder.home}
-      hasBackIcon
-    />
+  <S.HeaderContainer>
+      <Header
+        title='Certificate details'
+        path={ROUTES.holder.home}
+        hasBackIcon
+      />
+    </S.HeaderContainer>
 
     <S.Container>
       {getDetails({ detailsObject: credentialSubject, qrCode })}
