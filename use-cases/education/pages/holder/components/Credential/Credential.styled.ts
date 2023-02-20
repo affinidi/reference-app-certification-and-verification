@@ -37,7 +37,7 @@ export const HeaderContainer = styled(Box)`
     margin-bottom: ${pxToRem(0)};
       div {
         margin-bottom: ${pxToRem(36)};
-        }
       }
+    }
   }
 `
