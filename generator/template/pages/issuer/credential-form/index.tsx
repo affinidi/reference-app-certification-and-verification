@@ -15,19 +15,15 @@ const CredentialForm: FC = () => {
   const { authState } = useAuthContext()
   const { handleSubmit, validate, isCreating, error } = useCredentialForm()
 
+  useEffect(() => {
+    if (error) {
+      notifyError(new Error(messages.issuer.error.apiError))
+    }
+  }, [error])
+
   if (!authState.authorizedAsIssuer) {
     return <Spinner />
   }
-
-  useEffect(() => {
-    if (error) {
-      if (error.response?.status === 404 || error.response?.status === 500) {
-        notifyError(new Error(messages.issuer.error.apiError))
-        return;
-      }
-      notifyError(error)
-    }
-  }, [error])
 
   return (
     <>

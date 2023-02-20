@@ -17,11 +17,7 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if (error) {
-      if (error.response?.status === 404 || error.response?.status === 500) {
-        notifyError(new Error(messages.issuer.error.apiError))
-        return;
-      }
-      notifyError(error)
+      notifyError(new Error(messages.issuer.error.apiError))
     }
   }, [error])
 

@@ -22,12 +22,8 @@ const CredentialForm: FC = () => {
   const { handleSubmit, validate, isCreating, error } = useCredentialForm()
 
   useEffect(() => {
-    if(error){      
-      if (error.response?.status === 404 || error.response?.status === 500) {
-        notifyError(new Error(messages.issuer.error.apiError))
-        return;
-      }
-      notifyError(error)
+    if (error) {
+      notifyError(new Error(messages.issuer.error.apiError))
     }
   }, [error])
 

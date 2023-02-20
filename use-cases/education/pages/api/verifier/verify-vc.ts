@@ -1,6 +1,9 @@
 import { z } from 'zod'
 import { use } from 'next-api-middleware'
 import type { NextApiRequest, NextApiResponse } from 'next'
+
+import { JSONLD_CONTEXT_URL } from 'utils/schema'
+
 import { allowedHttpMethods } from '../middlewares/allowed-http-methods'
 import { errorHandler } from '../middlewares/error-handler'
 import { verifierClient } from '../clients/verifier-client'
@@ -26,8 +29,12 @@ async function handler(
 
   const { vc } = await cloudWalletClient.retrieveSharedCredential({ hash, key })
 
+  if (!vc['@context'].includes(JSONLD_CONTEXT_URL)) {
+    throw new Error('Invalid vc')
+  }
+
   const verificationResult = await verifierClient.verifyCredentials({
-    verifiableCredentials: [vc]
+    verifiableCredentials: [vc],
   })
 
   res.status(200).json(verificationResult)
