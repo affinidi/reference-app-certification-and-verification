@@ -18,8 +18,10 @@ export const Container = styled(Box)`
   height: ${pxToRem(144)};
   padding: 0 ${pxToRem(100)};
   background-color: ${(props) => props.theme.colors.brand.primary['90']};
+  margin-bottom: ${pxToRem(48)};
 
   @media (max-width: 1024px) {
+    margin-bottom: ${pxToRem(48)};
     padding: 0 ${pxToRem(24)};
     height: ${pxToRem(164)};
   }
@@ -32,3 +34,4 @@ export const Title = styled(Typography)`
     padding-bottom: ${pxToRem(24)};
   }
 `
+
