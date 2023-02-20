@@ -8,7 +8,7 @@ export const Heading = styled(Typography)`
 `
 
 export const Title = styled(Typography)`
-  margin: ${pxToRem(48)} 0 ${pxToRem(24)} 0;
+margin-bottom: ${pxToRem(24)};
 `
 
 export const InputWrapper = styled(Input)`
