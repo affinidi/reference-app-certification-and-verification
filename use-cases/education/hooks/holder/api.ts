@@ -3,7 +3,7 @@ import axios from 'axios'
 import { hostUrl } from 'pages/env'
 import { ErrorResponse } from 'types/error'
 import { VerifiableCredential } from 'types/vc'
-import { useSessionStorage } from 'hooks/useSessionStorage'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 
 export const useSignInMutation = () => {
   return useMutation<{ token: string }, ErrorResponse, { username: string }, () => void>(async (data) => {
@@ -11,7 +11,7 @@ export const useSignInMutation = () => {
       `${hostUrl}/api/holder/sign-in`,
       { method: 'POST', data }
     )
-  
+
     return { token }
   })
 }
@@ -22,14 +22,14 @@ export const useConfirmSignInMutation = () => {
       `${hostUrl}/api/holder/confirm-sign-in`,
       { method: 'POST', data }
     )
-  
+
     return { accessToken }
   })
 }
 
 export const useLogOutMutation = () => {
-  const { getItem } = useSessionStorage()
-  
+  const { getItem } = useLocalStorage()
+
   return useMutation<void, ErrorResponse, void, () => void>(async () => {
     const accessToken = getItem('accessToken')
     if (!accessToken) return
@@ -43,12 +43,12 @@ export const useLogOutMutation = () => {
 
 
 export const useCheckHolderAuthMutation = () => {
-  const { getItem } = useSessionStorage()
-  
+  const { getItem } = useLocalStorage()
+
   return useMutation<void, ErrorResponse, void, () => void>(async () => {
     const accessToken = getItem('accessToken')
     if (!accessToken) throw new Error('Access token is not present')
-    
+
     await axios<{ did: string }>(
       `${hostUrl}/api/holder/get-did`,
       { method: 'POST', headers: { 'Authorization': accessToken } }
@@ -57,8 +57,8 @@ export const useCheckHolderAuthMutation = () => {
 }
 
 export const useGetVcsQuery = () => {
-  const { getItem } = useSessionStorage()
-  
+  const { getItem } = useLocalStorage()
+
   return useQuery<{ vcs: VerifiableCredential[] }, ErrorResponse>(['getVcs'], async () => {
     const accessToken = getItem('accessToken')
     if (!accessToken) throw new Error('Access token is not present')
@@ -67,14 +67,14 @@ export const useGetVcsQuery = () => {
       `${hostUrl}/api/holder/get-vcs`,
       { method: 'GET', headers: { 'Authorization': accessToken } }
     )
-  
+
     return { vcs }
   })
 }
 
 export const useClaimVcQuery = (data: { credentialOfferRequestToken: string }) => {
-  const { getItem } = useSessionStorage()
-  
+  const { getItem } = useLocalStorage()
+
   return useQuery<{ credentialId: string }, ErrorResponse>(['claimVc', data.credentialOfferRequestToken], async () => {
     const accessToken = getItem('accessToken')
     if (!accessToken) throw new Error('Access token is not present')
@@ -89,14 +89,14 @@ export const useClaimVcQuery = (data: { credentialOfferRequestToken: string }) =
         }
       }
     )
-  
+
     return { credentialId }
   }, { enabled: Boolean(data.credentialOfferRequestToken) })
 }
 
 export const useShareVcQuery = (data: { credentialId: string }) => {
-  const { getItem } = useSessionStorage()
-  
+  const { getItem } = useLocalStorage()
+
   return useQuery<{ vc: VerifiableCredential; qrCode: string }, ErrorResponse>(['shareVc', data.credentialId], async () => {
     const accessToken = getItem('accessToken')
     if (!accessToken) throw new Error('Access token is not present')
@@ -111,7 +111,7 @@ export const useShareVcQuery = (data: { credentialId: string }) => {
         }
       }
     )
-  
+
     return { vc, qrCode }
   }, { enabled: Boolean(data.credentialId) })
 }
