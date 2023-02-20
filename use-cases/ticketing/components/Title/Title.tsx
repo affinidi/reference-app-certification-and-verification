@@ -7,11 +7,9 @@ export interface TitleProps extends BoxProps {
 }
 
 const Title: React.FC<TitleProps> = ({ title, children }) => {
-
   return (
-      <S.Title variant="p1">{children}</S.Title>
+    <S.Title variant="p1">{children}</S.Title>
   )
 }
-
 
 export default Title

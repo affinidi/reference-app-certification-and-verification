@@ -1,6 +1,6 @@
 import { Dispatch, FC, FormEvent, SetStateAction } from 'react'
 
-import { Container, ContainerForm, Header, Input } from 'components'
+import { Container, ContainerForm, Header, Input, Title } from 'components'
 
 import * as S from './SigninForm.styled'
 
@@ -40,7 +40,7 @@ export const SignInForm: FC<SignInFormProps> = ({
       <Container>
         <div className="grid lg:grid-cols-3 lg:gap-16">
           <ContainerForm className="lg:col-start-2" onSubmit={handleSignIn}>
-            <S.Title variant="p1">Please enter your email address to sign in.</S.Title>
+            <Title>Please enter your email address to sign in.</Title>
 
             <Input
               id="email"

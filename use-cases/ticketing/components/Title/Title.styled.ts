@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
 import { pxToRem } from "utils"
-import  Typography  from "components/Typography/Typography"
+import Typography from "components/Typography/Typography"
 
 export const Title = styled(Typography)`
-margin-bottom: ${pxToRem(40)};
+  margin-bottom: ${pxToRem(40)};
 
   @media (max-width: 1024px) {
     margin-bottom: ${pxToRem(24)};
