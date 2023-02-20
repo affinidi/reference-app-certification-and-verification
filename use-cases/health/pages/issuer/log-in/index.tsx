@@ -3,10 +3,9 @@ import { FC, FormEvent, useEffect, useState } from 'react'
 import { useSessionStorage } from 'hooks/useSessionStorage'
 import { useCheckCredentialsMutation } from 'hooks/issuer/api'
 import { useAuthContext } from 'hooks/useAuthContext'
-import { Box, Container, ContainerForm, Header, Input } from 'components'
+import { Box, Container, ContainerForm, Header, Input, Title} from 'components'
 
 import * as S from './index.styled'
-import { PROJECT } from './index.theme'
 
 const IssuerLogIn: FC = () => {
   const { setItem } = useSessionStorage()
@@ -40,7 +39,7 @@ const IssuerLogIn: FC = () => {
       <Container>
         <div className="grid lg:grid-cols-3 lg:gap-16">
           <ContainerForm className="lg:col-start-2" onSubmit={handleLogIn}>
-            <S.Title variant="p1" $isProject={PROJECT}>Please enter your email address and password to log in.</S.Title>
+            <Title>Please enter your email address and password to log in.</Title>
 
             <Box gap={24}>
               <Input
