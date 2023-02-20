@@ -7,10 +7,6 @@ export const Wrapper = styled.div`
   padding-bottom: ${pxToRem(40)};
 `
 
-export const Title = styled(Typography)`
-  margin: ${pxToRem(40)} 0;
-`
-
 export const VerificationFieldContainer = styled(Box)`
   @media (max-width: 1024px) {
     gap: ${pxToRem(16)};
