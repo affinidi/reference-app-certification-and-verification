@@ -3,9 +3,9 @@ import { Exception, Result } from "@zxing/library";
 import { extractHashAndKeyFromVSShareUrl, ROUTES } from "utils";
 import { useScanner } from "hooks/verifier/useScanner";
 import { Typography } from "../../../../components";
-import * as S from "./QrScanner.styled";
 import { useRouter } from "next/router";
 import { notifyError } from "utils/notification";
+import * as S from './QrScanner.styled'
 
 type QrScannerProps = {};
 
@@ -23,7 +23,7 @@ const QrScanner: FC<QrScannerProps> = () => {
       }
       try {
         const hashAndKey = extractHashAndKeyFromVSShareUrl(text);
-        if (!hashAndKey) {
+        if (!hashAndKey?.key || !hashAndKey?.hash) {
           // setScanError("The QR code was not recognized");
           notifyError(new Error('The QR code was not recognized'))
           return;
@@ -38,8 +38,8 @@ const QrScanner: FC<QrScannerProps> = () => {
         );
       } catch (error) {
         console.error(error);
+        // setScanError("The QR code was not recognized");
         notifyError(new Error('The QR-Code has not been recognized.'))
-        // setScanError("The QR-Code has not been recognized.");
       }
     },
     [router]
@@ -57,11 +57,11 @@ const QrScanner: FC<QrScannerProps> = () => {
 
   return (
     <>
+      {!!scanError && <Typography variant="e1">{scanError}</Typography>}
+
       <S.Overlay>
         <video muted id={videoElementId} />
       </S.Overlay>
-
-      {!!scanError && <Typography variant="e1">{scanError}</Typography>}
     </>
   );
 };

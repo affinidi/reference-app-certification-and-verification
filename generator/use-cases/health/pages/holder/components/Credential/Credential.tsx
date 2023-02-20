@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { format } from 'date-fns'
-import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { ROUTES } from 'utils'
 import { Header } from 'components'
 import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
@@ -8,7 +7,7 @@ import { CredentialDetails } from '../CredentialDetails/CredentialDetails'
 import * as S from './Credential.styled'
 
 export type CredentialProps = {
-  credentialSubject: AnyData
+  credentialSubject: any
   qrCode?: string
 }
 

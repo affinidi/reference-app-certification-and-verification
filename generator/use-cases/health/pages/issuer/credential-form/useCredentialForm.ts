@@ -1,19 +1,10 @@
 import { format } from 'date-fns'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import * as EmailValidator from 'email-validator'
 import { useRouter } from 'next/router'
 
-import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { useSendVcOfferMutation } from 'hooks/issuer/api'
 import { ROUTES } from 'utils'
-import { apiKeyHash, projectDid, projectId } from 'pages/env'
-
-import { parseSchemaURL } from 'services/issuance/parse.schema.url'
-import {
-  CreateIssuanceInput,
-  CreateIssuanceOfferInput,
-  VerificationMethod,
-} from 'services/issuance/issuance.api'
-import { issuanceService } from 'services/issuance'
 
 export type SelectOption = {
   value: string,
@@ -81,74 +72,42 @@ export const initialValues: PrescriptionData = {
 
 export const useCredentialForm = () => {
   const router = useRouter()
-  const [isCreating, setIsCreating] = useState(false)
+  const { mutate, isSuccess, isLoading } = useSendVcOfferMutation()
   const [error, setError] = useState(null)
 
-  const handleSubmit = useCallback(
-    async (values: PrescriptionData) => {  
-      setIsCreating(true)
-
-      const walletUrl = `${window.location.origin}/holder/claim`
-      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSONLD_CONTEXT_URL)
-
-      const issuanceJson: CreateIssuanceInput = {
-        template: {
-          walletUrl,
-          verification: {
-            method: VerificationMethod.Email,
-          },
-          schema: {
-            type: schemaType,
-            jsonLdContextUrl: jsonLdContext.toString(),
-            jsonSchemaUrl: jsonSchema.toString(),
-          },
-          issuerDid: projectDid,
+  const handleSubmit = (values: PrescriptionData) => {
+    mutate({
+      targetEmail: values.patientEmail,
+      credentialSubject: {
+        prescribedAt: format(new Date(values.prescribedAt), "yyyy-MM-dd"),
+        medicationName: values.medicationName,
+        dosage: {
+          amount: Number(values.dosageAmount),
+          unit: values.dosageUnit
         },
-        projectId,
-      }
-
-      const offerInput: CreateIssuanceOfferInput = {
-        verification: {
-          target: {
-            email: values.patientEmail,
-          },
+        practitioner: {
+          name: values.practitionerName,
         },
-        credentialSubject: {
-          prescribedAt: format(new Date(values.prescribedAt), "yyyy-MM-dd"),
-          medicationName: values.medicationName,
-          dosage: {
-            amount: Number(values.dosageAmount),
-            unit: values.dosageUnit
-          },
-          practitioner: {
-            name: values.practitionerName,
-          },
-          frequency: {
-            amount: Number(values.frequencyTimes),
-            interval: {
-              amount: 1,
-              unit: values.frequencyIntervalUnit
-            }
-          },
-          patient: {
-            name: values.patientName,
-            email: values.patientEmail,
+        frequency: {
+          amount: Number(values.frequencyTimes),
+          interval: {
+            amount: 1,
+            unit: values.frequencyIntervalUnit
           }
         },
-      }
+        patient: {
+          name: values.patientName,
+          email: values.patientEmail,
+        }
+      },
+    })
+  }
 
-      try {
-        const issuanceId = await issuanceService.createIssuance(apiKeyHash, issuanceJson)
-        await issuanceService.createOffer(apiKeyHash, issuanceId.id, offerInput)
-
-        router.push(ROUTES.issuer.result)
-      } catch(err: unknown) {
-        setIsCreating(false)
-        setError(err)
-      }
-    },
-    [router],
-  )
+  useEffect(() => {
+    if (isSuccess) {
+      router.push(ROUTES.issuer.result)
+    }
+  }, [isSuccess, router])
 
   const validate = useCallback((values: PrescriptionData) => {
     const errors = {} as Partial<PrescriptionData>
@@ -198,6 +157,6 @@ export const useCredentialForm = () => {
     handleSubmit,
     validate,
     error,
-    isCreating,
+    isCreating: isLoading,
   }
 }
