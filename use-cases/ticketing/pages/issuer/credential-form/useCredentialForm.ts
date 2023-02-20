@@ -39,8 +39,7 @@ export const initialValues: EventSubjectData = {
 
 export const useCredentialForm = () => {
   const router = useRouter()
-  const { mutate, isSuccess, isLoading } = useSendVcOfferMutation()
-  const [error, setError] = useState(null)
+  const { mutate, isSuccess, isLoading, error } = useSendVcOfferMutation()
 
   const handleSubmit = (values: EventSubjectData) => {
     mutate({

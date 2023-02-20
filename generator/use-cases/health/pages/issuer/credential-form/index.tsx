@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react'
 import { Field, Formik } from 'formik'
 
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { messages } from 'utils/messages'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
 
@@ -21,7 +22,11 @@ const CredentialForm: FC = () => {
   const { handleSubmit, validate, isCreating, error } = useCredentialForm()
 
   useEffect(() => {
-    if(error){
+    if(error){      
+      if (error.response?.status === 404 || error.response?.status === 500) {
+        notifyError(new Error(messages.issuer.error.apiError))
+        return;
+      }
       notifyError(error)
     }
   }, [error])

@@ -9,6 +9,7 @@ import { toast } from 'components/Toast/Toast'
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
 import { notifyError } from 'utils/notification'
+import { messages } from 'utils/messages'
 
 const CredentialForm: FC = () => {
   const { authState } = useAuthContext()
@@ -20,6 +21,10 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if (error) {
+      if (error.response?.status === 404 || error.response?.status === 500) {
+        notifyError(new Error(messages.issuer.error.apiError))
+        return;
+      }
       notifyError(error)
     }
   }, [error])

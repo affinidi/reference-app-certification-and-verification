@@ -3,9 +3,9 @@ import { Exception, Result } from "@zxing/library";
 import { extractHashAndKeyFromVSShareUrl, ROUTES } from "utils";
 import { useScanner } from "hooks/verifier/useScanner";
 import { Typography } from "../../../../components";
-import * as S from "./QrScanner.styled";
 import { useRouter } from "next/router";
 import { notifyError } from "utils/notification";
+import * as S from './QrScanner.styled'
 
 type QrScannerProps = {};
 

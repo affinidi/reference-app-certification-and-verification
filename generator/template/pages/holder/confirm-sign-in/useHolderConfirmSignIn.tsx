@@ -12,8 +12,8 @@ export const useHolderConfirmSignIn = () => {
   const storage = useSessionStorage()
   const router = useRouter()
   const { authState, updateAuthState } = useAuthContext()
-  const { data, error, mutateAsync, isLoading, reset } = useConfirmSignInMutation()
-  const { data: signInData, mutateAsync: signInMutateAsync } = useSignInMutation()
+  const { data, error, mutate, isLoading, reset } = useConfirmSignInMutation()
+  const { data: signInData, mutate: signInMutate } = useSignInMutation()
   const { computedCode, inputs, isButtonDisabled, resetInputs } = useConfirmSignIn(error)
 
   useEffect(() => {
@@ -29,13 +29,13 @@ export const useHolderConfirmSignIn = () => {
       router.push(ROUTES.holder.signIn)
       return
     }
-    await signInMutateAsync({ username: authState.username })
+    await signInMutate({ username: authState.username })
   }
 
   const onSubmit = async (e?: SyntheticEvent) => {
     e?.preventDefault()
 
-    await mutateAsync({
+    await mutate({
       token: storage.getItem('signUpToken') || '',
       confirmationCode: computedCode,
     })

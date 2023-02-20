@@ -3,6 +3,7 @@ import { Formik } from 'formik'
 
 import { Container, Header, Input, Textarea } from 'components'
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { messages } from 'utils/messages'
 
 import { notifyError } from '../../../utils/notification'
 
@@ -14,6 +15,10 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if(error){
+      if (error.response?.status === 404 || error.response?.status === 500) {
+        notifyError(new Error(messages.issuer.error.apiError))
+        return;
+      }
       notifyError(error)
     }
   }, [error])
