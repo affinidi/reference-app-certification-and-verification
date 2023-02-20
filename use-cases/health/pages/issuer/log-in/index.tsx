@@ -4,13 +4,15 @@ import { useSessionStorage } from 'hooks/useSessionStorage'
 import { useCheckCredentialsMutation } from 'hooks/issuer/api'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Box, Container, ContainerForm, Header, Input } from 'components'
+import { notifyError } from 'utils/notification'
 
 import * as S from './index.styled'
 
 const IssuerLogIn: FC = () => {
   const { setItem } = useSessionStorage()
   const { updateAuthState } = useAuthContext()
-  const { mutate, isSuccess, isError, isLoading, reset } = useCheckCredentialsMutation()
+  const { mutate, isSuccess, isError, isLoading, reset } =
+    useCheckCredentialsMutation()
 
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
@@ -32,36 +34,49 @@ const IssuerLogIn: FC = () => {
     reset()
   }, [login, password])
 
+  useEffect(() => {
+    if (isError) {
+      notifyError(new Error('Incorrect user name or password'))
+    }
+  }, [isError])
+
   return (
     <>
-      <Header title="Admin login" />
+      <Header title='Admin login' />
 
       <Container>
-        <div className="grid lg:grid-cols-3 lg:gap-16">
-          <ContainerForm className="lg:col-start-2" onSubmit={handleLogIn}>
-            <S.Title variant="p1">Please enter your email address and password to log in.</S.Title>
+        <div className='grid lg:grid-cols-3 lg:gap-16'>
+          <ContainerForm className='lg:col-start-2' onSubmit={handleLogIn}>
+            <S.Title variant='p1'>
+              Please enter your user name and password to log in.
+            </S.Title>
 
             <Box gap={24}>
               <Input
-                id="email"
-                type="email"
-                label="Email address"
-                placeholder="Enter your email address"
+                id='userName'
+                type='email'
+                label='Username'
+                placeholder='Enter user name'
                 onChange={setLogin}
                 hasError={isError}
               />
 
               <Input
-                id="password"
-                type="password"
-                label="Password"
-                placeholder="Enter your password"
+                id='password'
+                type='password'
+                label='Password'
+                placeholder='Enter your password'
                 onChange={setPassword}
                 hasError={isError}
               />
             </Box>
 
-            <S.ButtonWrapper fullWidth disabled={isLoading} loading={isLoading} type="submit">
+            <S.ButtonWrapper
+              fullWidth
+              disabled={isLoading}
+              loading={isLoading}
+              type='submit'
+            >
               log in
             </S.ButtonWrapper>
           </ContainerForm>
