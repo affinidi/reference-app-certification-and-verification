@@ -139,6 +139,7 @@ const CredentialForm: FC = () => {
                     />
                   </div>
 
+                  <div className='grid lg:grid-cols-3'>
                   <S.ButtonWrapper
                     type='submit'
                     form='form'
@@ -147,6 +148,7 @@ const CredentialForm: FC = () => {
                   >
                     Issue certificate
                   </S.ButtonWrapper>
+                  </div>
                 </form>
               )}
             </Formik>
