@@ -4,7 +4,7 @@
 
 1. Clone this monorepo
 2. Run `npm install` in the root directory
-3. Run `npm run install` to install dependencies in the template and each use case
+3. Run `npm run install-all` to install dependencies in the template and each use case
 4. Run `npm run dev` to automatically re-generate use cases and run them
 
 Now make some changes to `generator/template` or `generator/use-cases/{use-case}` and apps will be re-generated & restarted automatically.

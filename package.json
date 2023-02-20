@@ -7,7 +7,7 @@
     "dev": "node generator/confirm.mjs && nodemon --exec 'node generator/generate.mjs && npm run start'",
     "generate": "node generator/confirm.mjs && node generator/generate.mjs",
 
-    "install": "concurrently -n w: npm:install:*",
+    "install-all": "concurrently -n w: npm:install:*",
     "install:template": "npm i --prefix generator/template",
     "install:education": "npm i --prefix use-cases/education",
     "install:health": "npm i --prefix use-cases/health",
