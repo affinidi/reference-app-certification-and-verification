@@ -4,12 +4,12 @@ import { useRouter } from 'next/router'
 import { ROUTES } from 'utils'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useLogOutMutation } from 'hooks/holder/api'
-import { useLocaleStorage } from './useLocaleStorage'
+import { useLocalStorage } from './useLocalStorage'
 
 export const useNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { authState, updateAuthState } = useAuthContext()
-  const { clear } = useLocaleStorage()
+  const { clear } = useLocalStorage()
   const { mutateAsync } = useLogOutMutation()
   const { push } = useRouter()
 

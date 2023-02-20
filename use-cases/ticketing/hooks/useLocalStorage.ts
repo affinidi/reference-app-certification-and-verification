@@ -21,7 +21,7 @@ export const clearLocalStorage = () => {
   }
 }
 
-export const useLocaleStorage = () => {
+export const useLocalStorage = () => {
   const setItem = setItemToLocalStorage
   const getItem = getItemFromLocalStorage
   const clear = clearLocalStorage

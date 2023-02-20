@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { useLocaleStorage } from 'hooks/useLocaleStorage'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useSignInMutation } from 'hooks/holder/api'
 
@@ -11,7 +11,7 @@ export const useHolderSignIn = () => {
   const [username, setUsername] = useState('')
   const [inputError, setInputError] = useState<string | null>(null)
   const router = useRouter()
-  const storage = useLocaleStorage()
+  const storage = useLocalStorage()
   const { updateAuthState } = useAuthContext()
 
   const { mutate, data, error, isLoading } = useSignInMutation()

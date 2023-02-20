@@ -1,6 +1,6 @@
 import { FC, FormEvent, useEffect, useState } from 'react'
 
-import { useLocaleStorage } from 'hooks/useLocaleStorage'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useCheckCredentialsMutation } from 'hooks/issuer/api'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Box, Container, ContainerForm, Header, Input, Title} from 'components'
@@ -8,7 +8,7 @@ import { Box, Container, ContainerForm, Header, Input, Title} from 'components'
 import * as S from './index.styled'
 
 const IssuerLogIn: FC = () => {
-  const { setItem } = useLocaleStorage()
+  const { setItem } = useLocalStorage()
   const { updateAuthState } = useAuthContext()
   const { mutate, isSuccess, isError, isLoading, reset } = useCheckCredentialsMutation()
 

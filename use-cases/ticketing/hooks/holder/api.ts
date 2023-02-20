@@ -3,7 +3,7 @@ import axios from 'axios'
 import { hostUrl } from 'pages/env'
 import { ErrorResponse } from 'types/error'
 import { VerifiableCredential } from 'types/vc'
-import { useLocaleStorage } from 'hooks/useLocaleStorage'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 
 export const useSignInMutation = () => {
   return useMutation<{ token: string }, ErrorResponse, { username: string }, () => void>(async (data) => {
@@ -28,7 +28,7 @@ export const useConfirmSignInMutation = () => {
 }
 
 export const useLogOutMutation = () => {
-  const { getItem } = useLocaleStorage()
+  const { getItem } = useLocalStorage()
 
   return useMutation<void, ErrorResponse, void, () => void>(async () => {
     const accessToken = getItem('accessToken')
@@ -43,7 +43,7 @@ export const useLogOutMutation = () => {
 
 
 export const useCheckHolderAuthMutation = () => {
-  const { getItem } = useLocaleStorage()
+  const { getItem } = useLocalStorage()
 
   return useMutation<void, ErrorResponse, void, () => void>(async () => {
     const accessToken = getItem('accessToken')
@@ -57,7 +57,7 @@ export const useCheckHolderAuthMutation = () => {
 }
 
 export const useGetVcsQuery = () => {
-  const { getItem } = useLocaleStorage()
+  const { getItem } = useLocalStorage()
 
   return useQuery<{ vcs: VerifiableCredential[] }, ErrorResponse>(['getVcs'], async () => {
     const accessToken = getItem('accessToken')
@@ -73,7 +73,7 @@ export const useGetVcsQuery = () => {
 }
 
 export const useClaimVcQuery = (data: { credentialOfferRequestToken: string }) => {
-  const { getItem } = useLocaleStorage()
+  const { getItem } = useLocalStorage()
 
   return useQuery<{ credentialId: string }, ErrorResponse>(['claimVc', data.credentialOfferRequestToken], async () => {
     const accessToken = getItem('accessToken')
@@ -95,7 +95,7 @@ export const useClaimVcQuery = (data: { credentialOfferRequestToken: string }) =
 }
 
 export const useShareVcQuery = (data: { credentialId: string }) => {
-  const { getItem } = useLocaleStorage()
+  const { getItem } = useLocalStorage()
 
   return useQuery<{ vc: VerifiableCredential; qrCode: string }, ErrorResponse>(['shareVc', data.credentialId], async () => {
     const accessToken = getItem('accessToken')
