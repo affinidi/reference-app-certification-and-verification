@@ -1,43 +1,43 @@
 export const messages = {
   home: {
     holder: {
-      title: 'Collect generic VCs',
-      description: 'Collect your generic VCs or view them stored in your wallet',
+      title: 'Collect prescriptions',
+      description: 'Collect your prescriptions or view them stored in your wallet',
     },
     verifier: {
-      title: 'Verify generic VCs',
-      description: 'Verify generic VCs with a QR code scanner',
+      title: 'Verify prescriptions',
+      description: 'Verify prescriptions with a QR code scanner',
     },
     issuer: {
-      title: 'Issue generic VCs',
-      description: 'Issue generic VCs easily',
+      title: 'Issue prescriptions',
+      description: 'Issue prescriptions to your patients easily',
     },
   },
   verifier: {
-    welcome: 'Welcome to the generic scanner. Tap “scan QR code” to start checking generic VCs.',
+    welcome: 'Welcome to the healthi scanner. Tap “scan QR code” to start checking prescriptions.',
     result: {
-      valid: 'Generic VC successfully checked.',
-      invalid: 'Generic VC is invalid.',
+      valid: 'Prescription successfully checked.',
+      invalid: 'Prescription is invalid.',
       content: {
-        valid: 'Valid generic VC',
-        invalid: 'Invalid generic VC',
+        valid: 'Valid prescription',
+        invalid: 'Invalid prescription',
       }
     },
   },
   issuer: {
     result: {
-      title: 'Generic VC issued',
-      issued: 'Your generic VC has been issued.',
-      next: 'Issue next generic VC',
+      title: 'Prescription issued',
+      issued: 'Your prescription has been issued.',
+      next: 'Issue next prescription',
       content: {
-        issued: 'Generic VC successfully issued',
+        issued: 'Prescription successfully issued',
       },
     },
   },
   holder: {
     home: {
-      title: 'Your generic VCs',
-      noVcs: 'You don\'t have any generic VCs yet.'
+      title: 'Your prescriptions',
+      noVcs: 'You don\'t have any prescriptions yet.'
     }
   }
 }
