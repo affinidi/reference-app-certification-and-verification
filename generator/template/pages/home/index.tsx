@@ -19,6 +19,25 @@ export const Home: FC = () => {
 
       <Container title="Please select one of the following options">
         <S.Wrapper className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+
+          <S.Card
+            alignItems="center"
+            direction="row"
+            justifyContent="space-between"
+            gap={8}
+            onClick={() => router.push(ROUTES.issuer.credentialForm)}
+          >
+            <Box gap={16}>
+              <Typography variant="h6">{messages.home.issuer.title}</Typography>
+              <Typography variant="p1">
+                {messages.home.issuer.description}
+              </Typography>
+            </Box>
+            <S.Icon>
+              <BulkIssuanceIcon />
+            </S.Icon>
+          </S.Card>
+
           <S.Card
             alignItems="center"
             direction="row"
@@ -52,24 +71,6 @@ export const Home: FC = () => {
             </Box>
             <S.Icon>
               <DigitalCheckIcon />
-            </S.Icon>
-          </S.Card>
-
-          <S.Card
-            alignItems="center"
-            direction="row"
-            justifyContent="space-between"
-            gap={8}
-            onClick={() => router.push(ROUTES.issuer.credentialForm)}
-          >
-            <Box gap={16}>
-              <Typography variant="h6">{messages.home.issuer.title}</Typography>
-              <Typography variant="p1">
-                {messages.home.issuer.description}
-              </Typography>
-            </Box>
-            <S.Icon>
-              <BulkIssuanceIcon />
             </S.Icon>
           </S.Card>
         </S.Wrapper>
