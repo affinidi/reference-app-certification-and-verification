@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { hostUrl } from 'pages/env'
 import { ErrorResponse } from 'types/error'
-import { useLocalStorage } from 'hooks/useLocalStorage'
+import { useLocalStorage } from '../useLocalStorage'
 
 export const useCheckCredentialsMutation = () => {
   return useMutation<void, ErrorResponse, { login: string; password: string }, () => void>(async (credentials) => {

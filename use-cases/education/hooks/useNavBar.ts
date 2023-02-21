@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { ROUTES } from 'utils'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useLogOutMutation } from 'hooks/holder/api'
-import { useLocalStorage } from 'hooks/useLocalStorage'
+import { useLocalStorage } from './useLocalStorage'
 
 export const useNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
