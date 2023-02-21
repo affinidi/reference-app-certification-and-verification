@@ -27,7 +27,7 @@ export const useHolderConfirmSignIn = () => {
   const onSubmit = async (e?: SyntheticEvent) => {
     e?.preventDefault()
 
-     mutate({
+    mutate({
       token: storage.getItem('signUpToken') || '',
       confirmationCode: computedCode,
     })
