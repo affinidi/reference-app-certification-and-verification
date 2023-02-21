@@ -1,20 +1,34 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { VerifiableCredential } from 'types/vc'
 import { useGetVcsQuery } from 'hooks/holder/api'
 import { useAuthContext } from 'hooks/useAuthContext'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 import { EmptyStateIllustration } from 'assets/empty-state-illustration'
 import { Container, Header, Spinner, Typography } from 'components'
 import { messages } from 'utils/messages'
+import { ROUTES } from 'utils'
 import CredentialCard from './components/CredentialCard/CredentialCard'
 import { useFourColumns } from './home.theme'
 
 import * as S from './index.styled'
 
+
 const Home: FC = () => {
-  const { authState } = useAuthContext()
+  const router = useRouter()
+  const { authState, updateAuthState } = useAuthContext()
   const { data, error } = useGetVcsQuery() 
+
+  useEffect(() => {
+     if (error?.code === 'CWA-4') {
+      updateAuthState({
+        authorizedAsHolder: false,
+      })
+      router.push(ROUTES.holder.signIn)
+    }
+  }, [error, router])
 
   if (!authState.authorizedAsHolder) {
     return <Spinner />

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
 
-import { ErrorResponse } from 'hooks/useAuthentication'
+import { ErrorResponse } from 'types/error'
 import { Box, Container, Header, Spinner } from 'components'
 import { messages } from 'utils/messages'
 

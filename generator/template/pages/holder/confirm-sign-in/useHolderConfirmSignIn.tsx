@@ -12,7 +12,7 @@ export const useHolderConfirmSignIn = () => {
   const storage = useLocalStorage()
   const router = useRouter()
   const { authState, updateAuthState } = useAuthContext()
-  const { data, error, mutateAsync, isLoading } = useConfirmSignInMutation()
+  const { data, error, mutate, isLoading } = useConfirmSignInMutation()
   const { data: signInData, mutateAsync: signInMutateAsync } = useSignInMutation()
   const { computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
 
@@ -27,7 +27,7 @@ export const useHolderConfirmSignIn = () => {
   const onSubmit = async (e?: SyntheticEvent) => {
     e?.preventDefault()
 
-    await mutateAsync({
+     mutate({
       token: storage.getItem('signUpToken') || '',
       confirmationCode: computedCode,
     })
