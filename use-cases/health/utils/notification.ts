@@ -1,6 +1,6 @@
-import { toast } from "components/Toast/Toast"
+import { toast } from "components"
 
-export const notifyError = (error: any) => {
+export const showErrorToast = (error: any) => {
     const message = error.message || 'Unexpected error'
   
     toast(message, {

@@ -31,12 +31,7 @@ const QrScanner: FC<QrScannerProps> = () => {
         )
       } catch (error) {
         console.error(error)
-        await router.push(
-          {
-            pathname: ROUTES.verifier.result,
-          },
-          ROUTES.verifier.result
-        )
+        await router.push(ROUTES.verifier.result)
       }
     },
     [router]

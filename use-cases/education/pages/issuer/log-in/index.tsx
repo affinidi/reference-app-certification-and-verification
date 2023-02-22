@@ -3,7 +3,7 @@ import { FC, FormEvent, useEffect, useState } from 'react'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useCheckCredentialsMutation } from 'hooks/issuer/api'
 import { useAuthContext } from 'hooks/useAuthContext'
-import { notifyError } from 'utils/notification'
+import { showErrorToast } from 'utils/notification'
 import { Box, Container, ContainerForm, Header, Input, Title} from 'components'
 import { messages } from 'utils/messages'
 
@@ -37,7 +37,7 @@ const IssuerLogIn: FC = () => {
 
   useEffect(() => {
     if (isError) {
-      notifyError(new Error(messages.issuer.loginError))
+      showErrorToast(new Error(messages.issuer.loginError))
     }
   }, [isError])
 

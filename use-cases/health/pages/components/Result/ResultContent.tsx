@@ -19,33 +19,40 @@ export const ResultContent: FC<ResultContentProps> = ({
   isValid,
   isIssuance,
   error,
-}) => (
-  <>
-    <S.ImgWrapper>
-      {isValid ? (
-        isIssuance ? (
-          <IssuedIllustration />
-        ) : (
-          <QrScanSuccessIllustration />
-        )
-      ) : (
-        <QrScanErrorIllustration />
-      )}
-    </S.ImgWrapper>
+}) => {
+  const resultMessage = () => {
+    if (isValid) {
+      return isIssuance
+        ? messages.issuer.result.content.issued
+        : messages.verifier.result.content.valid
+    }
 
-    <S.ResultTitle
-      align='center'
-      variant='h5'
-      $isVerified={isValid}
-      $isIssuance={isIssuance}
-    >
-      {isValid
-        ? isIssuance
-          ? messages.issuer.result.content.issued
-          : messages.verifier.result.content.valid
-        : error?.code === SCAN_ERROR
-        ? messages.verifier.result.content.scanError
-        : messages.verifier.result.content.invalid}
-    </S.ResultTitle>
-  </>
-)
+    return error?.code === SCAN_ERROR
+      ? messages.verifier.result.content.scanError
+      : messages.verifier.result.content.invalid
+  }
+  return (
+    <>
+      <S.ImgWrapper>
+        {isValid ? (
+          isIssuance ? (
+            <IssuedIllustration />
+          ) : (
+            <QrScanSuccessIllustration />
+          )
+        ) : (
+          <QrScanErrorIllustration />
+        )}
+      </S.ImgWrapper>
+
+      <S.ResultTitle
+        align='center'
+        variant='h5'
+        $isVerified={isValid}
+        $isIssuance={isIssuance}
+      >
+        {resultMessage()}
+      </S.ResultTitle>
+    </>
+  )
+}

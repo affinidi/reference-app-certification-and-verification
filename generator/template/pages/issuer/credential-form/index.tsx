@@ -4,7 +4,7 @@ import { Field, Formik } from 'formik'
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
-import { notifyError } from 'utils/notification'
+import { showErrorToast } from 'utils/notification'
 import { messages } from 'utils/messages'
 
 import {
@@ -22,7 +22,7 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if (error) {
-      notifyError(new Error(messages.issuer.error.apiError))
+      showErrorToast(new Error(messages.issuer.error.apiError))
     }
   }, [error])
 

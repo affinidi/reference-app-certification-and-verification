@@ -6,7 +6,7 @@ import { messages } from 'utils/messages'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Spinner } from 'components'
 
-import { notifyError } from '../../../utils/notification'
+import { notifyError } from 'utils/notification'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'

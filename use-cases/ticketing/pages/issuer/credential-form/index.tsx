@@ -5,7 +5,7 @@ import { Container, Header, Input, Textarea } from 'components'
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { messages } from 'utils/messages'
 
-import { notifyError } from '../../../utils/notification'
+import { notifyError } from 'utils/notification'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'

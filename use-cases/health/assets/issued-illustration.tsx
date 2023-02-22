@@ -1,7 +1,7 @@
 import { SVGAttributes } from 'react'
 
 export const IssuedIllustration = (props: SVGAttributes<SVGElement>) => (
-  <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M214.238 69.74S175.646 14.18 127.464 8.3C84.931 3.076 45.451 23.42 39.955 67.367c-1.958 15.672-5.443 32.986-11.635 47.27C21.374 130.661 9.523 144 18.6 174.802c9.077 30.801 47.41 58.617 75.274 58.56 27.864-.058 54.038-25.388 75.633-48.423s90.365-44.697 44.731-115.2z" fill="#64C495"/>
       <path opacity=".7" d="M214.238 69.74S175.646 14.18 127.464 8.3C84.931 3.076 45.451 23.42 39.955 67.367c-1.958 15.672-5.443 32.986-11.635 47.27C21.374 130.661 9.523 144 18.6 174.802c9.077 30.801 47.41 58.617 75.274 58.56 27.864-.058 54.038-25.388 75.633-48.423s90.365-44.697 44.731-115.2z" fill="#fff"/>
       <g opacity=".3" stroke="#313A55" stroke-linecap="round" stroke-linejoin="round">

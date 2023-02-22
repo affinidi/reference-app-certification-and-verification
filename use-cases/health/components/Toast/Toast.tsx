@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import React from 'react'
 import { toast as reactToast, ToastContainerProps, ToastOptions } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -22,7 +21,7 @@ export interface ToastProps extends ToastOptions {
   children: React.ReactNode
 }
 
-const ToastsContainer: React.FC<ToastContainerProps> = (props) => (
+export const ToastsContainer: React.FC<ToastContainerProps> = (props) => (
   <S.Container theme="dark" closeButton={false} {...props} />
 )
 
@@ -44,5 +43,3 @@ export const toast = (message: string, { type, ...restProps }: Omit<ToastProps, 
 
   return reactToast(message, { ...restProps, type })
 }
-
-export default ToastsContainer
