@@ -32,10 +32,10 @@ export const useHolderConfirmSignIn = () => {
     await signInMutate({ username: authState.username })
   }
 
-  const onSubmit = async (e?: SyntheticEvent) => {
+  const onSubmit = (e?: SyntheticEvent) => {
     e?.preventDefault()
 
-    await mutate({
+    mutate({
       token: storage.getItem('signUpToken') || '',
       confirmationCode: computedCode,
     })
