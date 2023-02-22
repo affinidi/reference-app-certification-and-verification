@@ -4,7 +4,8 @@ import { Field, Formik } from 'formik'
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
-import { toast } from 'components/Toast/Toast'
+import { notifyError } from 'utils/notification'
+import { messages } from 'utils/messages'
 
 import {
   DosageUnitOptions,
@@ -14,8 +15,6 @@ import {
   SelectOption,
 } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
-import { notifyError } from 'utils/notification'
-import { messages } from 'utils/messages'
 
 const CredentialForm: FC = () => {
   const { authState } = useAuthContext()

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import * as EmailValidator from 'email-validator'
 import { useRouter } from 'next/router'
 

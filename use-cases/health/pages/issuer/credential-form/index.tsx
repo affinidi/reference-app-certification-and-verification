@@ -2,11 +2,10 @@ import { FC, useEffect } from 'react'
 import { Field, Formik } from 'formik'
 
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
-import { messages } from 'utils/messages'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
-
-import { notifyError } from '../../../utils/notification'
+import { notifyError } from 'utils/notification'
+import { messages } from 'utils/messages'
 
 import {
   DosageUnitOptions,
@@ -58,7 +57,11 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a prescription.
                   </S.Title>
 
-                  <Input label='JSON-LD Context URL' value={JSONLD_CONTEXT_URL} disabled />
+                  <Input
+                    label='JSON-LD Context URL'
+                    value={JSONLD_CONTEXT_URL}
+                    disabled
+                  />
 
                   <S.Heading variant='h6'>Prescription details</S.Heading>
 

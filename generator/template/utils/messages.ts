@@ -34,7 +34,7 @@ export const messages = {
       },
     },
     error: {
-      apiError: 'Generic VC could not be issued.'
+      apiError: 'Due to server error the prescription could not be issued.'
     }
   },
   holder: {

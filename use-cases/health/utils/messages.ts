@@ -36,7 +36,6 @@ export const messages = {
     error: {
       apiError: 'Due to server error the prescription could not be issued.'
     }
-
   },
   holder: {
     home: {

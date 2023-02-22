@@ -73,7 +73,6 @@ const Home: FC = () => {
           <Container>
             <div className={`grid lg:grid-cols-2 ${useFourColumns ? 'xl:grid-cols-4' : 'xl:grid-cols-3'} gap-12 lg:gap-16`}>
               {matchingVcs.map((vc: VerifiableCredential) => (
-
                 <CredentialCard
                   key={vc.id}
                   vc={vc}
