@@ -11,12 +11,12 @@ export type CredentialCardProps = {
   vc: any
 }
 
-const CredentialCard: FC<CredentialCardProps> = ({ vc }: CredentialCardProps) => {
+const CredentialCard: FC<CredentialCardProps> = ({ vc }) => {
   const router = useRouter()
 
   const credential = {
-    firstName: vc?.credentialSubject?.firstName,
-    lastName: vc?.credentialSubject?.lastName,
+    title: `${vc?.credentialSubject.patient.name} ${vc?.credentialSubject.prescribedAt}`,
+    medicationName: vc?.credentialSubject.medicationName,
     credentialId: vc?.id,
   }
 
@@ -25,32 +25,18 @@ const CredentialCard: FC<CredentialCardProps> = ({ vc }: CredentialCardProps) =>
   }
 
   return (
-    <S.Credential
-      direction="row"
-      gap={12}
-      onClick={handleClick}
-    >
-      <S.ImageWrapper
-        justifyContent="center"
-        alignItems="center"
-      >
+    <S.CredentialCard direction='row' gap={12} onClick={handleClick}>
+      <S.ImageWrapper justifyContent='center' alignItems='center'>
         <CredentialIcon />
       </S.ImageWrapper>
 
-      <Box
-        direction="row"
-        gap={4}
-      >
+      <Box direction='row' gap={4}>
         <Box>
-          <Typography variant="c1">First name</Typography>
-          <Typography variant="p4">{credential.firstName}</Typography>
-        </Box>
-        <Box>
-          <Typography variant="c1">Last name</Typography>
-          <Typography variant="p4">{credential.lastName}</Typography>
+          <Typography variant='h7'>{credential.title}</Typography>
+          <Typography variant='p3'>{credential.medicationName}</Typography>
         </Box>
       </Box>
-    </S.Credential>
+    </S.CredentialCard>
   )
 }
 

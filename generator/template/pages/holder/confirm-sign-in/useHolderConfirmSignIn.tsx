@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { useSessionStorage } from 'hooks/useSessionStorage'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useConfirmSignIn } from 'pages/components/ConfirmSignInForm/useConfirmSignIn'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useSignInMutation, useConfirmSignInMutation } from 'hooks/holder/api'
@@ -9,7 +9,7 @@ import { useSignInMutation, useConfirmSignInMutation } from 'hooks/holder/api'
 import { ROUTES } from 'utils'
 
 export const useHolderConfirmSignIn = () => {
-  const storage = useSessionStorage()
+  const storage = useLocalStorage()
   const router = useRouter()
   const { authState, updateAuthState } = useAuthContext()
   const { data, error, mutate, isLoading, reset } = useConfirmSignInMutation()

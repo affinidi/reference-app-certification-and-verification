@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { hostUrl } from 'pages/env'
 import { ErrorResponse } from 'types/error'
-import { useSessionStorage } from '../useSessionStorage'
+import { useLocalStorage } from '../useLocalStorage'
 
 export const useCheckCredentialsMutation = () => {
   return useMutation<void, ErrorResponse, { login: string; password: string }, () => void>(async (credentials) => {
@@ -14,8 +14,8 @@ export const useCheckCredentialsMutation = () => {
 }
 
 export const useCheckIssuerAuthMutation = () => {
-  const { getItem } = useSessionStorage()
-  
+  const { getItem } = useLocalStorage()
+
   return useMutation<void, ErrorResponse, void, () => void>(async () => {
     const login = getItem('issuerLogin')
     const password = getItem('issuerPassword')
@@ -29,8 +29,8 @@ export const useCheckIssuerAuthMutation = () => {
 }
 
 export const useSendVcOfferMutation = () => {
-  const { getItem } = useSessionStorage()
-  
+  const { getItem } = useLocalStorage()
+
   return useMutation<void, ErrorResponse, { targetEmail: string; credentialSubject: any }, () => void>(async (data) => {
     const login = getItem('issuerLogin')
     const password = getItem('issuerPassword')

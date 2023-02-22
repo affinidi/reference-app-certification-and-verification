@@ -152,14 +152,16 @@ const CredentialForm: FC = () => {
                     />
                   </div>
 
-                  <S.ButtonWrapper
-                    type='submit'
-                    form='form'
-                    disabled={!(formikProps.isValid && formikProps.dirty)}
-                    loading={isCreating}
-                  >
-                    Issue certificate
-                  </S.ButtonWrapper>
+                  <div className='grid lg:grid-cols-3'>
+                    <S.ButtonWrapper
+                      type='submit'
+                      form='form'
+                      disabled={!(formikProps.isValid && formikProps.dirty)}
+                      loading={isCreating}
+                      >
+                      Issue certificate
+                    </S.ButtonWrapper>
+                  </div>
                 </form>
               )}
             </Formik>

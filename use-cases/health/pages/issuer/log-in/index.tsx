@@ -1,15 +1,15 @@
 import { FC, FormEvent, useEffect, useState } from 'react'
 
-import { useSessionStorage } from 'hooks/useSessionStorage'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useCheckCredentialsMutation } from 'hooks/issuer/api'
 import { useAuthContext } from 'hooks/useAuthContext'
-import { Box, Container, ContainerForm, Header, Input } from 'components'
 import { notifyError } from 'utils/notification'
+import { Box, Container, ContainerForm, Header, Input, Title} from 'components'
 
 import * as S from './index.styled'
 
 const IssuerLogIn: FC = () => {
-  const { setItem } = useSessionStorage()
+  const { setItem } = useLocalStorage()
   const { updateAuthState } = useAuthContext()
   const { mutate, isSuccess, isError, isLoading, reset } =
     useCheckCredentialsMutation()
@@ -45,11 +45,9 @@ const IssuerLogIn: FC = () => {
       <Header title='Admin login' />
 
       <Container>
-        <div className='grid lg:grid-cols-3 lg:gap-16'>
-          <ContainerForm className='lg:col-start-2' onSubmit={handleLogIn}>
-            <S.Title variant='p1'>
-              Please enter your user name and password to log in.
-            </S.Title>
+        <div className="grid lg:grid-cols-3 lg:gap-16">
+          <ContainerForm className="lg:col-start-2" onSubmit={handleLogIn}>
+            <Title>Please enter your user name and password to log in.</Title>
 
             <Box gap={24}>
               <Input

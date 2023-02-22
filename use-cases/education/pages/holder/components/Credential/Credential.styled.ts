@@ -31,3 +31,13 @@ export const Container = styled(Box)`
     padding: 0;
   }
 `
+export const HeaderContainer = styled(Box)`
+@media (max-width: 576px) {
+  div {
+    margin-bottom: ${pxToRem(0)};
+      div {
+        margin-bottom: ${pxToRem(36)};
+      }
+    }
+  }
+`
