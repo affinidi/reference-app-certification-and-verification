@@ -4,16 +4,6 @@ import { useRouter } from 'next/router'
 import { useCheckIssuerAuthMutation } from './issuer/api'
 import { useCheckHolderAuthMutation } from './holder/api'
 
-export type ErrorResponse = {
-  name: string
-  traceId: string
-  message: string
-  details: {
-    field: string
-    issue: string
-    location: string
-  }
-}
 
 export type UserState = {
   username: string
