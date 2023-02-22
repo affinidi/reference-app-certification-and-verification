@@ -1,20 +1,35 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { VerifiableCredential } from 'types/vc'
 import { useGetVcsQuery } from 'hooks/holder/api'
 import { useAuthContext } from 'hooks/useAuthContext'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 import { EmptyStateIllustration } from 'assets/empty-state-illustration'
 import { Container, Header, Spinner, Typography } from 'components'
 import { messages } from 'utils/messages'
+import { ROUTES } from 'utils'
 import CredentialCard from './components/CredentialCard/CredentialCard'
 import { useFourColumns } from './home.theme'
 
 import * as S from './index.styled'
 
+const JWT_EXPIRED_ERROR_CODE = 'CWA-4'
+
 const Home: FC = () => {
-  const { authState } = useAuthContext()
+  const router = useRouter()
+  const { authState, updateAuthState } = useAuthContext()
   const { data, error } = useGetVcsQuery() 
+
+  useEffect(() => {
+     if (error?.code === JWT_EXPIRED_ERROR_CODE) {
+      updateAuthState({
+        authorizedAsHolder: false,
+      })
+      router.push(ROUTES.holder.signIn)
+    }
+  }, [error, router, updateAuthState])
 
   if (!authState.authorizedAsHolder) {
     return <Spinner />
@@ -73,7 +88,6 @@ const Home: FC = () => {
           <Container>
             <div className={`grid lg:grid-cols-2 ${useFourColumns ? 'xl:grid-cols-4' : 'xl:grid-cols-3'} gap-12 lg:gap-16`}>
               {matchingVcs.map((vc: VerifiableCredential) => (
-
                 <CredentialCard
                   key={vc.id}
                   vc={vc}
