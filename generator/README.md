@@ -6,7 +6,7 @@
 2. Run `npm install` in the root directory (it will automatically install dependencies in the template and generated use cases)
 3. Run `npm run dev` to automatically re-generate use cases and run them
 
-Now make some changes to `generator/template` or `generator/use-cases/{use-case}` and apps will be re-generated & restarted automatically.
+Now make some changes to `generator/template` or `generator/overrides/{use-case}` and apps will be re-generated & restarted automatically.
 
 > Note: `npm run dev` does not reload the page automatically when source code changes.
 
@@ -27,8 +27,8 @@ Now make some changes to `generator/template` or `generator/use-cases/{use-case}
   ...
 /generator
   /template     – fully functional generic app that's used as a base for all use cases
-  /use-cases
-    /use-case-1 – use case-specific customizations (themes, components, assets, etc.)
+  /overrides
+    /use-case-1 – use case-specific overrides (themes, components, assets, etc.)
     /use-case-2
     ...
   generate.mjs  – script that's responsible for generating use case-specific apps
@@ -36,7 +36,7 @@ Now make some changes to `generator/template` or `generator/use-cases/{use-case}
 
 How it works:
 - It copies `/generator/template/` to the `/use-cases/{use-case}` folder
-- It then merges files from `/generator/use-cases/{use-case}` with `/use-cases/{use-case}`
+- It then merges files from `/generator/overrides/{use-case}` with `/use-cases/{use-case}`
   > Some paths are completely overridden instead of being merged – this can be customized in the `generate.mjs` script.
 - `package.json` and `package-lock.json` are slightly updated to use proper `name` value
 - `README.md` file is copied from the root directory to the `use-cases/{use-case}` folder

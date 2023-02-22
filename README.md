@@ -135,6 +135,8 @@ Learn more about [VCs](https://academy.affinidi.com/what-are-verifiable-credenti
 
 ## Overview diagrams
 
+> You might want to install [an extension](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) to view these Mermaid diagrams.
+
 > We'll use "Health" use case as an example.
 
 ### Issuer flow

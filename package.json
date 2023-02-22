@@ -31,8 +31,8 @@
     "type": "git",
     "url": "git+https://github.com/affinidi/reference-app-certification-and-verification.git"
   },
-  "author": "Vitaly Rudenko",
-  "license": "ISC",
+  "author": "Affinidi",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/affinidi/reference-app-certification-and-verification/issues"
   },
