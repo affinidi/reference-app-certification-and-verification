@@ -21,6 +21,7 @@ export const messages = {
       content: {
         valid: 'Valid prescription',
         invalid: 'Invalid prescription',
+        scanError: 'The QR code was not recognized'
       }
     },
   },
