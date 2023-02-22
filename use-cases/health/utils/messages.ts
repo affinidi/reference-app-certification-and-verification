@@ -26,6 +26,7 @@ export const messages = {
     },
   },
   issuer: {
+    loginError: 'Incorrect user name or password',
     result: {
       title: 'Prescription issued',
       issued: 'Your prescription has been issued.',

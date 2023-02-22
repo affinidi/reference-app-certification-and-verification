@@ -21,10 +21,12 @@ export const messages = {
       content: {
         valid: 'Valid ticket',
         invalid: 'Invalid ticket',
+        scanError: 'The QR code was not recognized'
       }
     },
   },
   issuer: {
+    loginError: 'Incorrect user name or password',
     result: {
       title: 'Ticket issued',
       issued: 'Your ticket has been issued.',

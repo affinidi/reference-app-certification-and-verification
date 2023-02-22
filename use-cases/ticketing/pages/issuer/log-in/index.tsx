@@ -5,6 +5,7 @@ import { useCheckCredentialsMutation } from 'hooks/issuer/api'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { notifyError } from 'utils/notification'
 import { Box, Container, ContainerForm, Header, Input, Title} from 'components'
+import { messages } from 'utils/messages'
 
 import * as S from './index.styled'
 
@@ -36,7 +37,7 @@ const IssuerLogIn: FC = () => {
 
   useEffect(() => {
     if (isError) {
-      notifyError(new Error('Incorrect user name or password'))
+      notifyError(new Error(messages.issuer.loginError))
     }
   }, [isError])
 
