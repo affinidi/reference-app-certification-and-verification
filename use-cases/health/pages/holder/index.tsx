@@ -15,6 +15,7 @@ import { useFourColumns } from './home.theme'
 
 import * as S from './index.styled'
 
+const JWT_EXPIRED_ERROR_CODE = 'CWA-4'
 
 const Home: FC = () => {
   const router = useRouter()
@@ -22,13 +23,13 @@ const Home: FC = () => {
   const { data, error } = useGetVcsQuery() 
 
   useEffect(() => {
-     if (error?.code === 'CWA-4') {
+     if (error?.code === JWT_EXPIRED_ERROR_CODE) {
       updateAuthState({
         authorizedAsHolder: false,
       })
       router.push(ROUTES.holder.signIn)
     }
-  }, [error, router])
+  }, [error, router, updateAuthState])
 
   if (!authState.authorizedAsHolder) {
     return <Spinner />

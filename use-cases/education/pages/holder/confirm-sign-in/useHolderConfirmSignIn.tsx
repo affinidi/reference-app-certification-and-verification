@@ -24,7 +24,7 @@ export const useHolderConfirmSignIn = () => {
     await signInMutateAsync({ username: authState.username })
   }
 
-  const onSubmit = async (e?: SyntheticEvent) => {
+  const onSubmit = (e?: SyntheticEvent) => {
     e?.preventDefault()
 
     mutate({
