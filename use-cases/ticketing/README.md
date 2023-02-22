@@ -53,25 +53,25 @@ These are called "use cases" and they're adapted for a specific industry.
 
 > Issue, verify and store tickets for events, such as concerts, conferences, meetups, etc.
 
-As an issuer (ticket sales company), you can enter details of the event and generate a ticket for a participant.  
-Participant (holder) can then store that ticket in their wallet and share it as a QR code with the verifier when asked to.  
-When the event starts, someone from the security (verifier) can quickly verify the QR.
+As a ticket seller (issuer), you can enter details of the event and generate a ticket for a participant (holder).  
+The concert attendee (holder) can then store that ticket in their wallet and share it as a QR code with the security guard at the entrance of the event (verifier).  
+When the event starts, security guard (verifier) can quickly verify that the ticket is valid by scanning the QR code.
 
 ### "Health" use case
 
 > Issue, verify and store prescriptions for medications.
 
-As an issuer (doctor), you can enter details of the medications (dosage, frequency, etc.) and generate a prescription for a patient.  
-Patient (holder) can then store that prescription in their wallet and share it as a QR code with the verifier when asked to.  
-Pharmacist from a drug store can then quickly verify the QR and provide requested medicine.
+As a doctor (issuer), you can enter details of the medications (dosage, frequency, etc.) and generate a prescription for a patient (holder).  
+The patient (holder) can then store that prescription in their wallet and share it as a QR code with the pharmacist when collecting their medications from the pharmacy (verifier).  
+The pharmacist (verifier) can quickly verify that the prescription is valid by scanning the QR code.
 
 ### "Education" use case
 
 > Issue, verify and store course certificates.
 
-As an issuer (institution), you can enter details of the course and generate a certificate for a student.  
-Student (holder) can then store that certificate in their wallet and share it as a QR code with the verifier when asked to.  
-Job interviewer can then quickly verify the QR and validate your knowledge of the course topic.
+As an educational institute (issuer), you can enter details of a certification and generate a certificate for a student (holder).  
+The student (holder) can then store that certificate in their wallet and share it as a QR code with a recruiter or interviewer (verifier).  
+A recruiter or interviewer (verifier) can quickly verify that the certificate is valid by scanning the QR code.
 
 ## Flows
 
@@ -134,6 +134,8 @@ _This app uses the Affinidi VC Issuance API for performing the Claim Flow._
 Learn more about [VCs](https://academy.affinidi.com/what-are-verifiable-credentials-79f1846a7b9), [trust triangle](https://academy.affinidi.com/what-is-the-trust-triangle-9a9caf36b321) and [Decentralized Identifiers (DIDs)](https://academy.affinidi.com/demystifying-decentralized-identifiers-dids-2dc6fc3148fd).
 
 ## Overview diagrams
+
+> You might want to install [an extension](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) to view these Mermaid diagrams.
 
 > We'll use "Health" use case as an example.
 
