@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { SCHEMA_URL } from 'utils/schema'
 import { VerifiableCredential } from 'types/vc'
 import { useGetVcsQuery } from 'hooks/holder/api'
 import { useAuthContext } from 'hooks/useAuthContext'
@@ -46,7 +46,7 @@ const Home: FC = () => {
     )
   }
 
-  const matchingVcs = (data.vcs as VerifiableCredential[]).filter((vc) => vc['@context'].includes(JSONLD_CONTEXT_URL))
+  const matchingVcs = (data.vcs as VerifiableCredential[]).filter((vc) => vc['@context'].includes(SCHEMA_URL))
 
   return (
     <>
@@ -73,7 +73,6 @@ const Home: FC = () => {
           <Container>
             <div className={`grid lg:grid-cols-2 ${useFourColumns ? 'xl:grid-cols-4' : 'xl:grid-cols-3'} gap-12 lg:gap-16`}>
               {matchingVcs.map((vc: VerifiableCredential) => (
-
                 <CredentialCard
                   key={vc.id}
                   vc={vc}

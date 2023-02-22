@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Field, Formik } from 'formik'
 
-import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { SCHEMA_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
 
@@ -49,7 +49,7 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a prescription.
                   </S.Title>
 
-                  <Input label='JSON-LD Context URL' value={JSONLD_CONTEXT_URL} disabled />
+                  <Input label='Schema URL' value={SCHEMA_URL} disabled />
 
                   <S.Heading variant='h6'>Prescription details</S.Heading>
 

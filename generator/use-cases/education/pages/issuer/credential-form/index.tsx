@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Formik } from 'formik'
 
-import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { SCHEMA_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Spinner } from 'components'
 
@@ -34,7 +34,7 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a certificate.
                   </S.Title>
 
-                  <Input label='JSON-LD Context URL' value={JSONLD_CONTEXT_URL} disabled />
+                  <Input label='Schema URL' value={SCHEMA_URL} disabled />
 
                   <S.Heading variant='h6'>Certificate details</S.Heading>
 

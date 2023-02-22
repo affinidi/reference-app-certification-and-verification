@@ -1,2 +1,2 @@
-export const JSONLD_CONTEXT_URL =
-  "https://schema.affinidi.com/PrescriptionV1-3.jsonld";
+export const SCHEMA_URL =
+  "https://schema.affinidi.com/PrescriptionV1-3.json";

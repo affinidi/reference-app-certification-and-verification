@@ -7,7 +7,7 @@ import { authenticateIssuer } from '../helpers/authenticate-issuer'
 import { issuanceClient } from '../clients/issuance-client'
 import { issuerProjectDid, issuerProjectId } from '../env'
 import { hostUrl } from '../../env'
-import { JSONLD_CONTEXT_URL } from 'utils/schema'
+import { SCHEMA_URL } from 'utils/schema'
 import { parseSchemaURL } from '../helpers/parse.schema.url'
 
 const requestSchema = z
@@ -25,7 +25,7 @@ async function handler(
 
   const { credentialSubject, targetEmail } = requestSchema.parse(req.body)
 
-  const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSONLD_CONTEXT_URL)
+  const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(SCHEMA_URL)
 
   const { id: issuanceId } = await issuanceClient.createIssuance({
     projectId: issuerProjectId as string,
