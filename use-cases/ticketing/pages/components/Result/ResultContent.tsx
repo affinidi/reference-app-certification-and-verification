@@ -4,9 +4,10 @@ import { IssuedIllustration } from 'assets/issued-illustration'
 import { QrScanSuccessIllustration } from 'assets/qr-scan-success-illustration'
 import { QrScanErrorIllustration } from 'assets/qr-scan-error-illustration'
 import { messages } from 'utils/messages'
+import { ErrorResponse } from 'types/error'
+import { SCAN_ERROR } from 'pages/verifier/result'
 
 import * as S from './Result.styled'
-import { ErrorResponse } from 'types/error'
 
 export type ResultContentProps = {
   isValid: boolean
@@ -42,7 +43,7 @@ export const ResultContent: FC<ResultContentProps> = ({
         ? isIssuance
           ? messages.issuer.result.content.issued
           : messages.verifier.result.content.valid
-        : error?.code === 'SCAN_ERROR'
+        : error?.code === SCAN_ERROR
         ? messages.verifier.result.content.scanError
         : messages.verifier.result.content.invalid}
     </S.ResultTitle>

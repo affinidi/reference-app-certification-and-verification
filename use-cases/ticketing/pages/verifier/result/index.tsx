@@ -2,11 +2,13 @@ import { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { ROUTES } from 'utils'
+import { messages } from 'utils/messages'
 import { useVerifyVcQuery } from 'hooks/verifier/api'
 import { ErrorResponse } from 'types/error'
 
 import { Result } from '../../components/Result/Result'
-import { messages } from 'utils/messages'
+
+export const SCAN_ERROR = 'SCAN_ERROR'
 
 const VerifierResult: FC = () => {
   const router = useRouter()
@@ -19,7 +21,7 @@ const VerifierResult: FC = () => {
 
   useEffect(() => {
     if (!key || !hash) {
-      setScanError({ code: 'SCAN_ERROR', message: messages.verifier.result.content.scanError })
+      setScanError({ code: SCAN_ERROR, message: messages.verifier.result.content.scanError })
     }
   }, [key, hash])
 
