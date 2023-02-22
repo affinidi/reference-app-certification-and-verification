@@ -23,7 +23,9 @@
     "build:template": "npm run --prefix generator/template build",
     "build:education": "npm run --prefix use-cases/education build",
     "build:health": "npm run --prefix use-cases/health build",
-    "build:ticketing": "npm run --prefix use-cases/ticketing build"
+    "build:ticketing": "npm run --prefix use-cases/ticketing build",
+
+    "postinstall": "npm run install-all"
   },
   "repository": {
     "type": "git",
