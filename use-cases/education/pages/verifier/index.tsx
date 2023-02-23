@@ -17,7 +17,8 @@ const Verifier: FC = () => {
 
       <S.Wrapper>
         <Container>
-          <div className="grid lg:grid-cols-3 lg:gap-16">
+        <div className="grid md:grid-cols-3 lg:grid-cols-3 lg:gap-16">
+          <div className="col-span-1"></div>
             <Box alignItems="center" className="lg:col-start-2">
               <QrScanDefaultIllustration />
 

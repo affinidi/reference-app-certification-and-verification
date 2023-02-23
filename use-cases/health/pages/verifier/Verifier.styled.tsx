@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 export const WelcomeMessage = styled(Typography)`
   margin-top: ${pxToRem(40)};
 
-  @media (min-width: 1024px) {
+  @media (min-width: 576px) {
     margin: ${pxToRem(48)} 0;
   }
 
