@@ -20,18 +20,21 @@ export const QrCodeCard = styled(Box)`
 
     img {
       height: ${pxToRem(292)};
+      width: ${pxToRem(292)};
     }
   }
 `
 
-export const CredentialDetailsContainer = styled(Box)`
+export const DetailsContainer = styled(Box)`
   padding: ${pxToRem(40)};
   background-color: ${(props) => props.theme.colors.brand.secondary['50']};
-
+  
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
+    max-width: ${pxToRem(375)}; 
+    margin: 0 auto;
   }
 
   @media (min-width: 1024px) {
@@ -40,7 +43,7 @@ export const CredentialDetailsContainer = styled(Box)`
   }
 `
 
-export const CredentialDetailsCard = styled(Box)`
+export const DetailsCard = styled(Box)`
   width: 100%;
 
   span {
@@ -52,7 +55,7 @@ export const CredentialDetailsCard = styled(Box)`
   }
 `
 
-export const MedicationDetailsContainer = styled(Box)`
+export const DataContainer = styled(Box)`
   @media (max-width: 1024px) {
     gap: ${pxToRem(26)};
   }
