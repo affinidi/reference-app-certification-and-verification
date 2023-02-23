@@ -34,6 +34,11 @@ export const QrCodeCard = styled(Box)`
       max-width: none;
       height: ${pxToRem(248)};
     }
+    
+    @media (max-width: 1024px) {
+      height: ${pxToRem(292)};
+      width: ${pxToRem(292)};
+    }
   }
 
    @media (max-width: 1024px) {
@@ -58,7 +63,6 @@ export const DetailsCard = styled(Box)`
 
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
-    max-width: ${pxToRem(338)};
     margin: 0 auto;
     border-bottom-right-radius: 0;
     padding-bottom: ${pxToRem(24)};
