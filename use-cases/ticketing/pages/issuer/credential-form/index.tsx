@@ -25,7 +25,7 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a credential.
                   </S.Title>
 
-                  <Input label="JSON-LD Context URL" value={JSONLD_CONTEXT_URL} disabled />
+                  <Input label="Schema URL" value={JSONLD_CONTEXT_URL} disabled />
 
                   <S.Heading variant="h6">Event details</S.Heading>
 
