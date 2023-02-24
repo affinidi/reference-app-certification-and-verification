@@ -12,4 +12,8 @@ export const Overlay = styled.div`
     left: 0;
     border: 84px solid rgba(70, 78, 102, 0.7);
   }
+
+  video {
+    width: 100%;
+  }
 `
