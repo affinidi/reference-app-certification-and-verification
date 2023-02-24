@@ -1,10 +1,12 @@
 import { z } from 'zod'
 import { use } from 'next-api-middleware'
 import type { NextApiRequest, NextApiResponse } from 'next'
+
+import { ErrorCodes } from 'enums/errorCodes'
+
 import { allowedHttpMethods } from '../middlewares/allowed-http-methods'
 import { cloudWalletClient } from '../clients/cloud-wallet-client'
 import { ApiError } from '../api-error'
-import { AxiosError } from 'axios'
 import { errorHandler } from '../middlewares/error-handler'
 
 type HandlerResponse = {
@@ -31,13 +33,11 @@ async function handler(
     })
 
     res.status(200).json({ accessToken })
-  } catch (error: unknown) {
-    const responseData = (error as AxiosError)?.response?.data
-    if (responseData?.code === 'COR-5') {
+  } catch (error: any) {
+    if (['COR-5', 'COR-17'].includes(error.response?.data?.code)) {
       throw new ApiError({
-        code: responseData?.httpStatusCode,
-        message: responseData?.message,
-        httpStatusCode: responseData?.httpStatusCode,
+        code: ErrorCodes.INVALID_OTP_CODE,
+        httpStatusCode: 400,
       })
     }
     throw error

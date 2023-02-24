@@ -1,7 +1,7 @@
 import { toast } from "components"
 
 export const showErrorToast = (error: any) => {
-    const message = error.message || 'Unexpected error'
+    const message = error.message || 'Unexpected error, please try again'
   
     toast(message, {
       theme: 'dark',

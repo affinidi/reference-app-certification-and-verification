@@ -1,10 +1,11 @@
 import { FC, ReactNode, useState, useEffect } from 'react'
 
 import { Box, Container, Header, Typography, Title } from 'components'
-
-import { ErrorResponse } from 'types/error'
-import * as S from './ConfirmSignInForm.styled'
 import { messages } from 'utils/messages'
+import { ErrorCodes } from 'enums/errorCodes'
+import { ErrorResponse } from 'types/error'
+
+import * as S from './ConfirmSignInForm.styled'
 
 type ConfirmSignInFormProps = {
   error: ErrorResponse | null
@@ -29,7 +30,7 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
 
   useEffect(() => {
     if (error) {
-      if (error.code === 'COR-5') {
+      if (error.response?.data?.error?.code === ErrorCodes.INVALID_OTP_CODE) {
         setErrorMessage(messages.holder.invalidOtp)
         return
       }

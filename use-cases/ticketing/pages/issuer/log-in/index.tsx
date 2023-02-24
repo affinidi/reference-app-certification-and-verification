@@ -4,15 +4,16 @@ import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useCheckCredentialsMutation } from 'hooks/issuer/api'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { showErrorToast } from 'utils/notification'
-import { Box, Container, ContainerForm, Header, Input, Title} from 'components'
+import { Box, Container, ContainerForm, Header, Input, Title } from 'components'
 import { messages } from 'utils/messages'
+import { ErrorCodes } from 'enums/errorCodes'
 
 import * as S from './index.styled'
 
 const IssuerLogIn: FC = () => {
   const { setItem } = useLocalStorage()
   const { updateAuthState } = useAuthContext()
-  const { mutate, isSuccess, isError, isLoading, reset } =
+  const { mutate, isSuccess, isError, isLoading, reset, error } =
     useCheckCredentialsMutation()
 
   const [login, setLogin] = useState('')
@@ -33,21 +34,28 @@ const IssuerLogIn: FC = () => {
 
   useEffect(() => {
     reset()
-  }, [login, password])
+  }, [login, password, reset])
 
   useEffect(() => {
-    if (isError) {
-      showErrorToast(new Error(messages.issuer.loginError))
+    if (error) {
+      if (
+        error.response?.data?.error?.code ===
+        ErrorCodes.ISSUER_AUTH_NOT_PROVIDED
+      ) {
+        showErrorToast(new Error(messages.issuer.loginError))
+        return
+      }
+      showErrorToast(error)
     }
-  }, [isError])
+  }, [error])
 
   return (
     <>
       <Header title='Admin login' />
 
       <Container>
-        <div className="grid lg:grid-cols-3 lg:gap-16">
-          <ContainerForm className="lg:col-start-2" onSubmit={handleLogIn}>
+        <div className='grid lg:grid-cols-3 lg:gap-16'>
+          <ContainerForm className='lg:col-start-2' onSubmit={handleLogIn}>
             <Title>Please enter your user name and password to log in.</Title>
 
             <Box gap={24}>
