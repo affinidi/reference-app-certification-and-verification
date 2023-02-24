@@ -1,66 +1,52 @@
-import { FC, useCallback, useState } from 'react'
-import { Exception, Result } from '@zxing/library'
-import { extractHashAndKeyFromVSShareUrl, ROUTES } from 'utils'
-import { useScanner } from 'hooks/verifier/useScanner'
-import { Typography } from '../../../../components'
-import * as S from './QrScanner.styled'
+import { FC, useCallback } from 'react'
+import { Result } from '@zxing/library'
 import { useRouter } from 'next/router'
 
-type QrScannerProps = {};
+import { extractHashAndKeyFromVSShareUrl, ROUTES } from 'utils'
+import { useScanner } from 'hooks/verifier/useScanner'
 
-const videoElementId = "video-renderer";
+import * as S from './QrScanner.styled'
+
+type QrScannerProps = {}
+
+const videoElementId = 'video-renderer'
 
 const QrScanner: FC<QrScannerProps> = () => {
-  const [scanError, setScanError] = useState("");
-  const router = useRouter();
+  const router = useRouter()
 
   const onScanned = useCallback(
     async (result: Result | undefined): Promise<void> => {
-      const text = result?.getText();
+      const text = result?.getText()
       if (!text) {
-        return;
+        return
       }
       try {
-        const hashAndKey = extractHashAndKeyFromVSShareUrl(text);
-        if (!hashAndKey?.key || !hashAndKey?.hash) {
-          setScanError("The QR code was not recognized");
-          return;
-        }
-        const { hash, key } = hashAndKey;
+        const hashAndKey = extractHashAndKeyFromVSShareUrl(text)
         await router.push(
           {
             pathname: ROUTES.verifier.result,
-            query: { key, hash },
+            query: { key: hashAndKey?.key, hash: hashAndKey?.hash },
           },
           ROUTES.verifier.result
-        );
+        )
       } catch (error) {
-        console.error(error);
-        setScanError("The QR code was not recognized");
+        console.error(error)
+        await router.push(ROUTES.verifier.result)
       }
     },
     [router]
-  );
-
-  const onError = useCallback((err: Exception) => {
-    setScanError(err.message);
-  }, []);
+  )
 
   useScanner({
-    onError,
     onScanned,
     videoElementId,
-  });
+  })
 
   return (
-    <>
-      {!!scanError && <Typography variant="e1">{scanError}</Typography>}
+    <S.Overlay>
+      <video muted id={videoElementId} />
+    </S.Overlay>
+  )
+}
 
-      <S.Overlay>
-        <video muted id={videoElementId} />
-      </S.Overlay>
-    </>
-  );
-};
-
-export default QrScanner;
+export default QrScanner

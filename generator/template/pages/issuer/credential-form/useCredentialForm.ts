@@ -72,7 +72,7 @@ export const initialValues: PrescriptionData = {
 
 export const useCredentialForm = () => {
   const router = useRouter()
-  const { mutate, isSuccess, isLoading } = useSendVcOfferMutation()
+  const { mutate, isSuccess, isLoading, error } = useSendVcOfferMutation()
 
   const handleSubmit = (values: PrescriptionData) => {
     mutate({
@@ -155,6 +155,7 @@ export const useCredentialForm = () => {
   return {
     handleSubmit,
     validate,
+    error,
     isCreating: isLoading,
   }
 }

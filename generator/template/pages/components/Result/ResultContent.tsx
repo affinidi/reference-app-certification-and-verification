@@ -4,42 +4,55 @@ import { IssuedIllustration } from 'assets/issued-illustration'
 import { QrScanSuccessIllustration } from 'assets/qr-scan-success-illustration'
 import { QrScanErrorIllustration } from 'assets/qr-scan-error-illustration'
 import { messages } from 'utils/messages'
+import { ErrorResponse } from 'types/error'
+import { SCAN_ERROR } from 'pages/verifier/result'
 
 import * as S from './Result.styled'
 
 export type ResultContentProps = {
   isValid: boolean
   isIssuance?: boolean
+  error?: Partial<ErrorResponse> | null
 }
 
 export const ResultContent: FC<ResultContentProps> = ({
   isValid,
   isIssuance,
-}) => (
-  <>
-    <S.ImgWrapper>
-      {isValid ? (
-        isIssuance ? (
-          <IssuedIllustration />
-        ) : (
-          <QrScanSuccessIllustration />
-        )
-      ) : (
-        <QrScanErrorIllustration />
-      )}
-    </S.ImgWrapper>
+  error,
+}) => {
+  const resultMessage = () => {
+    if (isValid) {
+      return isIssuance
+        ? messages.issuer.result.content.issued
+        : messages.verifier.result.content.valid
+    }
 
-    <S.ResultTitle
-      align='center'
-      variant='h5'
-      $isVerified={isValid}
-      $isIssuance={isIssuance}
-    >
-      {isValid
-        ? isIssuance
-          ? messages.issuer.result.content.issued
-          : messages.verifier.result.content.valid
-        : messages.verifier.result.content.invalid}
-    </S.ResultTitle>
-  </>
-)
+    return error?.code === SCAN_ERROR
+      ? messages.verifier.result.content.scanError
+      : messages.verifier.result.content.invalid
+  }
+  return (
+    <>
+      <S.ImgWrapper>
+        {isValid ? (
+          isIssuance ? (
+            <IssuedIllustration />
+          ) : (
+            <QrScanSuccessIllustration />
+          )
+        ) : (
+          <QrScanErrorIllustration />
+        )}
+      </S.ImgWrapper>
+
+      <S.ResultTitle
+        align='center'
+        variant='h5'
+        $isVerified={isValid}
+        $isIssuance={isIssuance}
+      >
+        {resultMessage()}
+      </S.ResultTitle>
+    </>
+  )
+}

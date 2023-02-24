@@ -21,10 +21,12 @@ export const messages = {
       content: {
         valid: 'Valid prescription',
         invalid: 'Invalid prescription',
+        scanError: 'The QR code was not recognized'
       }
     },
   },
   issuer: {
+    loginError: 'Incorrect user name or password',
     result: {
       title: 'Prescription issued',
       issued: 'Your prescription has been issued.',
@@ -33,6 +35,9 @@ export const messages = {
         issued: 'Prescription successfully issued',
       },
     },
+    error: {
+      apiError: 'Due to server error the prescription could not be issued.'
+    }
   },
   holder: {
     home: {

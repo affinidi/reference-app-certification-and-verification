@@ -4,7 +4,6 @@ import { Exception, Result } from '@zxing/library'
 
 type useScannerParams = {
   delay?: number
-  onError: (error: Exception) => void
   onScanned: (result: Result | undefined) => Promise<void>
   constraints?: MediaTrackConstraints
   videoElementId: string
@@ -18,18 +17,11 @@ export const useScanner = ({
   delay = 1000,
   videoElementId,
   onScanned,
-  onError,
 }: useScannerParams) => {
   const controlsRef: MutableRefObject<IScannerControls | null> = useRef(null)
 
   useEffect(() => {
-    if (!isMediaDevicesSupported() && isValidType(onScanned, 'onScanned', 'function')) {
-      const message =
-        'MediaDevices API has no support for your browser. You can fix this by running "npm i webrtc-adapter"'
-      onError(new Exception(message))
-      return
-    }
-    if (!constraints) {
+    if (!isMediaDevicesSupported() && isValidType(onScanned, 'onScanned', 'function') || !constraints) {
       return
     }
 
@@ -39,28 +31,18 @@ export const useScanner = ({
     scanner
       .decodeFromConstraints({ video: constraints }, videoElementId, async (result, error) => {
         if (error) {
-          // switch (error.name) {
-          //   case 'NotFoundException' || 'FormatException':
-          //     break
-          //   case 'ChecksumException':
-          //     onError(new Exception(`QR Code not recognized with ${error}. Please try again.`))
-          //     break
-          //   default:
-          //     onError(new Exception(`scanned failed with error: ${error}. Please try again.`))
-          // }
           return
         }
 
         await onScanned(result)
       })
       .then((controls: IScannerControls) => (controlsRef.current = controls))
-      .catch(onError)
 
     return () => {
       controlsRef.current?.stop()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onScanned, onError, videoElementId])
+  }, [onScanned, videoElementId])
 }
 
 export type UseScannerType = ReturnType<typeof useScanner>

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import * as EmailValidator from 'email-validator'
 import { useRouter } from 'next/router'
 
@@ -29,7 +29,7 @@ export const initialValues: CredentialSubjectData = {
 
 export const useCredentialForm = () => {
   const router = useRouter()
-  const { mutate, isSuccess, isLoading } = useSendVcOfferMutation()
+  const { mutate, isSuccess, isLoading, error } = useSendVcOfferMutation()
 
   const handleSubmit = (values: CredentialSubjectData) => {
     mutate({
@@ -87,6 +87,7 @@ export const useCredentialForm = () => {
   return {
     handleSubmit,
     validate,
+    error,
     isCreating: isLoading,
   }
 }
