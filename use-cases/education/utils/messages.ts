@@ -21,10 +21,12 @@ export const messages = {
       content: {
         valid: 'Valid certificate',
         invalid: 'Invalid certificate',
+        scanError: 'The QR code was not recognized'
       }
     },
   },
   issuer: {
+    loginError: 'Incorrect user name or password',
     result: {
       title: 'Certificate issued',
       issued: 'Your certificate has been issued.',
@@ -33,6 +35,9 @@ export const messages = {
         issued: 'Certificate successfully issued',
       },
     },
+    error: {
+      apiError: 'Due to server error the certificate could not be issued.'
+    }
   },
   holder: {
     home: {

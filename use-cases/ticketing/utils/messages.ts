@@ -21,10 +21,12 @@ export const messages = {
       content: {
         valid: 'Valid ticket',
         invalid: 'Invalid ticket',
+        scanError: 'The QR code was not recognized'
       }
     },
   },
   issuer: {
+    loginError: 'Incorrect user name or password',
     result: {
       title: 'Ticket issued',
       issued: 'Your ticket has been issued.',
@@ -33,6 +35,9 @@ export const messages = {
         issued: 'Ticket successfully issued',
       },
     },
+    error: {
+      apiError: 'Due to server error the ticket could not be issued.'
+    }
   },
   holder: {
     home: {

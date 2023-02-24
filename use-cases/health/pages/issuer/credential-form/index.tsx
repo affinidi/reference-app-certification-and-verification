@@ -1,9 +1,11 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Field, Formik } from 'formik'
 
 import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
+import { showErrorToast } from 'utils/notification'
+import { messages } from 'utils/messages'
 
 import {
   DosageUnitOptions,
@@ -16,7 +18,13 @@ import * as S from './CredentialForm.styled'
 
 const CredentialForm: FC = () => {
   const { authState } = useAuthContext()
-  const { handleSubmit, validate, isCreating } = useCredentialForm()
+  const { handleSubmit, validate, isCreating, error } = useCredentialForm()
+
+  useEffect(() => {
+    if (error) {
+      showErrorToast(new Error(messages.issuer.error.apiError))
+    }
+  }, [error])
 
   const CustomSelectComponent = ({ field, form, ...props }: any) => {
     const { name } = field
@@ -49,7 +57,11 @@ const CredentialForm: FC = () => {
                     Please fill in the form below to issue a prescription.
                   </S.Title>
 
-                  <Input label='JSON-LD Context URL' value={JSONLD_CONTEXT_URL} disabled />
+                  <Input
+                    label='JSON-LD Context URL'
+                    value={JSONLD_CONTEXT_URL}
+                    disabled
+                  />
 
                   <S.Heading variant='h6'>Prescription details</S.Heading>
 

@@ -1,7 +1,7 @@
 import { SVGAttributes } from 'react'
 
 export const Logo = (props: SVGAttributes<SVGElement>) => (
-  <svg width="118" height="32" viewBox="0 0 118 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="118" height="32" viewBox="0 0 118 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path fillRule="evenodd" clipRule="evenodd" d="M16 0a6 6 0 0 0-6 6v20a6 6 0 0 0 12 0V6a6 6 0 0 0-6-6zm0 2.63a2 2 0 0 0-2 2v22.74a2 2 0 1 0 4 0V4.63a2 2 0 0 0-2-2z" fill="#6BF7D4"/>
       <path fillRule="evenodd" clipRule="evenodd" d="M32 16a6 6 0 0 0-6-6H6a6 6 0 0 0 0 12h20a6 6 0 0 0 6-6zm-2.63 0a2 2 0 0 0-2-2H4.63a2 2 0 1 0 0 4h22.74a2 2 0 0 0 2-2z" fill="#2EBA97"/>
       <path d="M10 14v-4h4v4h-4zM18 22v-4h4v4h-4z" fill="#403EA7"/>

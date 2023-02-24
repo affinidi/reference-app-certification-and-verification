@@ -42,7 +42,7 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
                   {inputs}
                 </S.VerificationFieldContainer>
 
-                {error && <Typography variant="e1">{error?.message}</Typography>}
+                {error && <Typography variant="e1">Code is incorrect, please try again.</Typography>}
               </Box>
             </form>
 
