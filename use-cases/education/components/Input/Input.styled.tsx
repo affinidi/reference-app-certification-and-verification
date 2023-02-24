@@ -76,7 +76,6 @@ export const Input = styled.input<Pick<Props, '$hasError'> & { $hasIcon: boolean
   transition: border-color 0.125s ease-in-out;
   outline: none;
   border: 1px solid ${(props) => props.theme.colors.neutral.primary['15']};
-  border-color: ${(props) => props.$hasError && props.theme.colors.utility.danger['100']};
 
   ${(props) =>
     props.$hasIcon &&

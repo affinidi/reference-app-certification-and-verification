@@ -5,8 +5,7 @@ import { JSONLD_CONTEXT_URL } from 'utils/schema'
 import { messages } from 'utils/messages'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Spinner } from 'components'
-
-import { notifyError } from 'utils/notification'
+import { showErrorToast } from 'utils/notification'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
@@ -17,7 +16,7 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if (error) {
-      notifyError(new Error(messages.issuer.error.apiError))
+      showErrorToast(new Error(messages.issuer.error.apiError))
     }
   }, [error])
 

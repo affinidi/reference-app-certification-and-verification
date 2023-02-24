@@ -17,7 +17,7 @@ export const useHolderConfirmSignIn = () => {
   const { computedCode, inputs, isButtonDisabled, resetInputs } = useConfirmSignIn(error)
 
   useEffect(() => {
-    if (error && computedCode.length < 6) {
+    if (error && computedCode.length < inputs.length) {
       reset()
     }
   }, [computedCode, error, reset])
