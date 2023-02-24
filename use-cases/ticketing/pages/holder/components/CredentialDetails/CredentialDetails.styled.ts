@@ -6,6 +6,7 @@ import { Box, Typography } from 'components'
 export const DataCard = styled.div`
   background-color: ${(props) => props.theme.colors.brand.secondary['100']};
   padding: ${pxToRem(40)};
+  width: 100%;
 
   @media (max-width: 1024px) {
     border-bottom-left-radius: 8px;
