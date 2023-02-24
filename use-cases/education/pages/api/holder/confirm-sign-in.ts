@@ -2,12 +2,14 @@ import { z } from 'zod'
 import { use } from 'next-api-middleware'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { allowedHttpMethods } from '../middlewares/allowed-http-methods'
-import { errorHandler } from '../middlewares/error-handler'
 import { cloudWalletClient } from '../clients/cloud-wallet-client'
+import { ApiError } from '../api-error'
+import { AxiosError } from 'axios'
+import { errorHandler } from '../middlewares/error-handler'
 
 type HandlerResponse = {
-  accessToken: string;
-};
+  accessToken: string
+}
 
 const requestSchema = z
   .object({
@@ -22,12 +24,24 @@ async function handler(
 ) {
   const { token, confirmationCode } = requestSchema.parse(req.body)
 
-  const { accessToken } = await cloudWalletClient.confirmSignInPasswordless({
-    token,
-    confirmationCode,
-  })
+  try {
+    const { accessToken } = await cloudWalletClient.confirmSignInPasswordless({
+      token,
+      confirmationCode,
+    })
 
-  res.status(200).json({ accessToken })
+    res.status(200).json({ accessToken })
+  } catch (error: unknown) {
+    const responseData = (error as AxiosError)?.response?.data
+    if (responseData?.code === 'COR-5') {
+      throw new ApiError({
+        code: responseData?.httpStatusCode,
+        message: responseData?.message,
+        httpStatusCode: responseData?.httpStatusCode,
+      })
+    }
+    throw error
+  }
 }
 
 export default use(allowedHttpMethods('POST'), errorHandler)(handler)
