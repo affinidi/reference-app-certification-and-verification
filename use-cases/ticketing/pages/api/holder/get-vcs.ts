@@ -30,7 +30,7 @@ export async function handler(
       .status(200)
       .json({ vcs: vcs.filter((vc) => vc.type.includes(schemaType)) })
   } catch (error: any) {
-    if (error.response?.data?.code === 'CWA-4') {
+    if (error.response?.data?.code === ErrorCodes.CWA_4) {
       throw new ApiError({
         code: ErrorCodes.JWT_EXPIRED_ERROR,
         httpStatusCode: 400,

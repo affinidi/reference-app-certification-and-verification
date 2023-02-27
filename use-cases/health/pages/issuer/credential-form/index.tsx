@@ -23,11 +23,13 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if (error) {
-      if (error.response?.data?.error?.code === ErrorCodes.INTERNAL_SERVER_ERROR) {
+      if (
+        error.response?.data?.error?.code === ErrorCodes.INTERNAL_SERVER_ERROR
+      ) {
         showErrorToast(new Error(messages.issuer.error.apiError))
-        return
+      } else {
+        showErrorToast(error)
       }
-      showErrorToast(error)
     }
   }, [error])
 

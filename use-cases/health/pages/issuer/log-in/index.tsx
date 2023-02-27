@@ -43,9 +43,9 @@ const IssuerLogIn: FC = () => {
         ErrorCodes.ISSUER_AUTH_NOT_PROVIDED
       ) {
         showErrorToast(new Error(messages.issuer.loginError))
-        return
+      } else {
+        showErrorToast(error)
       }
-      showErrorToast(error)
     }
   }, [error])
 

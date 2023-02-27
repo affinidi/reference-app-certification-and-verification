@@ -20,8 +20,6 @@ export const errorHandler: Middleware = async (req, res, next) => {
       })
     } else if (error instanceof ApiError) {
       logger.debug({ error }, 'API error')
-      console.log('isApi')
-
       res.status(error.httpStatusCode).json({
         error: {
           code: error.code,
