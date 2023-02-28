@@ -44,7 +44,7 @@ export const CredentialDetails: FC<CredentialDetailsProps> = ({
       </S.DataCardInnerContainer>
     </S.DataCard>
 
-    <S.QrCodeCard>
+    <S.QrCodeCard direction='row' justifyContent="center">
       <img src={qrCode} alt='QR Code' />
     </S.QrCodeCard>
   </S.DetailsCard>

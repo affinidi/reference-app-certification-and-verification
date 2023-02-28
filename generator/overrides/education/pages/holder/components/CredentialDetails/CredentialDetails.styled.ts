@@ -34,12 +34,20 @@ export const QrCodeCard = styled(Box)`
       max-width: none;
       height: ${pxToRem(248)};
     }
+    
+    @media (max-width: 1024px) {
+      height: ${pxToRem(292)};
+      width: ${pxToRem(292)};
+    }
   }
 
-  @media (max-width: 576px) {
-    background-color: ${(props) => props.theme.colors.brand.primary['90']};
+   @media (max-width: 1024px) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+  }
+
+   @media (max-width: 576px) {
+    background-color: ${(props) => props.theme.colors.brand.primary['90']};
   }
 `
 
@@ -55,8 +63,9 @@ export const DetailsCard = styled(Box)`
 
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
-    max-width: ${pxToRem(338)};
     margin: 0 auto;
+    border-bottom-right-radius: 0;
+    padding-bottom: ${pxToRem(24)};
   }
 
   @media (max-width: 576px) {

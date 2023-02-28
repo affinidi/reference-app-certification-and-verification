@@ -23,13 +23,13 @@ export const CredentialDetails: FC<CredentialDetailsProps> = ({
   practitionerName,
   qrCode,
 }) => (
-  <S.CredentialDetailsContainer justifyContent='space-between' direction="row">
-    <S.CredentialDetailsCard justifyContent='space-between' gap={48}>
+  <S.DetailsContainer justifyContent='space-between' direction="row">
+    <S.DetailsCard justifyContent='space-between' gap={48}>
       <Box gap={8}>
         <Typography variant='h4'>{patientName}</Typography>
       </Box>
 
-      <S.MedicationDetailsContainer gap={42}>
+      <S.DataContainer gap={42}>
         <Box gap={2}>
           <Typography variant='p3'>Medication</Typography>
           <Typography variant='p4'>{medicationName}</Typography>
@@ -57,13 +57,13 @@ export const CredentialDetails: FC<CredentialDetailsProps> = ({
             <Typography variant='p4'>{practitionerName}</Typography>
           </Box>
         </div>
-      </S.MedicationDetailsContainer>
-    </S.CredentialDetailsCard>
+      </S.DataContainer>
+    </S.DetailsCard>
 
     <S.QrCodeCard>
       <img src={qrCode} alt='QR Code' />
     </S.QrCodeCard>
-  </S.CredentialDetailsContainer>
+  </S.DetailsContainer>
 )
 
 export default CredentialDetails
