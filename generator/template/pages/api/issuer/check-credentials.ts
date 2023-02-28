@@ -4,10 +4,7 @@ import { allowedHttpMethods } from '../middlewares/allowed-http-methods'
 import { errorHandler } from '../middlewares/error-handler'
 import { authenticateIssuer } from '../helpers/authenticate-issuer'
 
-async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<void>
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse<void>) {
   authenticateIssuer(req)
   res.status(200).end()
 }

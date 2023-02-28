@@ -6,6 +6,7 @@ import { messages } from 'utils/messages'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Spinner } from 'components'
 import { showErrorToast } from 'utils/notification'
+import { ErrorCodes } from 'enums/errorCodes'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
@@ -16,7 +17,13 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if (error) {
-      showErrorToast(new Error(messages.issuer.error.apiError))
+      if (
+        error.response?.data?.error?.code === ErrorCodes.INTERNAL_SERVER_ERROR
+      ) {
+        showErrorToast(new Error(messages.issuer.error.apiError))
+      } else {
+        showErrorToast(error)
+      }
     }
   }, [error])
 
@@ -157,7 +164,7 @@ const CredentialForm: FC = () => {
                       form='form'
                       disabled={!(formikProps.isValid && formikProps.dirty)}
                       loading={isCreating}
-                      >
+                    >
                       Issue certificate
                     </S.ButtonWrapper>
                   </div>

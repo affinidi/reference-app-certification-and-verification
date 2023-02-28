@@ -20,7 +20,7 @@ export const useHolderConfirmSignIn = () => {
     if (error && computedCode.length < inputs.length) {
       reset()
     }
-  }, [computedCode, error, reset])
+  }, [computedCode, error, inputs.length, reset])
 
   const handleResendCode = async () => {
     reset()

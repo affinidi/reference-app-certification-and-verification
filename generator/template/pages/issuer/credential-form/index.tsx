@@ -6,6 +6,7 @@ import { useAuthContext } from 'hooks/useAuthContext'
 import { Container, Header, Input, Select, Spinner } from 'components'
 import { showErrorToast } from 'utils/notification'
 import { messages } from 'utils/messages'
+import { ErrorCodes } from 'enums/errorCodes'
 
 import {
   DosageUnitOptions,
@@ -22,7 +23,13 @@ const CredentialForm: FC = () => {
 
   useEffect(() => {
     if (error) {
-      showErrorToast(new Error(messages.issuer.error.apiError))
+      if (
+        error.response?.data?.error?.code === ErrorCodes.INTERNAL_SERVER_ERROR
+      ) {
+        showErrorToast(new Error(messages.issuer.error.apiError))
+      } else {
+        showErrorToast(error)
+      }
     }
   }, [error])
 
