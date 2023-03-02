@@ -34,7 +34,7 @@ async function handler(
 
     res.status(200).json({ accessToken })
   } catch (error: any) {
-    if ([ErrorCodes.COR_5, ErrorCodes.COR_17].includes(error.response?.data?.code)) {
+    if (['COR-5', 'COR-17'].includes(error.response?.data?.code)) {
       throw new ApiError({
         code: ErrorCodes.INVALID_OTP_CODE,
         httpStatusCode: 400,
