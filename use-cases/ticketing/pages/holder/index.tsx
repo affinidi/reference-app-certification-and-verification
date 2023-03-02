@@ -22,11 +22,13 @@ const Home: FC = () => {
 
   useEffect(() => {
     if (error?.response?.data?.error?.code === ErrorCodes.JWT_EXPIRED_ERROR) {
-      updateAuthState({
-        authorizedAsHolder: false,
-      })
+      if(authState.authorizedAsHolder) {
+        updateAuthState({
+          authorizedAsHolder: false,
+        })
+      }
     }
-  }, [error, router, updateAuthState])
+  }, [error, router, updateAuthState, authState])
 
   if (!authState.authorizedAsHolder) {
     return <Spinner />
