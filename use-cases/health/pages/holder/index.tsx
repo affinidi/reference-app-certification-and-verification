@@ -25,7 +25,6 @@ const Home: FC = () => {
       updateAuthState({
         authorizedAsHolder: false,
       })
-      router.push(ROUTES.holder.signIn)
     }
   }, [error, router, updateAuthState])
 
