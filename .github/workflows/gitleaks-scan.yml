@@ -1,7 +1,7 @@
 name: gitleaks
 
 on:
-  pull_request:
+  push:
     paths:
         - 'use-cases/*/**'
 
