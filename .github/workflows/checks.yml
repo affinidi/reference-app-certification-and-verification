@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: use-cases/**
+        working-directory: use-cases/education
     steps:
       - name: Checkout
         uses: actions/checkout@v3
