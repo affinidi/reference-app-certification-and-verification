@@ -1,0 +1,14 @@
+name: gitleaks
+
+on:
+  pull_request:
+    paths:
+        - 'use-cases/*/**'
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: gitleaks-action
+        uses: zricethezav/gitleaks-action@v1.6.0
