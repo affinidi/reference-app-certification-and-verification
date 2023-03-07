@@ -43,6 +43,7 @@ export const messages = {
     home: {
       title: 'Your tickets',
       noVcs: 'You don\'t have any tickets yet.'
-    }
+    },
+    invalidOtp: 'Code is incorrect, please try again.'
   }
 }

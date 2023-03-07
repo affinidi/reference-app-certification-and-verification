@@ -5,7 +5,7 @@ import { QrScanSuccessIllustration } from 'assets/qr-scan-success-illustration'
 import { QrScanErrorIllustration } from 'assets/qr-scan-error-illustration'
 import { messages } from 'utils/messages'
 import { ErrorResponse } from 'types/error'
-import { SCAN_ERROR } from 'pages/verifier/result'
+import { ErrorCodes } from 'enums/errorCodes'
 
 import * as S from './Result.styled'
 
@@ -27,7 +27,7 @@ export const ResultContent: FC<ResultContentProps> = ({
         : messages.verifier.result.content.valid
     }
 
-    return error?.code === SCAN_ERROR
+    return error?.code === ErrorCodes.SCAN_ERROR
       ? messages.verifier.result.content.scanError
       : messages.verifier.result.content.invalid
   }

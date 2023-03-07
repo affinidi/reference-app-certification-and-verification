@@ -43,6 +43,7 @@ export const messages = {
     home: {
       title: 'Your certificates',
       noVcs: 'You don\'t have any certificates yet.'
-    }
+    },
+    invalidOtp: 'Code is incorrect, please try again.'
   }
 }
