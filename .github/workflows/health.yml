@@ -3,7 +3,7 @@ name: checks
 on: [pull_request]
 
 env:
-  use_case: use-cases/education
+  use_case: use-cases/health
 
 jobs:
   lint:

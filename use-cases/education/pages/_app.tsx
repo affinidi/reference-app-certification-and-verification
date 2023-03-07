@@ -22,8 +22,6 @@ export default function App({
     },
   });
 
-  console.log('test')
-
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
