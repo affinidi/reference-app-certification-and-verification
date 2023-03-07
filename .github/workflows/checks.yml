@@ -2,12 +2,15 @@ name: checks
 
 on: [pull_request]
 
+env:
+  use_case: use-cases/education
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: use-cases/education
+        working-directory: $use_case
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,3 +25,12 @@ jobs:
 
       - name: Npm run test
         run: npm run lint
+  gitleaks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: $use_case
+    steps:
+      - uses: actions/checkout@v3
+      - name: gitleaks-action
+        uses: zricethezav/gitleaks-action@v1.6.0
