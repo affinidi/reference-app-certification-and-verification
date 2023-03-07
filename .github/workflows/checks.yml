@@ -3,14 +3,14 @@ name: checks
 on: [pull_request]
 
 env:
-  use_case: use-cases/education
+  Use_case: use-cases/education
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: $use_case
+        working-directory: $Use_case
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: $use_case
+        working-directory: $Use_case
     steps:
       - uses: actions/checkout@v3
       - name: gitleaks-action
