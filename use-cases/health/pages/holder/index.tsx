@@ -8,7 +8,6 @@ import { useAuthContext } from 'hooks/useAuthContext'
 import { EmptyStateIllustration } from 'assets/empty-state-illustration'
 import { Container, Header, Spinner, Typography } from 'components'
 import { messages } from 'utils/messages'
-import { ROUTES } from 'utils'
 import { ErrorCodes } from 'enums/errorCodes'
 
 import CredentialCard from './components/CredentialCard/CredentialCard'
