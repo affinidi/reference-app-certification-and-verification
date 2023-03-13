@@ -12,7 +12,7 @@ import * as S from './index.styled'
 
 const IssuerLogIn: FC = () => {
   const { setItem } = useLocalStorage()
-  const { updateAuthState } = useAuthContext()
+  const { updateAuthState, authState } = useAuthContext()
   const { mutate, isSuccess, isError, isLoading, reset, error } =
     useCheckCredentialsMutation()
 
@@ -25,12 +25,12 @@ const IssuerLogIn: FC = () => {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && !authState.authorizedAsIssuer) {
       setItem('issuerLogin', login)
       setItem('issuerPassword', password)
       updateAuthState({ authorizedAsIssuer: true })
     }
-  }, [isSuccess])
+  }, [authState, isSuccess, login, password, setItem, updateAuthState])
 
   useEffect(() => {
     reset()
