@@ -39,8 +39,7 @@ jobs:
     defaults:
       run:
         working-directory: ${{env.use_case}}
-    environment:
-      name: ticketingEnv
+    environment: ticketingEnv
     steps:
       - name: Checkout
         uses: actions/checkout@v3
