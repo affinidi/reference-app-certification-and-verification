@@ -36,6 +36,8 @@ jobs:
         uses: zricethezav/gitleaks-action@v1.6.0
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: healthEnv
     defaults:
       run:
         working-directory: ${{env.use_case}}
