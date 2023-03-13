@@ -37,6 +37,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: healthEnv
+    env:
+     NEXT_PUBLIC_HOST: http://localhost:3002
     defaults:
       run:
         working-directory: ${{env.use_case}}
