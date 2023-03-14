@@ -44,8 +44,7 @@ jobs:
         working-directory: ${{env.use_case}}
     steps:
       - name: Test vars
-        run: |
-          echo "repository variable : ${{ vars.NEXT_PUBLIC_HOST }}"
+        run: "echo ${{ vars.NEXT_PUBLIC_HOST }}"
 
       - name: Checkout
         uses: actions/checkout@v3
