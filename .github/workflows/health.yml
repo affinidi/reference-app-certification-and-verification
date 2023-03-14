@@ -40,9 +40,6 @@ jobs:
     defaults:
       run:
         working-directory: ${{env.use_case}}
-    # environment: healthEnv
-    # env:
-    #   NEXT_PUBLIC_HOST:  ${{ vars.NEXT_PUBLIC_HOST }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
