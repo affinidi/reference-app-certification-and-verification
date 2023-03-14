@@ -4,6 +4,7 @@ on: [pull_request]
 
 env:
   use_case: use-cases/education
+  NEXT_PUBLIC_HOST:  ${{ vars.NEXT_PUBLIC_HOST }}
 
 jobs:
   lint:
@@ -39,9 +40,9 @@ jobs:
     defaults:
       run:
         working-directory: ${{env.use_case}}
-    environment: educationEnv
-    env:
-      NEXT_PUBLIC_HOST:  ${{ vars.NEXT_PUBLIC_HOST }}
+    # environment: educationEnv
+    # env:
+    #   NEXT_PUBLIC_HOST:  ${{ vars.NEXT_PUBLIC_HOST }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
