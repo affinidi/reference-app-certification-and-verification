@@ -19,7 +19,7 @@
     "start:health": "npm run --prefix use-cases/health dev -- -p 3002",
     "start:ticketing": "npm run --prefix use-cases/ticketing dev -- -p 3003",
 
-    "build": "concurrently -n w: npm:build:*",
+    "build": "concurrently -n w: \"npm:build:*(!template)\"",
     "build:template": "npm run --prefix generator/template build",
     "build:education": "npm run --prefix use-cases/education build",
     "build:health": "npm run --prefix use-cases/health build",
