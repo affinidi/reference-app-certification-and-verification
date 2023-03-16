@@ -6,6 +6,7 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "build"
+    open-pull-requests-limit: 0
   
   - package-ecosystem: "npm"
     directory: "/use-cases/health" # Location of package manifests
@@ -13,6 +14,7 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "build"
+    open-pull-requests-limit: 0  
 
   - package-ecosystem: "npm"
     directory: "/use-cases/ticketing" # Location of package manifests
@@ -20,3 +22,4 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "build"
+    open-pull-requests-limit: 0  
