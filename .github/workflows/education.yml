@@ -1,0 +1,56 @@
+name: checks
+
+on: [pull_request]
+
+env:
+  use_case: use-cases/education
+  NEXT_PUBLIC_HOST:  ${{ vars.NEXT_PUBLIC_HOST }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{env.use_case}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Npm run test
+        run: npm run lint
+  gitleaks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{env.use_case}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: gitleaks-action
+        uses: zricethezav/gitleaks-action@v1.6.0
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{env.use_case}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build  

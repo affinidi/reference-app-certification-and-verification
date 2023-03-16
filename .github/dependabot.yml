@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/use-cases/education" # Location of package manifests
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "build"
+  
+  - package-ecosystem: "npm"
+    directory: "/use-cases/health" # Location of package manifests
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "build"
+
+  - package-ecosystem: "npm"
+    directory: "/use-cases/ticketing" # Location of package manifests
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "build"
