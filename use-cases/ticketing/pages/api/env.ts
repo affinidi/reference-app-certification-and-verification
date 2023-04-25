@@ -22,7 +22,7 @@ export const verifierApiUrl = process.env.VERIFIER_API_URL
 export const cloudWalletApiUrl = process.env.CLOUD_WALLET_API_URL
 
 export const issuerLogin = process.env.ISSUER_LOGIN
-export const issuerPassword = process.env.ISSUER_PASSWORD
+export const hashedIssuerPassword = process.env.ISSUER_HASH_PASSWORD
 
 export const issuerApiKeyHash = process.env.ISSUER_API_KEY_HASH
 export const issuerProjectDid = process.env.ISSUER_PROJECT_DID

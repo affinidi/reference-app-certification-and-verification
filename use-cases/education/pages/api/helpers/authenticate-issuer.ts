@@ -1,16 +1,21 @@
 import { NextApiRequest } from 'next'
+import crypto from 'crypto'
 
 import { ErrorCodes } from 'enums/errorCodes'
 
 import { ApiError } from '../api-error'
-import { issuerLogin, issuerPassword } from '../env'
+import { issuerLogin, hashedIssuerPassword } from '../env'
+
+function hashPassword(password: string) {
+  return crypto.createHash('sha256').update(password).digest('hex')
+}
 
 export function authenticateIssuer(req: NextApiRequest): void {
   const authorization = req.headers['authorization']
 
   if (authorization?.startsWith('Basic ')) {
     const [login, password] = authorization.slice('Basic '.length).split(':')
-    if (login === issuerLogin && password === issuerPassword) {
+    if (login === issuerLogin && hashPassword(password) === hashedIssuerPassword) {
       return
     }
   }
