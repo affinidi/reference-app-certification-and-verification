@@ -19,6 +19,7 @@
     "@zxing/browser": "^0.1.1",
     "@zxing/library": "^0.19.2",
     "axios": "^1.2.6",
+    "bcrypt": "^5.1.0",
     "date-fns": "^2.29.3",
     "email-validator": "^2.0.4",
     "eslint": "8.33.0",
@@ -44,6 +45,7 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.4.0",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
