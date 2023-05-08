@@ -32,7 +32,9 @@ Setting up the reference app is easy, just follow these steps:
     $ cp .env.example .env
     ```
 
-    **Enter values for `NEXT_PUBLIC_PROJECT_ID`, `NEXT_PUBLIC_PROJECT_DID` and `NEXT_PUBLIC_API_KEY_HASH` from your Affinidi project properties.**  
+    **Enter values for `NEXT_PUBLIC_PROJECT_ID`, `NEXT_PUBLIC_PROJECT_DID` and `NEXT_PUBLIC_API_KEY_HASH` from your Affinidi project properties.**
+
+    For all aps u can find two variables: `ISSUER_LOGIN` and `ISSUER_HASH_PASSWORD`. This is only an example of usage, and it should be replaced with appropriate auth mechanism (e.g. OAuth or any other match your requirements). 
 4. Launch the app:
     ```
     $ npm run dev

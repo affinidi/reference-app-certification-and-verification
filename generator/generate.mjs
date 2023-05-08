@@ -22,7 +22,7 @@ async function generate() {
   const overrides = (await fs.readdir(overridesPath, { withFileTypes: true }))
     .filter(i => i.isDirectory()).map(i => i.name)
     .sort()
-  
+
   console.log(`Detected use cases: ${overrides.join(', ')}`)
 
   for (const [i, useCase] of overrides.entries()) {
@@ -57,7 +57,7 @@ async function generate() {
       }
     }
 
-    console.log(`Applying overrides`)
+    console.log('Applying overrides')
     await merge(overridePath, useCasePath, { filter: (path) => !filesToIgnore.includes(basename(path)) })
 
     console.log('Transforming package.json and package-lock.json files')
@@ -81,6 +81,8 @@ async function generate() {
     }
 
     await replace(envPath, { 'localhost:3000': `localhost:${port}` })
+
+    console.log('Do not forget to update issuer login credentials variables in .env')
   }
 }
 
@@ -102,7 +104,7 @@ async function replace(path, replacements) {
 
 async function merge(from, to, options) {
   await mkdirp(join(to, '..'))
-  
+
   try {
     await fs.cp(from, to, { recursive: true, ...options })
   } catch (error) {
